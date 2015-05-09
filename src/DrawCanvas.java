@@ -11,3044 +11,3040 @@ import java.io.*;
 /** DrawCanvas.java */
 public final class DrawCanvas extends Canvas implements Runnable, CommandListener{
 
-/** ’è” */
-final static int		KEY_NO			=0x00000000,
-						KEY_0			=0x00000001,
-						KEY_1			=0x00000002,
-						KEY_2			=0x00000004,
-						KEY_3			=0x00000008,
-						KEY_4			=0x00000010,
-						KEY_5			=0x00000020,
-						KEY_6			=0x00000040,
-						KEY_7			=0x00000080,
-						KEY_8			=0x00000100,
-						KEY_9			=0x00000200,
-						KEY_ASTERISK	=0x00000400,
-						KEY_POUND		=0x00000800,
-						KEY_UP			=0x00001000,
-						KEY_LEFT		=0x00002000,
-						KEY_RIGHT		=0x00004000,
-						KEY_DOWN		=0x00008000,
-						KEY_SELECT		=0x00010000,
+/** å®šæ•° */
+final static int        KEY_NO           =0x00000000,
+                        KEY_0            =0x00000001,
+                        KEY_1            =0x00000002,
+                        KEY_2            =0x00000004,
+                        KEY_3            =0x00000008,
+                        KEY_4            =0x00000010,
+                        KEY_5            =0x00000020,
+                        KEY_6            =0x00000040,
+                        KEY_7            =0x00000080,
+                        KEY_8            =0x00000100,
+                        KEY_9            =0x00000200,
+                        KEY_ASTERISK     =0x00000400,
+                        KEY_POUND        =0x00000800,
+                        KEY_UP           =0x00001000,
+                        KEY_LEFT         =0x00002000,
+                        KEY_RIGHT        =0x00004000,
+                        KEY_DOWN         =0x00008000,
+                        KEY_SELECT       =0x00010000,
 
-						SCREEN_WIDTH	=240,			//ƒXƒNƒŠ[ƒ“‚Ì•
-						SCREEN_HEIGHT	=240,			//ƒXƒNƒŠ[ƒ“‚Ì‚‚³
-						FOODER_HEIGHT	=32,			//ƒtƒbƒ_‚Ì‚‚³
-						PLAYING_HEIGHT	=208,
-						NUM_WIDTH		=14,			//”š‚Ì•
-						NUM_HEIGHT		=11,			//”š‚Ì‚‚³
-						CAL_WIDTH		=8,				//”š‚Ì•
-						CAL_HEIGHT		=10,			//”š‚Ì‚‚³
-						F_WIDTH			=9,				//”š‚Ì•
-						F_HEIGHT		=7,				//”š‚Ì‚‚³
+                        SCREEN_WIDTH     =240,            //ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®å¹…
+                        SCREEN_HEIGHT    =240,            //ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®é«˜ã•
+                        FOODER_HEIGHT    =32,             //ãƒ•ãƒƒãƒ€ã®é«˜ã•
+                        PLAYING_HEIGHT   =208,
+                        NUM_WIDTH        =14,            //æ•°å­—ã®å¹…
+                        NUM_HEIGHT       =11,            //æ•°å­—ã®é«˜ã•
+                        CAL_WIDTH        =8,             //æ•°å­—ã®å¹…
+                        CAL_HEIGHT       =10,            //æ•°å­—ã®é«˜ã•
+                        F_WIDTH          =9,             //æ•°å­—ã®å¹…
+                        F_HEIGHT         =7,             //æ•°å­—ã®é«˜ã•
 
-						NOW_LOADING		=0,
-						TITLE			=1,
-						MODE_SELECT		=2,
-						GAME_START		=4,
-						GAME_PLAYING	=5,
-						GAME_END		=6,
-						GAME_RESULT		=7,
-						RECORD			=8,
-						HELP			=9,
-						BONUS			=10,
-						ENDING			=11,
+                        NOW_LOADING      =0,
+                        TITLE            =1,
+                        MODE_SELECT      =2,
+                        GAME_START       =4,
+                        GAME_PLAYING     =5,
+                        GAME_END         =6,
+                        GAME_RESULT      =7,
+                        RECORD           =8,
+                        HELP             =9,
+                        BONUS            =10,
+                        ENDING           =11,
 
-						SLEEP_TIME		=70,			//ƒXƒŠ[ƒvƒ^ƒCƒ€
-						MAX_SCORE		=9999999,
-						MAX_COMBO		=99,
+                        SLEEP_TIME       =70,            //ã‚¹ãƒªãƒ¼ãƒ—ã‚¿ã‚¤ãƒ 
+                        MAX_SCORE        =9999999,
+                        MAX_COMBO        =99,
 
-						COMBO_TIME		=4,
-						TIME_LIMIT		=112,//20,
-						CURSOR_TIME		=2,
+                        COMBO_TIME        =4,
+                        TIME_LIMIT        =112,//20,
+                        CURSOR_TIME       =2,
 
-						HISCORE_SIZE	=5,
-						BONUS_SIZE		=12,
-						STAGE_SIZE		=3,
-						RS_SIZE			=256,			//ƒŒƒR[ƒhƒXƒgƒA
-						MODE_SIZE		=3,
+                        HISCORE_SIZE      =5,
+                        BONUS_SIZE        =12,
+                        STAGE_SIZE        =3,
+                        RS_SIZE           =256,            //ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢
+                        MODE_SIZE         =3,
 
-						STOP			=0,
-						WALK			=1,
-						JUMP			=2,
-						WALK_SPEED		=8,
-						JUMP_HEIGHT		=22,
-						MYCHARA_WIDTH	=24,
-						MYCHARA_HEIGHT	=24,
+                        STOP              =0,
+                        WALK              =1,
+                        JUMP              =2,
+                        WALK_SPEED        =8,
+                        JUMP_HEIGHT       =22,
+                        MYCHARA_WIDTH     =24,
+                        MYCHARA_HEIGHT    =24,
 
-						GROUND_TOP		=93,
-						GROUND_MIDDLE	=141,
-						GROUND_BOTTOM	=189,
-						GROUND_WIDTH	=96,
-						GROUND_HEIGHT	=48,
+                        GROUND_TOP        =93,
+                        GROUND_MIDDLE    =141,
+                        GROUND_BOTTOM    =189,
+                        GROUND_WIDTH    =96,
+                        GROUND_HEIGHT    =48,
 
-						APPLE_SIZE		=6,				//o‚Ä‚­‚éƒtƒ‹[ƒc‚Ì‘å‚«‚³
-						NONE			=-1,
-						APPLE			=0,
-						ORANGE			=1,
-						LEMON			=2,
-						SPECIAL			=3,
+                        APPLE_SIZE        =6,                //å‡ºã¦ãã‚‹ãƒ•ãƒ«ãƒ¼ãƒ„ã®å¤§ãã•
+                        NONE            =-1,
+                        APPLE            =0,
+                        ORANGE            =1,
+                        LEMON            =2,
+                        SPECIAL            =3,
 
-						BONUS_SCORE		=2000,
-						BONUS_TIME		=8,
-						BONUS_APPEAR	=16,
+                        BONUS_SCORE        =2000,
+                        BONUS_TIME        =8,
+                        BONUS_APPEAR    =16,
 
-						SLOT_TIME		=20,
-						SLOT_BONUS		=0,
-						TIME_BONUS		=1,
-						GET_ITEM		=2,
+                        SLOT_TIME        =20,
+                        SLOT_BONUS        =0,
+                        TIME_BONUS        =1,
+                        GET_ITEM        =2,
 
-						IMAGE_MYCHARA	=0,			//ImageIndex
-						IMAGE_BG		=1,
-						IMAGE_GROUND3	=2,
-						IMAGE_GROUND2	=3,
-						IMAGE_GROUND1	=4,
-						IMAGE_FOODER	=5,
-						IMAGE_APPLE		=6,
-						IMAGE_BONUS		=7,
-						IMAGE_LANG		=8,
-						IMAGE_NUM		=9,
-						IMAGE_LANG_FD	=10,
-						IMAGE_JUMP		=11,
-						IMAGE_SHINE		=12,
-						IMAGE_PRESENTS	=13,
-						IMAGE_STAGE		=14,
-						IMAGE_GAME		=15,
-						IMAGE_SLOT		=16,
-						IMAGE_BONUS2	=17,
-						IMAGE_PRESS		=18,
-						IMAGE_NUMB		=19,
-						IMAGE_NEKO		=20,
-						IMAGE_SIZE		=21,			//ImageƒTƒCƒY
+                        IMAGE_MYCHARA    =0,            //ImageIndex
+                        IMAGE_BG        =1,
+                        IMAGE_GROUND3    =2,
+                        IMAGE_GROUND2    =3,
+                        IMAGE_GROUND1    =4,
+                        IMAGE_FOODER    =5,
+                        IMAGE_APPLE        =6,
+                        IMAGE_BONUS        =7,
+                        IMAGE_LANG        =8,
+                        IMAGE_NUM        =9,
+                        IMAGE_LANG_FD    =10,
+                        IMAGE_JUMP        =11,
+                        IMAGE_SHINE        =12,
+                        IMAGE_PRESENTS    =13,
+                        IMAGE_STAGE        =14,
+                        IMAGE_GAME        =15,
+                        IMAGE_SLOT        =16,
+                        IMAGE_BONUS2    =17,
+                        IMAGE_PRESS        =18,
+                        IMAGE_NUMB        =19,
+                        IMAGE_NEKO        =20,
+                        IMAGE_SIZE        =21,            //Imageã‚µã‚¤ã‚º
 
-						IMAGE_STOP		=0,
-						IMAGE_WALK1		=2,
-						IMAGE_WALK2		=1,
+                        IMAGE_STOP        =0,
+                        IMAGE_WALK1        =2,
+                        IMAGE_WALK2        =1,
 
-						L_TITLE1		=0,				//•¶š
-						L_TITLE2		=1,
-						L_START			=2,
-						L_PAUSE			=3,
-						L_TIME_UP		=4,
-						L_RECORD		=5,
-						L_ITEM			=6,
-						L_HELP			=7,
-						L_STAGE			=8,
-						N_SLASH			=10,
-						N_PLUS			=11,
-						N_LEFT			=12,
-						N_RIGHT			=13,
-						F_SCORE			=0,
-						F_TIME			=1,
-						F_COMBO			=2,
-						F_SLOT			=3,
+                        L_TITLE1        =0,                //æ–‡å­—
+                        L_TITLE2        =1,
+                        L_START            =2,
+                        L_PAUSE            =3,
+                        L_TIME_UP        =4,
+                        L_RECORD        =5,
+                        L_ITEM            =6,
+                        L_HELP            =7,
+                        L_STAGE            =8,
+                        N_SLASH            =10,
+                        N_PLUS            =11,
+                        N_LEFT            =12,
+                        N_RIGHT            =13,
+                        F_SCORE            =0,
+                        F_TIME            =1,
+                        F_COMBO            =2,
+                        F_SLOT            =3,
 
-						FINAL_END		=-1;			//éŒ¾I—¹
+                        FINAL_END        =-1;            //å®£è¨€çµ‚äº†
 
-final static String		RS_GAMEDATA		="A";
+final static String        RS_GAMEDATA        ="A";
 
-final static int[]		GROUND_TOP1X	={ 241,  12, 208},
-						GROUND_TOP2X	={ 241, 241, -64},
-						GROUND_MIDDLE1X	={ 241,  48, -32},
-						GROUND_MIDDLE2X	={ 241, 241, 176};
+final static int[]        GROUND_TOP1X    ={ 241,  12, 208},
+                        GROUND_TOP2X    ={ 241, 241, -64},
+                        GROUND_MIDDLE1X    ={ 241,  48, -32},
+                        GROUND_MIDDLE2X    ={ 241, 241, 176};
 
-final static String[]	MODE_HELP		=	{
-													"wƒnƒCƒXƒRƒA‚ğ•\¦‚µ‚Ü‚·x","wæ“¾‚µ‚½ƒAƒCƒeƒ€‚ğ•\¦‚µ‚Ü‚·x","wƒwƒ‹ƒv‚ğ•\¦‚µ‚Ü‚·x"
-											};
+final static String[]    MODE_HELP        =    {
+                                                    "ã€ãƒã‚¤ã‚¹ã‚³ã‚¢ã‚’è¡¨ç¤ºã—ã¾ã™ã€","ã€å–å¾—ã—ãŸã‚¢ã‚¤ãƒ†ãƒ ã‚’è¡¨ç¤ºã—ã¾ã™ã€","ã€ãƒ˜ãƒ«ãƒ—ã‚’è¡¨ç¤ºã—ã¾ã™ã€"
+                                            };
 
-final static String[]	MENU_TEXT		=	{
-													"ƒQ[ƒ€ÄŠJ","ƒ^ƒCƒgƒ‹‚É–ß‚é"
-											};
+final static String[]    MENU_TEXT        =    {
+                                                    "ã‚²ãƒ¼ãƒ å†é–‹","ã‚¿ã‚¤ãƒˆãƒ«ã«æˆ»ã‚‹"
+                                            };
 
-final static String[][]	HELP_TEXT		=	{	{
-													"Ÿ‚Í‚¶‚ß‚É",
-													"Jumping Fruits‚Í‚Ğ‚æ‚±‚ğ‘€ì‚µ‚Ä",
-													"ƒtƒ‹[ƒc‚ğƒLƒƒƒbƒ`‚·‚éƒQ[ƒ€‚Å‚·B",
-													"",
-													"ƒtƒ‹[ƒc‚ğƒLƒƒƒbƒ`‚·‚é‚ÆƒXƒRƒA‚ª",
-													"‰ÁZ‚³‚ê‚Ü‚·B§ŒÀŠÔ‚ª‚O‚É‚È‚é‚Æ",
-													"ƒQ[ƒ€ƒI[ƒo[B‘S‚RƒXƒe[ƒW‚Å‚·B"
-												},{
-													"Ÿ‘€ì•û–@",
-													"©¨: ˆÚ“®",
-													"Œˆ’è: ƒWƒƒƒ“ƒv",
-													" « : ~‚è‚é",
-													"",
-													"•ûŒüƒL[‚Í‚Q,‚S,‚U,‚WƒL[,",
-													"Œˆ’èƒL[‚Í‚TƒL[‚Å‘ã—p‚Å‚«‚Ü‚·B"
-												},{
-													"Ÿ˜A‘±ƒWƒƒƒ“ƒv",
-													"ƒtƒ‹[ƒc‚ğƒLƒƒƒbƒ`‚·‚é‚Æ‚³‚ç‚É",
-													"‚Ğ‚æ‚±‚ªƒWƒƒƒ“ƒv‚µ‚Ü‚·",
-													"˜A‘±ƒWƒƒƒ“ƒv‚Ì‰ñ”‚É‚æ‚Á‚Ä‰ÁZ‚³‚ê",
-													"‚é“¾“_‚ª‘‚¦‚é‚Ì‚ÅA˜A‘±ƒWƒƒƒ“ƒv‚Å",
-													"‚“¾“_‚ğ‘_‚Á‚Ä‚­‚¾‚³‚¢I",
-													""
-												},{
-													"Ÿƒ{[ƒiƒX‚PwSLOT BONUSx",
-													"æ“¾‚µ‚½ƒtƒ‹[ƒc‚Í¶‰º‚ÌƒXƒƒbƒg‚É",
-													"Ši”[‚³‚ê‚Ü‚·B",
-													"¶‰º‚ÌƒXƒƒbƒg‚ª‚R‚Â‚»‚ë‚¤‚Æ",
-													"wSLOT BONUSx‚Æ‚È‚èA‚³‚ç‚É‚“¾“_",
-													"‚ª‰ÁZ‚³‚ê‚Ü‚·B",
-													""
-												},{
-													"Ÿƒ{[ƒiƒX‚QwTIME BONUSx",
-													"¶‰º‚ÌƒXƒƒbƒg‚ª‚R‚Âˆá‚¤ê‡‚ÍA",
-													"wTIME BONUSx‚Æ‚È‚è‚Ü‚·B",
-													"§ŒÀŠÔ‚ª­‚µ‰„‚Ñ‚é‚Ì‚ÅƒXƒƒbƒg‚ğ",
-													"ãè‚ÉŠˆ—p‚µ‚Ä‚­‚¾‚³‚¢B",
-													"",
-													""
-												},{
-													"Ÿƒ{[ƒiƒX‚RwGET ITEMx",
-													"‚ ‚éğŒ‚ğ–‚½‚·‚Æ•Ï‚È‚à‚Ì‚ª—‚¿‚Ä",
-													"‚«‚Ü‚·BŒ©–‚ÉƒLƒƒƒbƒ`‚·‚é‚Æˆê–œ“_",
-													"‰ÁZ‚³‚ê‚Ü‚·B",
-													"æ“¾‚µ‚½ƒAƒCƒeƒ€‚ÍITEM LIST‚©‚ç",
-													"‰{——‚Å‚«‚Ü‚·B",
-													"–Úw‚¹‘SƒAƒCƒeƒ€ƒRƒ“ƒvƒŠ[ƒgI"
-												},{
-													"Ÿ‚³‚¢‚²‚É",
-													"wJumping Fruitsx‚ğDL‚µ‚Ä’¸‚¢‚Ä",
-													"‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚µ‚½B",
-													"‚²ˆÓŒ©E—v–]‚ÍWebƒTƒCƒg‚Ö‚Ç‚¤‚¼B",
-													"",
-													"Copyright by bluesystem¡",
-													"          All right reserved 2006."
-												}};
-final static String[][]	ITEM_TEXT		=	{	{
-													"ŠÃ‚»‚¤‚ÈƒoƒiƒiBƒtƒBƒŠƒsƒ“YB",
-													"Ì‚Í‹Md•i‚¾‚Á‚½‚»‚¤‚¾B"
-												},{
-													"ã‚ª‚µ‚Ñ‚ê‚éƒpƒCƒiƒbƒvƒ‹B",
-													"“ì‘og‚Å•—Ši‚ª‚ ‚è‚Ü‚·B‚³‚·‚ªB"
-												},{
-													"‚‹‰•i‚Ì‘ã•\Aƒƒƒ“B",
-													"‚½‚Ü‚Éƒnƒ€‚ª‚Ì‚Á‚Ä‚¢‚é‚ª‚»‚ê‚ÍŒ™B"
-												},{
-													"‚³‚­‚ç‚ñ‚ÚB’†g‚ª‚¢‚Á‚Ï‚¢‹l‚Ü‚Á‚½",
-													"ŠÃ‚­ŠÃ‚¢‚â‚Â‚Å‚·B‚à‚¤ˆê‰ñI"
-												},{
-													"ƒ‰Eƒtƒ‰ƒ“ƒXB‚½‚Ü‚ÉƒKƒ€‚ÅH‚×‚é",
-													"’ö“x‚È‚ñ‚Å‚æ‚­’m‚è‚Ü‚¹‚ñ‚ªcB"
-												},{
-													"‚·‚²‚­ŠÃ‚¢‚İ‚©‚ñB‚Ó‚Â‚¤‚Ì‚İ‚©‚ñ",
-													"‚Æ”÷–­‚ÉF‚ªˆá‚¢‚Ü‚·B"
-												},{
-													"w¯‚Ì‚©‚¯‚çx‚Æ‚¢‚¤ƒXƒiƒbƒN‰ÙqB",
-													"‚Ğ‚æ‚±ŠE‚Ì¡”Nˆê”Ô‚Ìƒqƒbƒg¤•iB"
-												},{
-													"wƒKƒ“ƒfƒ€x‚Ìƒvƒ‰ƒ‚‚Ì‚Â‚Ì‚¾cB",
-													"‚±‚ÌŒ`‚Í‚«‚Á‚Æ•ÒƒKƒ“ƒfƒ€‚¾cB"
-												},{
-													"w›ƒCƒp[ƒ_ƒbƒVƒ…ƒ‚[ƒ^[x‚¾I",
-													"ƒR[ƒXƒAƒEƒg‚É‹C‚ğ‚Â‚¯‚æ‚¤B"
-												},{
-													"‚¿‚Ü‚½‚Ål‹C‚ÌwƒQ[ƒ€ƒ{ƒEƒBxB",
-													"‚ ‚È‚½‚Í60•b‚Å‰½“_‚Æ‚êc(ˆÈ‰º—ª)"
-												},{
-													"“`à‚Ìw”ª¯‹…x‚¾cB",
-													"‰½ŒÂW‚ß‚Ä‚àŠè‚¢‚ÍŠ‚¢‚»‚¤‚É‚È‚¢B"
-												},{
-													"wìÒ‚©‚ç‚Ìè†x",
-													"Œˆ’èƒL[‚ğ‰Ÿ‚µ‚Ä‰º‚³‚¢(*^-')ƒm"	
-												}};
-final static String[]	ITEM_NO			=	{		"‚»‚ÌƒAƒCƒeƒ€‚Í‚Ü‚¾",
-													"              è‚É“ü‚ê‚Ä‚¢‚Ü‚¹‚ñB"};
-final static String[]	END_TEXT		=	{
-													"ŸThank You For Playing!!Ÿ",
-													"‘SƒAƒCƒeƒ€ƒRƒ“ƒvƒŠ[ƒg",
-													"–{“–‚É‚¨‚ß‚Å‚Æ‚¤‚²‚´‚¢‚Ü‚·!!",
-													"ˆê‰‚±‚ÌƒQ[ƒ€‚Í‚±‚±‚ÅI‚í‚è‚Å‚·B",
-													"‚¨”æ‚ê—l‚Å‚·B‚ ‚ñ‚½‚Í‚·‚²‚¢I",
-													"Ÿ‰ñì‚É‚²Šú‘Ò‚­‚¾‚³‚¢(*'-')ƒm"
-											};
+final static String[][]    HELP_TEXT        =    {    {
+                                                    "â—†ã¯ã˜ã‚ã«",
+                                                    "Jumping Fruitsã¯ã²ã‚ˆã“ã‚’æ“ä½œã—ã¦",
+                                                    "ãƒ•ãƒ«ãƒ¼ãƒ„ã‚’ã‚­ãƒ£ãƒƒãƒã™ã‚‹ã‚²ãƒ¼ãƒ ã§ã™ã€‚",
+                                                    "",
+                                                    "ãƒ•ãƒ«ãƒ¼ãƒ„ã‚’ã‚­ãƒ£ãƒƒãƒã™ã‚‹ã¨ã‚¹ã‚³ã‚¢ãŒ",
+                                                    "åŠ ç®—ã•ã‚Œã¾ã™ã€‚åˆ¶é™æ™‚é–“ãŒï¼ã«ãªã‚‹ã¨",
+                                                    "ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã€‚å…¨ï¼“ã‚¹ãƒ†ãƒ¼ã‚¸ã§ã™ã€‚"
+                                                },{
+                                                    "â—†æ“ä½œæ–¹æ³•",
+                                                    "â†â†’: ç§»å‹•",
+                                                    "æ±ºå®š: ã‚¸ãƒ£ãƒ³ãƒ—",
+                                                    " â†“ : é™ã‚Šã‚‹",
+                                                    "",
+                                                    "æ–¹å‘ã‚­ãƒ¼ã¯ï¼’,ï¼”,ï¼–,ï¼˜ã‚­ãƒ¼,",
+                                                    "æ±ºå®šã‚­ãƒ¼ã¯ï¼•ã‚­ãƒ¼ã§ä»£ç”¨ã§ãã¾ã™ã€‚"
+                                                },{
+                                                    "â—†é€£ç¶šã‚¸ãƒ£ãƒ³ãƒ—",
+                                                    "ãƒ•ãƒ«ãƒ¼ãƒ„ã‚’ã‚­ãƒ£ãƒƒãƒã™ã‚‹ã¨ã•ã‚‰ã«",
+                                                    "ã²ã‚ˆã“ãŒã‚¸ãƒ£ãƒ³ãƒ—ã—ã¾ã™",
+                                                    "é€£ç¶šã‚¸ãƒ£ãƒ³ãƒ—ã®å›æ•°ã«ã‚ˆã£ã¦åŠ ç®—ã•ã‚Œ",
+                                                    "ã‚‹å¾—ç‚¹ãŒå¢—ãˆã‚‹ã®ã§ã€é€£ç¶šã‚¸ãƒ£ãƒ³ãƒ—ã§",
+                                                    "é«˜å¾—ç‚¹ã‚’ç‹™ã£ã¦ãã ã•ã„ï¼",
+                                                    ""
+                                                },{
+                                                    "â—†ãƒœãƒ¼ãƒŠã‚¹ï¼‘ã€SLOT BONUSã€",
+                                                    "å–å¾—ã—ãŸãƒ•ãƒ«ãƒ¼ãƒ„ã¯å·¦ä¸‹ã®ã‚¹ãƒ­ãƒƒãƒˆã«",
+                                                    "æ ¼ç´ã•ã‚Œã¾ã™ã€‚",
+                                                    "å·¦ä¸‹ã®ã‚¹ãƒ­ãƒƒãƒˆãŒï¼“ã¤ãã‚ã†ã¨",
+                                                    "ã€SLOT BONUSã€ã¨ãªã‚Šã€ã•ã‚‰ã«é«˜å¾—ç‚¹",
+                                                    "ãŒåŠ ç®—ã•ã‚Œã¾ã™ã€‚",
+                                                    ""
+                                                },{
+                                                    "â—†ãƒœãƒ¼ãƒŠã‚¹ï¼’ã€TIME BONUSã€",
+                                                    "å·¦ä¸‹ã®ã‚¹ãƒ­ãƒƒãƒˆãŒï¼“ã¤é•ã†å ´åˆã¯ã€",
+                                                    "ã€TIME BONUSã€ã¨ãªã‚Šã¾ã™ã€‚",
+                                                    "åˆ¶é™æ™‚é–“ãŒå°‘ã—å»¶ã³ã‚‹ã®ã§ã‚¹ãƒ­ãƒƒãƒˆã‚’",
+                                                    "ä¸Šæ‰‹ã«æ´»ç”¨ã—ã¦ãã ã•ã„ã€‚",
+                                                    "",
+                                                    ""
+                                                },{
+                                                    "â—†ãƒœãƒ¼ãƒŠã‚¹ï¼“ã€GET ITEMã€",
+                                                    "ã‚ã‚‹æ¡ä»¶ã‚’æº€ãŸã™ã¨å¤‰ãªã‚‚ã®ãŒè½ã¡ã¦",
+                                                    "ãã¾ã™ã€‚è¦‹äº‹ã«ã‚­ãƒ£ãƒƒãƒã™ã‚‹ã¨ä¸€ä¸‡ç‚¹",
+                                                    "åŠ ç®—ã•ã‚Œã¾ã™ã€‚",
+                                                    "å–å¾—ã—ãŸã‚¢ã‚¤ãƒ†ãƒ ã¯ITEM LISTã‹ã‚‰",
+                                                    "é–²è¦§ã§ãã¾ã™ã€‚",
+                                                    "ç›®æŒ‡ã›å…¨ã‚¢ã‚¤ãƒ†ãƒ ã‚³ãƒ³ãƒ—ãƒªãƒ¼ãƒˆï¼"
+                                                },{
+                                                    "â—†ã•ã„ã”ã«",
+                                                    "ã€Jumping Fruitsã€ã‚’DLã—ã¦é ‚ã„ã¦",
+                                                    "ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã—ãŸã€‚",
+                                                    "ã”æ„è¦‹ãƒ»è¦æœ›ã¯Webã‚µã‚¤ãƒˆã¸ã©ã†ãã€‚",
+                                                    "",
+                                                    "Copyright by bluesystemâ– ",
+                                                    "          All right reserved 2006."
+                                                }};
+final static String[][]    ITEM_TEXT        =    {    {
+                                                    "ç”˜ãã†ãªãƒãƒŠãƒŠã€‚ãƒ•ã‚£ãƒªãƒ”ãƒ³ç”£ã€‚",
+                                                    "æ˜”ã¯è²´é‡å“ã ã£ãŸãã†ã ã€‚"
+                                                },{
+                                                    "èˆŒãŒã—ã³ã‚Œã‚‹ãƒ‘ã‚¤ãƒŠãƒƒãƒ—ãƒ«ã€‚",
+                                                    "å—å›½å‡ºèº«ã§é¢¨æ ¼ãŒã‚ã‚Šã¾ã™ã€‚ã•ã™ãŒã€‚"
+                                                },{
+                                                    "é«˜ç´šå“ã®ä»£è¡¨ã€ãƒ¡ãƒ­ãƒ³ã€‚",
+                                                    "ãŸã¾ã«ãƒãƒ ãŒã®ã£ã¦ã„ã‚‹ãŒãã‚Œã¯å«Œã€‚"
+                                                },{
+                                                    "ã•ãã‚‰ã‚“ã¼ã€‚ä¸­èº«ãŒã„ã£ã±ã„è©°ã¾ã£ãŸ",
+                                                    "ç”˜ãç”˜ã„ã‚„ã¤ã§ã™ã€‚ã‚‚ã†ä¸€å›ï¼"
+                                                },{
+                                                    "ãƒ©ãƒ»ãƒ•ãƒ©ãƒ³ã‚¹ã€‚ãŸã¾ã«ã‚¬ãƒ ã§é£Ÿã¹ã‚‹",
+                                                    "ç¨‹åº¦ãªã‚“ã§ã‚ˆãçŸ¥ã‚Šã¾ã›ã‚“ãŒâ€¦ã€‚"
+                                                },{
+                                                    "ã™ã”ãç”˜ã„ã¿ã‹ã‚“ã€‚ãµã¤ã†ã®ã¿ã‹ã‚“",
+                                                    "ã¨å¾®å¦™ã«è‰²ãŒé•ã„ã¾ã™ã€‚"
+                                                },{
+                                                    "ã€æ˜Ÿã®ã‹ã‘ã‚‰ã€ã¨ã„ã†ã‚¹ãƒŠãƒƒã‚¯è“å­ã€‚",
+                                                    "ã²ã‚ˆã“ç•Œã®ä»Šå¹´ä¸€ç•ªã®ãƒ’ãƒƒãƒˆå•†å“ã€‚"
+                                                },{
+                                                    "ã€ã‚¬ãƒ³ãƒ‡ãƒ ã€ã®ãƒ—ãƒ©ãƒ¢ã®ã¤ã®ã â€¦ã€‚",
+                                                    "ã“ã®å½¢ã¯ãã£ã¨æ­¦è€…ã‚¬ãƒ³ãƒ‡ãƒ ã â€¦ã€‚"
+                                                },{
+                                                    "ã€â—‹ã‚¤ãƒ‘ãƒ¼ãƒ€ãƒƒã‚·ãƒ¥ãƒ¢ãƒ¼ã‚¿ãƒ¼ã€ã ï¼",
+                                                    "ã‚³ãƒ¼ã‚¹ã‚¢ã‚¦ãƒˆã«æ°—ã‚’ã¤ã‘ã‚ˆã†ã€‚"
+                                                },{
+                                                    "ã¡ã¾ãŸã§äººæ°—ã®ã€ã‚²ãƒ¼ãƒ ãƒœã‚¦ã‚£ã€ã€‚",
+                                                    "ã‚ãªãŸã¯60ç§’ã§ä½•ç‚¹ã¨ã‚Œâ€¦(ä»¥ä¸‹ç•¥)"
+                                                },{
+                                                    "ä¼èª¬ã®ã€å…«æ˜Ÿçƒã€ã â€¦ã€‚",
+                                                    "ä½•å€‹é›†ã‚ã¦ã‚‚é¡˜ã„ã¯å¶ã„ãã†ã«ãªã„ã€‚"
+                                                },{
+                                                    "ã€ä½œè€…ã‹ã‚‰ã®æ‰‹ç´™ã€",
+                                                    "æ±ºå®šã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ä¸‹ã•ã„(*^-')ãƒ"    
+                                                }};
+final static String[]    ITEM_NO            =    {        "ãã®ã‚¢ã‚¤ãƒ†ãƒ ã¯ã¾ã ",
+                                                    "              æ‰‹ã«å…¥ã‚Œã¦ã„ã¾ã›ã‚“ã€‚"};
+final static String[]    END_TEXT        =    {
+                                                    "â—†Thank You For Playing!!â—†",
+                                                    "å…¨ã‚¢ã‚¤ãƒ†ãƒ ã‚³ãƒ³ãƒ—ãƒªãƒ¼ãƒˆ",
+                                                    "æœ¬å½“ã«ãŠã‚ã§ã¨ã†ã”ã–ã„ã¾ã™!!",
+                                                    "ä¸€å¿œã“ã®ã‚²ãƒ¼ãƒ ã¯ã“ã“ã§çµ‚ã‚ã‚Šã§ã™ã€‚",
+                                                    "ãŠç–²ã‚Œæ§˜ã§ã™ã€‚ã‚ã‚“ãŸã¯ã™ã”ã„ï¼",
+                                                    "æ¬¡å›ä½œã«ã”æœŸå¾…ãã ã•ã„(*'-')ãƒ"
+                                            };
 
-/** ƒƒCƒ“ƒIƒuƒWƒFƒNƒg */
-private JumpingFruits	jumpingFruits;
+/** ãƒ¡ã‚¤ãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ */
+private JumpingFruits    jumpingFruits;
 
-/** ƒCƒ[ƒW */
-private Image[]			img				=new Image[IMAGE_SIZE];
+/** ã‚¤ãƒ¡ãƒ¼ã‚¸ */
+private Image[]            img                =new Image[IMAGE_SIZE];
 
-private Image			logoImg;
+private Image            logoImg;
 
-/** ƒ_ƒuƒ‹ƒoƒbƒtƒ@ƒŠƒ“ƒO */
-private Image 			mainImg;			//ƒIƒtƒCƒ[ƒW
-private Graphics		g;					//ƒIƒtƒOƒ‰ƒtƒBƒNƒX
+/** ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚° */
+private Image             mainImg;            //ã‚ªãƒ•ã‚¤ãƒ¡ãƒ¼ã‚¸
+private Graphics        g;                    //ã‚ªãƒ•ã‚°ãƒ©ãƒ•ã‚£ã‚¯ã‚¹
 
-/** ”wŒi‰æ‘œ */
-private Image 			imgBg=Image.createImage(SCREEN_WIDTH,SCREEN_HEIGHT-FOODER_HEIGHT);				//”wŒi‰æ‘œ
-private Image 			imgFd=Image.createImage(SCREEN_WIDTH,FOODER_HEIGHT);	
+/** èƒŒæ™¯ç”»åƒ */
+private Image             imgBg=Image.createImage(SCREEN_WIDTH,SCREEN_HEIGHT-FOODER_HEIGHT);                //èƒŒæ™¯ç”»åƒ
+private Image             imgFd=Image.createImage(SCREEN_WIDTH,FOODER_HEIGHT);    
 
-/**ƒOƒ‰ƒtƒBƒbƒNƒ†[ƒeƒBƒŠƒeƒB*/
-private GraphicsUtil	gUtil;
+/**ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£*/
+private GraphicsUtil    gUtil;
 
-/** ƒfƒoƒCƒXƒRƒ“ƒgƒ[ƒ‹ */
-private DeviceControl	devCtl = DeviceControl.getDefaultDeviceControl();
+/** ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ« */
+private DeviceControl    devCtl = DeviceControl.getDefaultDeviceControl();
 
-/** ƒXƒgƒŠƒ“ƒOƒoƒbƒtƒ@ */
-private StringBuffer	Sb				=new StringBuffer();
-private String			drawSt			=null;
+/** ã‚¹ãƒˆãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡ */
+private StringBuffer    Sb                =new StringBuffer();
+private String            drawSt            =null;
 
-/** ƒL[ƒCƒxƒ“ƒg */
-private int 			m_event			=KEY_NO;
-/** ƒL[ó‘Ô */
-private int 			key				=KEY_NO;
+/** ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆ */
+private int             m_event            =KEY_NO;
+/** ã‚­ãƒ¼çŠ¶æ…‹ */
+private int             key                =KEY_NO;
 
-/** ƒtƒHƒ“ƒg‚ğ•Û‚·‚é•Ï” */
-private Font			f				=Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-private int 			stHeight		=f.getHeight();
+/** ãƒ•ã‚©ãƒ³ãƒˆã‚’ä¿æŒã™ã‚‹å¤‰æ•° */
+private Font            f                =Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+private int             stHeight        =f.getHeight();
 
-/** —” */
-private	Random			r				=new Random();
+/** ä¹±æ•° */
+private    Random            r                =new Random();
 
-/** ƒRƒ}ƒ“ƒh•Ï” */
-//private Command 		noneCmd			=new Command("",		Command.SCREEN,1);
-private Command 		exitCmd			=new Command("I—¹",	Command.SCREEN,2);
-private Command 		pauseCmd		=new Command("’†’f",	Command.SCREEN,3);
-private Command 		resumeCmd		=new Command("ÄŠJ",	Command.SCREEN,4);
-private Command 		backCmd			=new Command("–ß‚é",	Command.SCREEN,5);
+/** ã‚³ãƒãƒ³ãƒ‰å¤‰æ•° */
+//private Command         noneCmd            =new Command("",        Command.SCREEN,1);
+private Command         exitCmd            =new Command("çµ‚äº†",    Command.SCREEN,2);
+private Command         pauseCmd        =new Command("ä¸­æ–­",    Command.SCREEN,3);
+private Command         resumeCmd        =new Command("å†é–‹",    Command.SCREEN,4);
+private Command         backCmd            =new Command("æˆ»ã‚‹",    Command.SCREEN,5);
 
 //ver1.2.0
-private Command 		onSoundCmd		=new Command("ô›",	Command.SCREEN,1);
-private Command 		offSoundCmd		=new Command("ô~",	Command.SCREEN,1);
+private Command         onSoundCmd        =new Command("â™ªâ—‹",    Command.SCREEN,1);
+private Command         offSoundCmd        =new Command("â™ªÃ—",    Command.SCREEN,1);
 
-/** ƒVƒXƒeƒ€•Ï” */
-private long			m_sleepTime		=0;	//ƒXƒŠ[ƒvƒ^ƒCƒ€
-private boolean			m_isPause		=false;
-private boolean			m_isDrawFooder	=false;
-private boolean			m_isDrawBg		=false;
-private int				m_hcenter		=getWidth()/2;
-private int				m_vcenter		=getHeight()/2;
-private int				m_load			=0;
-private int				m_cursor		=0;
-private int				m_cursorTime	=0;
+/** ã‚·ã‚¹ãƒ†ãƒ å¤‰æ•° */
+private long            m_sleepTime        =0;    //ã‚¹ãƒªãƒ¼ãƒ—ã‚¿ã‚¤ãƒ 
+private boolean            m_isPause        =false;
+private boolean            m_isDrawFooder    =false;
+private boolean            m_isDrawBg        =false;
+private int                m_hcenter        =getWidth()/2;
+private int                m_vcenter        =getHeight()/2;
+private int                m_load            =0;
+private int                m_cursor        =0;
+private int                m_cursorTime    =0;
 
-/** ƒQ[ƒ€•Ï” */
-private int				m_modeState		=NOW_LOADING;
-private int				m_nextState		=NOW_LOADING;
-private int				m_time			=0;
-private int				m_lv			=0;
-private int				m_score			=0;
-private int				m_combo			=0;
-private int				m_comboTime		=0;
-private int				m_comboMax		=0;
-private int				m_stage			=0;
-private int				m_option		=0;
-private int				m_teropX		=0;
-private int				m_slot[]		={NONE,NONE,NONE};
-private int				m_slotTime		=0;
-private int				m_slotState		=0;
-private boolean			m_isAppearBonus	=false;
-private int				m_bonusIndex	=0;
-private boolean			m_isBonusGet	=false;
-private int				m_hiScore[][]	={	{	0,	0,	0,	0,	0},
-											{	0,	0,	0,	0,	0},
-											{	0,	0,	0,	0,	0}};
-private int				m_hiCombo[][]	={	{	0,	0,	0,	0,	0},
-											{	0,	0,	0,	0,	0},
-											{	0,	0,	0,	0,	0}};
+/** ã‚²ãƒ¼ãƒ å¤‰æ•° */
+private int                m_modeState        =NOW_LOADING;
+private int                m_nextState        =NOW_LOADING;
+private int                m_time            =0;
+private int                m_lv            =0;
+private int                m_score            =0;
+private int                m_combo            =0;
+private int                m_comboTime        =0;
+private int                m_comboMax        =0;
+private int                m_stage            =0;
+private int                m_option        =0;
+private int                m_teropX        =0;
+private int                m_slot[]        ={NONE,NONE,NONE};
+private int                m_slotTime        =0;
+private int                m_slotState        =0;
+private boolean            m_isAppearBonus    =false;
+private int                m_bonusIndex    =0;
+private boolean            m_isBonusGet    =false;
+private int                m_hiScore[][]    ={    {    0,    0,    0,    0,    0},
+                                            {    0,    0,    0,    0,    0},
+                                            {    0,    0,    0,    0,    0}};
+private int                m_hiCombo[][]    ={    {    0,    0,    0,    0,    0},
+                                            {    0,    0,    0,    0,    0},
+                                            {    0,    0,    0,    0,    0}};
 
-private int				m_bonusGet[]	=	{	0,	0,	0,	0,	0,	0,
-												0,	0,	0,	0,	0,	0};
-private int				m_bonusNew[]	=	{	0,	0,	0,	0,	0,	0,
-												0,	0,	0,	0,	0,	0};
-private int				m_playTime		=0;
+private int                m_bonusGet[]    =    {    0,    0,    0,    0,    0,    0,
+                                                0,    0,    0,    0,    0,    0};
+private int                m_bonusNew[]    =    {    0,    0,    0,    0,    0,    0,
+                                                0,    0,    0,    0,    0,    0};
+private int                m_playTime        =0;
 
 
-/** ƒLƒƒƒ‰ƒNƒ^•Ï” */
-private int 			m_myX			=120;
-private int 			m_myY			=GROUND_BOTTOM;
-private boolean			m_isLeft		=false;
-private int				m_myState		=STOP;
-private int 			m_addY			=0;
-private int				m_walkCount		=0;
-private int				m_imgIndex		=IMAGE_STOP;
-private int				m_speed			=0;
-private int				m_ground		=GROUND_BOTTOM;
-private int				m_hiScoreNum	=-1;
+/** ã‚­ãƒ£ãƒ©ã‚¯ã‚¿å¤‰æ•° */
+private int             m_myX            =120;
+private int             m_myY            =GROUND_BOTTOM;
+private boolean            m_isLeft        =false;
+private int                m_myState        =STOP;
+private int             m_addY            =0;
+private int                m_walkCount        =0;
+private int                m_imgIndex        =IMAGE_STOP;
+private int                m_speed            =0;
+private int                m_ground        =GROUND_BOTTOM;
+private int                m_hiScoreNum    =-1;
 
-/** ƒtƒ‹[ƒc•Ï” */
-private int[]			m_appleState	={NONE,NONE,NONE,NONE,NONE,NONE};
-private int[]			m_appleX		={0,0,0,0,0,0};
-private int[]			m_appleY		={0,0,0,0,0,0};
-private int[]			m_appleSpeedX	={4,4,4,4,4,4};
-private int[]			m_appleSpeedY	={4,4,4,4,4,4};
-private boolean[]		m_appleIsLeft	={false,false,false,false,false,false};
+/** ãƒ•ãƒ«ãƒ¼ãƒ„å¤‰æ•° */
+private int[]            m_appleState    ={NONE,NONE,NONE,NONE,NONE,NONE};
+private int[]            m_appleX        ={0,0,0,0,0,0};
+private int[]            m_appleY        ={0,0,0,0,0,0};
+private int[]            m_appleSpeedX    ={4,4,4,4,4,4};
+private int[]            m_appleSpeedY    ={4,4,4,4,4,4};
+private boolean[]        m_appleIsLeft    ={false,false,false,false,false,false};
 
 //ver1.1.0
-private int				m_effX[]		={0,0,0};
-private int				m_effY[]		={0,0,0};
-private int				m_effTime[]		={0,0,0};
+private int                m_effX[]        ={0,0,0};
+private int                m_effY[]        ={0,0,0};
+private int                m_effTime[]        ={0,0,0};
 
 //debug
-//private Runtime			runtime=Runtime.getRuntime();
+//private Runtime            runtime=Runtime.getRuntime();
 
 //ver1.2.0 sound
-/** ƒtƒŒ[ƒYƒvƒŒƒCƒ„[ */
-static PhrasePlayer		phrasePlayer = null;
-//ƒgƒ‰ƒbƒN
-static PhraseTrack		tr1 = null;
-static PhraseTrack		tr2 = null;
-static PhraseTrack		tr3 = null;
-static PhraseTrack		tr4 = null;
+/** ãƒ•ãƒ¬ãƒ¼ã‚ºãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ */
+static PhrasePlayer        phrasePlayer = null;
+//ãƒˆãƒ©ãƒƒã‚¯
+static PhraseTrack        tr1 = null;
+static PhraseTrack        tr2 = null;
+static PhraseTrack        tr3 = null;
+static PhraseTrack        tr4 = null;
 
 //ver1.5.0
-private int				m_isMute		=0;
-private int				m_isShare		=0;
+private int                m_isMute        =0;
+private int                m_isShare        =0;
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	DrawCanvas(JumpingFruits jumpingFruits)
-	ŠT—v:	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    DrawCanvas(JumpingFruits jumpingFruits)
+    æ¦‚è¦:    ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 DrawCanvas(JumpingFruits jumpingFruits) {
 
-	//ƒƒCƒ“ƒIƒuƒWƒFƒNƒgì¬
-	this.jumpingFruits = jumpingFruits;
+    //ãƒ¡ã‚¤ãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä½œæˆ
+    this.jumpingFruits = jumpingFruits;
 
-	//ƒRƒ}ƒ“ƒhƒŠƒXƒi[“o˜^
-	setCommandListener(this);
+    //ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒŠãƒ¼ç™»éŒ²
+    setCommandListener(this);
 
-	//ƒ_ƒuƒ‹ƒoƒbƒtƒ@ƒŠƒ“ƒO
-	mainImg=Image.createImage(SCREEN_WIDTH,SCREEN_HEIGHT);
-	g=mainImg.getGraphics();
+    //ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚°
+    mainImg=Image.createImage(SCREEN_WIDTH,SCREEN_HEIGHT);
+    g=mainImg.getGraphics();
 
-	g.setFont(f);
+    g.setFont(f);
 
-	//ƒXƒŒƒbƒhŠJn
-	new Thread(this).start();
+    //ã‚¹ãƒ¬ãƒƒãƒ‰é–‹å§‹
+    new Thread(this).start();
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	resumeExe()
-	ŠT—v:	ˆê’â~‚Ìˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    resumeExe()
+    æ¦‚è¦:    ä¸€æ™‚åœæ­¢æ™‚ã®å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 public void resumeExe() {
-	m_isDrawBg=true;
-	if( m_modeState==GAME_PLAYING && !m_isPause ){
-		onMenu();
-	}
+    m_isDrawBg=true;
+    if( m_modeState==GAME_PLAYING && !m_isPause ){
+        onMenu();
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	run()
-	ŠT—v:	ƒXƒŒƒbƒhŠJn‚ÉŒÄ‚Î‚ê‚éƒƒ\ƒbƒh
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    run()
+    æ¦‚è¦:    ã‚¹ãƒ¬ãƒƒãƒ‰é–‹å§‹æ™‚ã«å‘¼ã°ã‚Œã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 public void run(){
 
-	int i=0;
+    int i=0;
 
-//--	ƒXƒ^[ƒgƒAƒbƒv	--------------------------------------//
+//--    ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—    --------------------------------------//
 
-	//ƒƒSæ“¾
-	try {
-		logoImg = Image.createImage("/logo.png");
-	}catch(Exception e) {}
+    //ãƒ­ã‚´å–å¾—
+    try {
+        logoImg = Image.createImage("/logo.png");
+    }catch(Exception e) {}
 
-	//”wŒi•`‰æ‚ğƒZƒbƒg
-	m_isDrawBg=true;
+    //èƒŒæ™¯æç”»ã‚’ã‚»ãƒƒãƒˆ
+    m_isDrawBg=true;
 
-//--	Now Loading		--------------------------------------//
+//--    Now Loading        --------------------------------------//
 
-	//ƒXƒŠ[ƒv‰Šú‰»
-	m_sleepTime = System.currentTimeMillis();
+    //ã‚¹ãƒªãƒ¼ãƒ—åˆæœŸåŒ–
+    m_sleepTime = System.currentTimeMillis();
 
-	drawNowloading();
-	repaint();
-	//serviceRepaints();
+    drawNowloading();
+    repaint();
+    //serviceRepaints();
 
-	//‰æ‘œæ“¾
-	for(i=0;i<IMAGE_SIZE;i++){
-		try{
-			img[i] = Image.createImage("/"+i+".png");
-		}catch(Exception e){
+    //ç”»åƒå–å¾—
+    for(i=0;i<IMAGE_SIZE;i++){
+        try{
+            img[i] = Image.createImage("/"+i+".png");
+        }catch(Exception e){
 System.out.println(e.toString());
-		}
-		m_load=i*100/IMAGE_SIZE;
-		if( System.currentTimeMillis()-m_sleepTime>=SLEEP_TIME ){
-			drawNowloading();
-			repaint();
-			m_sleepTime = System.currentTimeMillis();
-		}
-	}
+        }
+        m_load=i*100/IMAGE_SIZE;
+        if( System.currentTimeMillis()-m_sleepTime>=SLEEP_TIME ){
+            drawNowloading();
+            repaint();
+            m_sleepTime = System.currentTimeMillis();
+        }
+    }
 
-	try{
-		phrasePlayer=PhrasePlayer.getPlayer();
-		//ƒgƒ‰ƒbƒN
-		tr1 = phrasePlayer.getTrack(0);
-		tr2 = phrasePlayer.getTrack(1);
-		tr3 = phrasePlayer.getTrack(2);
-		tr4 = phrasePlayer.getTrack(3);
-	}catch(Exception e){
+    try{
+        phrasePlayer=PhrasePlayer.getPlayer();
+        //ãƒˆãƒ©ãƒƒã‚¯
+        tr1 = phrasePlayer.getTrack(0);
+        tr2 = phrasePlayer.getTrack(1);
+        tr3 = phrasePlayer.getTrack(2);
+        tr4 = phrasePlayer.getTrack(3);
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
-	//ƒTƒEƒ“ƒh
-	initSound();
+    }
+    //ã‚µã‚¦ãƒ³ãƒ‰
+    initSound();
 
-	m_load=100;
-	//ÅŒã‚É•`‰æ
-	drawNowloading();
-	repaint();
+    m_load=100;
+    //æœ€å¾Œã«æç”»
+    drawNowloading();
+    repaint();
 
-	try{
-		Thread.sleep(100);
-	}catch(Exception e){
+    try{
+        Thread.sleep(100);
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
-	loadRecordStore();
+    }
+    loadRecordStore();
 
-	//ƒ^ƒCƒgƒ‹‰æ–Ê‚É‘JˆÚ
-	m_nextState=TITLE;
+    //ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã«é·ç§»
+    m_nextState=TITLE;
 
-	//¶‘¤‚Ìƒ\ƒtƒgƒL[‚Íg—p‚µ‚È‚¢
-	//addCommand(noneCmd);
-	//ver1.2.0 ƒTƒEƒ“ƒhƒRƒ}ƒ“ƒh
-	if( m_isMute==0 ){
-		addCommand(onSoundCmd);
-	}else{
-		addCommand(offSoundCmd);
-	}
+    //å·¦å´ã®ã‚½ãƒ•ãƒˆã‚­ãƒ¼ã¯ä½¿ç”¨ã—ãªã„
+    //addCommand(noneCmd);
+    //ver1.2.0 ã‚µã‚¦ãƒ³ãƒ‰ã‚³ãƒãƒ³ãƒ‰
+    if( m_isMute==0 ){
+        addCommand(onSoundCmd);
+    }else{
+        addCommand(offSoundCmd);
+    }
 
-//--	ƒƒCƒ“ƒ‹[ƒv	--------------------------------------//
+//--    ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—    --------------------------------------//
 
-	try{
-		while(true){
-//--	‰Šúˆ—		--------------------------------------//
+    try{
+        while(true){
+//--    åˆæœŸå‡¦ç†        --------------------------------------//
 
-			if( m_modeState!=m_nextState ){
+            if( m_modeState!=m_nextState ){
 
-				//ó‘Ô‚ğ”²‚¯‚é
-				switch( m_modeState ){
-					case TITLE:
-						removeCommand(exitCmd);
-						m_cursor=0;
-						break;
+                //çŠ¶æ…‹ã‚’æŠœã‘ã‚‹
+                switch( m_modeState ){
+                    case TITLE:
+                        removeCommand(exitCmd);
+                        m_cursor=0;
+                        break;
 
-					case MODE_SELECT:
-						removeCommand(backCmd);
-						m_cursor=0;
-						break;
-					case RECORD:
-					case HELP:
-					case BONUS:
-						removeCommand(backCmd);
-						if( m_modeState==BONUS && m_nextState==ENDING ){
-						}else{
-							m_cursor=1;
-						}
-						break;
-					case ENDING:
-						removeCommand(backCmd);
-						break;
-					case GAME_PLAYING:
-						if( m_isPause ){
-							offMenu();
-						}
-						removeCommand(pauseCmd);
-						break;
+                    case MODE_SELECT:
+                        removeCommand(backCmd);
+                        m_cursor=0;
+                        break;
+                    case RECORD:
+                    case HELP:
+                    case BONUS:
+                        removeCommand(backCmd);
+                        if( m_modeState==BONUS && m_nextState==ENDING ){
+                        }else{
+                            m_cursor=1;
+                        }
+                        break;
+                    case ENDING:
+                        removeCommand(backCmd);
+                        break;
+                    case GAME_PLAYING:
+                        if( m_isPause ){
+                            offMenu();
+                        }
+                        removeCommand(pauseCmd);
+                        break;
 
-					//ver1.2.0
-					case GAME_RESULT:
-						//playCursor();
-						break;
-				}
+                    //ver1.2.0
+                    case GAME_RESULT:
+                        //playCursor();
+                        break;
+                }
 
-				//ó‘Ô‚É“ü‚é
-				switch( m_nextState ){
-					case TITLE:
-						//ƒRƒ}ƒ“ƒh’Ç‰Á
-						addCommand(exitCmd);
-						initGame();
-						initTitle();
-						m_stage=0;//ƒXƒe[ƒW‰Šú‰»
-						//ver1.2.0
-						stopBgm();
-						setTitleSound();
-						playCursor();
-						break;
+                //çŠ¶æ…‹ã«å…¥ã‚‹
+                switch( m_nextState ){
+                    case TITLE:
+                        //ã‚³ãƒãƒ³ãƒ‰è¿½åŠ 
+                        addCommand(exitCmd);
+                        initGame();
+                        initTitle();
+                        m_stage=0;//ã‚¹ãƒ†ãƒ¼ã‚¸åˆæœŸåŒ–
+                        //ver1.2.0
+                        stopBgm();
+                        setTitleSound();
+                        playCursor();
+                        break;
 
-					case MODE_SELECT:
-					case RECORD:
-					case HELP:
-					case BONUS:
-					case ENDING:
-						m_teropX=0;
-						addCommand(backCmd);
-						if( m_nextState==RECORD ){
-							setStageImage(m_cursor);
-						}
-						m_cursorTime=0;
-						//ver1.5.0
-						if( m_nextState==MODE_SELECT && m_modeState==TITLE ){
-							playEnter();
-						}else{
-							playCursor();
-						}
-						break;
+                    case MODE_SELECT:
+                    case RECORD:
+                    case HELP:
+                    case BONUS:
+                    case ENDING:
+                        m_teropX=0;
+                        addCommand(backCmd);
+                        if( m_nextState==RECORD ){
+                            setStageImage(m_cursor);
+                        }
+                        m_cursorTime=0;
+                        //ver1.5.0
+                        if( m_nextState==MODE_SELECT && m_modeState==TITLE ){
+                            playEnter();
+                        }else{
+                            playCursor();
+                        }
+                        break;
 
-					case GAME_START:
-						setStageImage(m_stage);
-						setFooderImage();
-						initGame();//ƒQ[ƒ€‰Šú‰»
-						getBonusIndex();//ƒ{[ƒiƒXŒˆ’è
-						m_time=0;
-						m_speed=41;
-						m_teropX=240;
+                    case GAME_START:
+                        setStageImage(m_stage);
+                        setFooderImage();
+                        initGame();//ã‚²ãƒ¼ãƒ åˆæœŸåŒ–
+                        getBonusIndex();//ãƒœãƒ¼ãƒŠã‚¹æ±ºå®š
+                        m_time=0;
+                        m_speed=41;
+                        m_teropX=240;
 
-						//ver1.2.0
-						setStageSound();
-						playBgm();
-						m_slotState=1;
-						playBonus();
-						break;
+                        //ver1.2.0
+                        setStageSound();
+                        playBgm();
+                        m_slotState=1;
+                        playBonus();
+                        break;
 
-					case GAME_PLAYING:
-						addCommand(pauseCmd);
-						m_isDrawFooder=true;
-						m_time=0;
-						m_speed=0;
-						break;
+                    case GAME_PLAYING:
+                        addCommand(pauseCmd);
+                        m_isDrawFooder=true;
+                        m_time=0;
+                        m_speed=0;
+                        break;
 
-					case GAME_END:
-						m_time=0;
-						m_speed=41;
-						m_teropX=240;
-						if( m_isBonusGet ){
-							//‰‚ß‚Äæ‚Á‚½‚çV‚µ‚¢ƒAƒCƒeƒ€
-							if( m_bonusGet[m_bonusIndex]==0 )
-								m_bonusNew[m_bonusIndex]=1;
-							m_bonusGet[m_bonusIndex]=1;
-						}
-						break;
+                    case GAME_END:
+                        m_time=0;
+                        m_speed=41;
+                        m_teropX=240;
+                        if( m_isBonusGet ){
+                            //åˆã‚ã¦å–ã£ãŸã‚‰æ–°ã—ã„ã‚¢ã‚¤ãƒ†ãƒ 
+                            if( m_bonusGet[m_bonusIndex]==0 )
+                                m_bonusNew[m_bonusIndex]=1;
+                            m_bonusGet[m_bonusIndex]=1;
+                        }
+                        break;
 
-					case GAME_RESULT:
-						m_playTime++;
-						//Œ»İƒRƒ“ƒ{ƒ}ƒbƒNƒX
-						if( m_combo>m_comboMax ){
-							m_comboMax=m_combo;
-						}
-						sortHiscore();
-						saveRecordStore();
-						break;
-				}
-				//‰Šúó‘Ô‚ğ‰ğœ
-				m_modeState=m_nextState;
+                    case GAME_RESULT:
+                        m_playTime++;
+                        //ç¾åœ¨ã‚³ãƒ³ãƒœãƒãƒƒã‚¯ã‚¹
+                        if( m_combo>m_comboMax ){
+                            m_comboMax=m_combo;
+                        }
+                        sortHiscore();
+                        saveRecordStore();
+                        break;
+                }
+                //åˆæœŸçŠ¶æ…‹ã‚’è§£é™¤
+                m_modeState=m_nextState;
 
-				m_event=KEY_NO;	//ƒL[ƒCƒxƒ“ƒg‰Šú‰»
-				key=KEY_NO;		//ƒL[ó‘Ô‰Šú‰»
+                m_event=KEY_NO;    //ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆåˆæœŸåŒ–
+                key=KEY_NO;        //ã‚­ãƒ¼çŠ¶æ…‹åˆæœŸåŒ–
 
-			}
+            }
 
-//--	ƒL[			--------------------------------------//
+//--    ã‚­ãƒ¼            --------------------------------------//
 
-			//ƒL[ó‘Ô‚Ìæ“¾
-			key=devCtl.getDeviceState( DeviceControl.KEY_STATE );
+            //ã‚­ãƒ¼çŠ¶æ…‹ã®å–å¾—
+            key=devCtl.getDeviceState( DeviceControl.KEY_STATE );
 
-			switch( m_modeState ){
-				case TITLE:
-					keyTitle();
-					break;
-				case MODE_SELECT:
-					keyModeSelect();
-					break;
-				case GAME_PLAYING:
-					if( !m_isPause ){
-						keyPlaying();
-					}else{
-						keyMenu();
-					}
-					break;
-				case GAME_RESULT:
-					keyGameResult();
-					break;
-				case RECORD:
-					keyRecord();
-					break;
-				case BONUS:
-					keyBonus();
-					break;
-				case HELP:
-					keyHelp();
-					break;
-				case ENDING:
-					keyEnding();
-					break;
-			}
+            switch( m_modeState ){
+                case TITLE:
+                    keyTitle();
+                    break;
+                case MODE_SELECT:
+                    keyModeSelect();
+                    break;
+                case GAME_PLAYING:
+                    if( !m_isPause ){
+                        keyPlaying();
+                    }else{
+                        keyMenu();
+                    }
+                    break;
+                case GAME_RESULT:
+                    keyGameResult();
+                    break;
+                case RECORD:
+                    keyRecord();
+                    break;
+                case BONUS:
+                    keyBonus();
+                    break;
+                case HELP:
+                    keyHelp();
+                    break;
+                case ENDING:
+                    keyEnding();
+                    break;
+            }
 
-			//ƒL[ƒCƒxƒ“ƒg‰Šú‰»
-			m_event=KEY_NO;
-			//ƒL[ó‘Ô‰Šú‰»
-			key=KEY_NO;
+            //ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆåˆæœŸåŒ–
+            m_event=KEY_NO;
+            //ã‚­ãƒ¼çŠ¶æ…‹åˆæœŸåŒ–
+            key=KEY_NO;
 
 
-//--	•`‰æ			--------------------------------------//
-			switch( m_modeState ){
-				case TITLE:
-					drawTitle();
-					if( m_isDrawFooder ){
-						drawFooder();
-					}
-					break;
+//--    æç”»            --------------------------------------//
+            switch( m_modeState ){
+                case TITLE:
+                    drawTitle();
+                    if( m_isDrawFooder ){
+                        drawFooder();
+                    }
+                    break;
 
-				case MODE_SELECT:
-					drawModeSelect();
-					break;
+                case MODE_SELECT:
+                    drawModeSelect();
+                    break;
 
-				case RECORD:
-					drawRecord();
-					break;
+                case RECORD:
+                    drawRecord();
+                    break;
 
-				case HELP:
-					drawHelp();
-					break;
+                case HELP:
+                    drawHelp();
+                    break;
 
-				case BONUS:
-					drawBonus();
-					break;
+                case BONUS:
+                    drawBonus();
+                    break;
 
-				case GAME_START:
-					drawGameStart();
-					drawFooder();
-					break;
+                case GAME_START:
+                    drawGameStart();
+                    drawFooder();
+                    break;
 
-				case GAME_PLAYING:
-					drawPlaying();
-					if( m_isDrawFooder ){
-						drawFooder();
-					}
-					break;
+                case GAME_PLAYING:
+                    drawPlaying();
+                    if( m_isDrawFooder ){
+                        drawFooder();
+                    }
+                    break;
 
-				case GAME_END:
-					drawPlaying();
-					if( m_isDrawFooder ){
-						drawFooder();
-					}
-					drawGameEnd();
-					break;
+                case GAME_END:
+                    drawPlaying();
+                    if( m_isDrawFooder ){
+                        drawFooder();
+                    }
+                    drawGameEnd();
+                    break;
 
-				case GAME_RESULT:
-					drawGameResult();
-					break;
+                case GAME_RESULT:
+                    drawGameResult();
+                    break;
 
-				case ENDING:
-					drawEnding();
-					break;
-			}
-			repaint();
-			//serviceRepaints();
+                case ENDING:
+                    drawEnding();
+                    break;
+            }
+            repaint();
+            //serviceRepaints();
 
-//--	ˆ—			--------------------------------------//
+//--    å‡¦ç†            --------------------------------------//
 
-			switch( m_modeState ){
-				case TITLE:
-					myAction();
-					moveTitle();
-					moveApple();
-					if( m_time%10==0 ){
-						appearApple();
-					}
-					m_time++;
-					if( m_time%4==0 ){
-						m_time=0;
-					}
-					break;
+            switch( m_modeState ){
+                case TITLE:
+                    myAction();
+                    moveTitle();
+                    moveApple();
+                    if( m_time%10==0 ){
+                        appearApple();
+                    }
+                    m_time++;
+                    if( m_time%4==0 ){
+                        m_time=0;
+                    }
+                    break;
 
-				case MODE_SELECT:
-					moveApple();
-					if( m_time%10==0 ){
-						appearApple();
-					}
-					m_time++;
-					if( m_time%4==0 ){
-						m_time=0;
-					}
-					if( m_cursorTime<CURSOR_TIME )
-						m_cursorTime++;
-					break;
+                case MODE_SELECT:
+                    moveApple();
+                    if( m_time%10==0 ){
+                        appearApple();
+                    }
+                    m_time++;
+                    if( m_time%4==0 ){
+                        m_time=0;
+                    }
+                    if( m_cursorTime<CURSOR_TIME )
+                        m_cursorTime++;
+                    break;
 
-				case GAME_START:
-					if( m_time>20 ){
-						m_nextState=GAME_PLAYING;
-					}else{
-						m_time++;
-					}
-					break;
+                case GAME_START:
+                    if( m_time>20 ){
+                        m_nextState=GAME_PLAYING;
+                    }else{
+                        m_time++;
+                    }
+                    break;
 
-				case GAME_PLAYING:
-					if( !m_isPause ){
-						moveApple();
-						if( m_time%10==0 ){
-							appearApple();
-						}
-// ”g–ä ver1.1.0
-						for(i=0;i<3;i++){
-							if(m_effTime[i]>4){
-								m_effTime[i]=0;
-							}else if( m_effTime[i]>0 ){
-								m_effTime[i]++;
-							}
-						}
+                case GAME_PLAYING:
+                    if( !m_isPause ){
+                        moveApple();
+                        if( m_time%10==0 ){
+                            appearApple();
+                        }
+// æ³¢ç´‹ ver1.1.0
+                        for(i=0;i<3;i++){
+                            if(m_effTime[i]>4){
+                                m_effTime[i]=0;
+                            }else if( m_effTime[i]>0 ){
+                                m_effTime[i]++;
+                            }
+                        }
 
-						if( m_comboTime>0 ){
-							m_comboTime--;
-						}
-						if( m_slotTime>0 ){
-							m_slotTime--;
-						}
-						myAction();
-						m_time++;
-						if( m_time%4==0 ){
-							m_isDrawFooder=true;
-							m_time=0;
-							m_lv--;
-							if(m_lv<0){
-								m_isPause=false;
-								m_lv=0;
-								m_nextState=GAME_END;
-							}
-						}
-					}
-					break;
+                        if( m_comboTime>0 ){
+                            m_comboTime--;
+                        }
+                        if( m_slotTime>0 ){
+                            m_slotTime--;
+                        }
+                        myAction();
+                        m_time++;
+                        if( m_time%4==0 ){
+                            m_isDrawFooder=true;
+                            m_time=0;
+                            m_lv--;
+                            if(m_lv<0){
+                                m_isPause=false;
+                                m_lv=0;
+                                m_nextState=GAME_END;
+                            }
+                        }
+                    }
+                    break;
 
-				case GAME_END:
-					m_time++;
-					if( m_time>20 ){
-						m_nextState=GAME_RESULT;
-					}
-					break;
+                case GAME_END:
+                    m_time++;
+                    if( m_time>20 ){
+                        m_nextState=GAME_RESULT;
+                    }
+                    break;
 
-				case GAME_RESULT:
-				case RECORD:
-				case HELP:
-				case BONUS:
-					moveApple();
-					if( m_time%10==0 ){
-						appearApple();
-					}
-					m_time++;
-					if( m_time%4==0 ){
-						m_time=0;
-					}
-					break;
+                case GAME_RESULT:
+                case RECORD:
+                case HELP:
+                case BONUS:
+                    moveApple();
+                    if( m_time%10==0 ){
+                        appearApple();
+                    }
+                    m_time++;
+                    if( m_time%4==0 ){
+                        m_time=0;
+                    }
+                    break;
 
-				case ENDING:
-					m_walkCount++;
-					if( m_walkCount>=240 ) m_walkCount=0;
-					m_teropX++;
-					if( m_teropX>=120 ) m_teropX=0;
-					moveApple();
-					if( m_time%10==0 ){
-						appearApple();
-					}
-					m_time++;
-					if( m_time%4==0 ){
-						m_time=0;
-					}
-					break;
+                case ENDING:
+                    m_walkCount++;
+                    if( m_walkCount>=240 ) m_walkCount=0;
+                    m_teropX++;
+                    if( m_teropX>=120 ) m_teropX=0;
+                    moveApple();
+                    if( m_time%10==0 ){
+                        appearApple();
+                    }
+                    m_time++;
+                    if( m_time%4==0 ){
+                        m_time=0;
+                    }
+                    break;
 
-			}//end of switch( m_modeState )
+            }//end of switch( m_modeState )
 
-//--	ƒXƒŠ[ƒv		--------------------------------------//
+//--    ã‚¹ãƒªãƒ¼ãƒ—        --------------------------------------//
 /*
-			m_sleepTime=m_sleepTime+70L-System.currentTimeMillis();
-			if( m_sleepTime>0 ) Thread.sleep(SLEEP_TIME);
-			m_sleepTime=System.currentTimeMillis();
+            m_sleepTime=m_sleepTime+70L-System.currentTimeMillis();
+            if( m_sleepTime>0 ) Thread.sleep(SLEEP_TIME);
+            m_sleepTime=System.currentTimeMillis();
 */
-			Thread.sleep(SLEEP_TIME);
-		}
-	}catch(Exception e){
-		System.out.println(e.toString());
-	}
+            Thread.sleep(SLEEP_TIME);
+        }
+    }catch(Exception e){
+        System.out.println(e.toString());
+    }
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	paint()
-	ŠT—v:	ƒƒCƒ“•`‰æˆ—
-	‹@”\:	ƒI[ƒo[ƒ‰ƒCƒh
-	–ß‚è’l:	-
-	ˆø”:	Graphics g	ƒOƒ‰ƒtƒBƒbƒNƒIƒuƒWƒFƒNƒg
+    åå‰:    paint()
+    æ¦‚è¦:    ãƒ¡ã‚¤ãƒ³æç”»å‡¦ç†
+    æ©Ÿèƒ½:    ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    Graphics g    ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 */
 public synchronized void paint(Graphics g2){
 
-	int i=0;
+    int i=0;
 
-	try{
-		//‰Šúˆ—
-		if( m_isDrawBg ){
-			g2.setColor(0,0,0);
-			g2.fillRect(0,0,getWidth(),getHeight());
-			m_isDrawBg=false;
-		}
+    try{
+        //åˆæœŸå‡¦ç†
+        if( m_isDrawBg ){
+            g2.setColor(0,0,0);
+            g2.fillRect(0,0,getWidth(),getHeight());
+            m_isDrawBg=false;
+        }
 
-		//ƒIƒtƒCƒ[ƒW‚ğ•`‰æ
-		g2.drawImage(mainImg, m_hcenter-120, m_vcenter-120, Graphics.LEFT|Graphics.TOP);
+        //ã‚ªãƒ•ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’æç”»
+        g2.drawImage(mainImg, m_hcenter-120, m_vcenter-120, Graphics.LEFT|Graphics.TOP);
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	commandAction(Command c, Displayable s)
-	ŠT—v:	ƒRƒ}ƒ“ƒh‚ÌƒCƒxƒ“ƒg
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    commandAction(Command c, Displayable s)
+    æ¦‚è¦:    ã‚³ãƒãƒ³ãƒ‰ã®ã‚¤ãƒ™ãƒ³ãƒˆ
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 public synchronized void commandAction(Command c, Displayable s) {
-	if( c == exitCmd ){//ExitƒRƒ}ƒ“ƒh
-		//I—¹ˆ—
-		jumpingFruits.doExit();
-	}
-	else if( c==pauseCmd ){//PauseƒRƒ}ƒ“ƒh
-		onMenu();
-	}
-	else if( c==resumeCmd ){//ResumeƒRƒ}ƒ“ƒh
-		offMenu();
-	}
-	else if( c==backCmd ){
-		switch( m_modeState ){
-			case MODE_SELECT:
-				m_nextState=TITLE;
-				break;
-			case RECORD:
-			case HELP:
-			case BONUS:
-				m_nextState=MODE_SELECT;
-				break;
-			case ENDING:
-				m_nextState=BONUS;
-				break;
-		}
+    if( c == exitCmd ){//Exitã‚³ãƒãƒ³ãƒ‰
+        //çµ‚äº†å‡¦ç†
+        jumpingFruits.doExit();
+    }
+    else if( c==pauseCmd ){//Pauseã‚³ãƒãƒ³ãƒ‰
+        onMenu();
+    }
+    else if( c==resumeCmd ){//Resumeã‚³ãƒãƒ³ãƒ‰
+        offMenu();
+    }
+    else if( c==backCmd ){
+        switch( m_modeState ){
+            case MODE_SELECT:
+                m_nextState=TITLE;
+                break;
+            case RECORD:
+            case HELP:
+            case BONUS:
+                m_nextState=MODE_SELECT;
+                break;
+            case ENDING:
+                m_nextState=BONUS;
+                break;
+        }
 //playCursor();
-	}
-	//ver1.2.0
-	else if( c==onSoundCmd ){//ô›ƒRƒ}ƒ“ƒh
-		switchMute();
-	}
-	else if( c==offSoundCmd ){//ô~ƒRƒ}ƒ“ƒh
-		switchMute();
-	}
+    }
+    //ver1.2.0
+    else if( c==onSoundCmd ){//â™ªâ—‹ã‚³ãƒãƒ³ãƒ‰
+        switchMute();
+    }
+    else if( c==offSoundCmd ){//â™ªÃ—ã‚³ãƒãƒ³ãƒ‰
+        switchMute();
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyPressed()
-	ŠT—v:	ƒL[‰Ÿ‰ºƒCƒxƒ“ƒg
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyPressed()
+    æ¦‚è¦:    ã‚­ãƒ¼æŠ¼ä¸‹ã‚¤ãƒ™ãƒ³ãƒˆ
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 public synchronized void keyPressed(int keyCode) {
 
-	int	gameCode=getGameAction(keyCode);
+    int    gameCode=getGameAction(keyCode);
 
-	switch( gameCode ) {
-		case UP: //ãƒL[‰Ÿ‰º
-			m_event=KEY_UP;
-			return;
-		case DOWN: //‰ºƒL[‰Ÿ‰º
-			m_event=KEY_DOWN;
-			return;
-		case LEFT: //¶ƒL[‰Ÿ‰º
-			m_event=KEY_LEFT;
-			return;
-		case RIGHT: //‰EƒL[‰Ÿ‰º
-			m_event=KEY_RIGHT;
-			return;
-		case FIRE: //’Ç‰Á Œˆ’è
-			m_event=KEY_SELECT;
-			return;
-	}
+    switch( gameCode ) {
+        case UP: //ä¸Šã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_UP;
+            return;
+        case DOWN: //ä¸‹ã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_DOWN;
+            return;
+        case LEFT: //å·¦ã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_LEFT;
+            return;
+        case RIGHT: //å³ã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_RIGHT;
+            return;
+        case FIRE: //è¿½åŠ  æ±ºå®š
+            m_event=KEY_SELECT;
+            return;
+    }
 
-	switch( keyCode ){
-		case KEY_NUM2: //2ƒL[‰Ÿ‰º
-			m_event=KEY_2;
-			return;
-		case KEY_NUM4: //4ƒL[‰Ÿ‰º
-			m_event=KEY_4;
-			return;
-		case KEY_NUM5: //5ƒL[‰Ÿ‰º
-			m_event=KEY_5;
-			return;
-		case KEY_NUM6: //6ƒL[‰Ÿ‰º
-			m_event=KEY_6;
-			return;
-		case KEY_NUM8: //8ƒL[‰Ÿ‰º
-			m_event=KEY_8;
-			return;
-	}
+    switch( keyCode ){
+        case KEY_NUM2: //2ã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_2;
+            return;
+        case KEY_NUM4: //4ã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_4;
+            return;
+        case KEY_NUM5: //5ã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_5;
+            return;
+        case KEY_NUM6: //6ã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_6;
+            return;
+        case KEY_NUM8: //8ã‚­ãƒ¼æŠ¼ä¸‹æ™‚
+            m_event=KEY_8;
+            return;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawNowloading()
-	ŠT—v:	Now Loading•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawNowloading()
+    æ¦‚è¦:    Now Loadingæç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawNowloading(){
-	try{
-		//”wŒi:”’
-		g.setColor(255,255,255);
-		g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    try{
+        //èƒŒæ™¯:ç™½
+        g.setColor(255,255,255);
+        g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		//bluesystem¡
-		g.drawImage(logoImg, 20, 100, Graphics.TOP|Graphics.LEFT);
+        //bluesystemâ– 
+        g.drawImage(logoImg, 20, 100, Graphics.TOP|Graphics.LEFT);
 
-		//ƒvƒƒOƒŒƒXƒo[
-		g.setColor(216,216,216);
-		g.fillRect(20, 220, 2*100, 2);
-		g.setColor(192,192,255);
-		g.fillRect(20, 220, 2*m_load, 2);
+        //ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼
+        g.setColor(216,216,216);
+        g.fillRect(20, 220, 2*100, 2);
+        g.setColor(192,192,255);
+        g.fillRect(20, 220, 2*m_load, 2);
 
-		//•¶š•\¦
-		Sb.delete(0,Sb.length());
-		drawSt = Sb.append(m_load).append(" “").toString();
-		g.setColor(160,160,160);
-		g.drawString(drawSt,220-f.stringWidth(drawSt),210,Graphics.BASELINE|Graphics.LEFT);
+        //æ–‡å­—è¡¨ç¤º
+        Sb.delete(0,Sb.length());
+        drawSt = Sb.append(m_load).append(" ï¼…").toString();
+        g.setColor(160,160,160);
+        g.drawString(drawSt,220-f.stringWidth(drawSt),210,Graphics.BASELINE|Graphics.LEFT);
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawTitle()
-	ŠT—v:	ƒ^ƒCƒgƒ‹‰æ–Ê•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawTitle()
+    æ¦‚è¦:    ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawTitle(){
-	try{
-		//”wŒi
-		g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
-		//’n–Ê
-		g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+    try{
+        //èƒŒæ™¯
+        g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
+        //åœ°é¢
+        g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
 
-		//ƒŠƒ“ƒS
-		for(int i=0; i<APPLE_SIZE; i++){
-			if( m_appleState[i]!=NONE && m_appleState[i]!=SPECIAL ){
-				gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
-			}
-		}
-
-
-		//ƒLƒƒƒ‰ƒNƒ^
-		getImgIndex();
-		if( !m_isLeft ){
-			gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
-		}else{
-			gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_MIRROR, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
-		}
-
-		g.setColor(255,255,255);
-		g.drawLine(0,20,SCREEN_WIDTH,20);
-		g.drawLine(0,85,SCREEN_WIDTH,85);
-
-		g.setColor(255,128,0);
-		g.drawLine(0,21,SCREEN_WIDTH,21);
-		g.drawLine(0,86,SCREEN_WIDTH,86);
-
-		//title
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TITLE1, img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 60, 40, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TITLE2, img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 95, 60, Graphics.TOP|Graphics.LEFT);
-
-		g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
-		g.drawImage(img[IMAGE_PRESENTS], 24, SCREEN_HEIGHT-FOODER_HEIGHT+12, Graphics.TOP|Graphics.LEFT);
-
-		if( m_time!=0 )
-			g.drawImage(img[IMAGE_PRESS], 120-72, 128, Graphics.TOP|Graphics.LEFT);
+        //ãƒªãƒ³ã‚´
+        for(int i=0; i<APPLE_SIZE; i++){
+            if( m_appleState[i]!=NONE && m_appleState[i]!=SPECIAL ){
+                gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
+            }
+        }
 
 
-	}catch(Exception e){
+        //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿
+        getImgIndex();
+        if( !m_isLeft ){
+            gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
+        }else{
+            gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_MIRROR, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
+        }
+
+        g.setColor(255,255,255);
+        g.drawLine(0,20,SCREEN_WIDTH,20);
+        g.drawLine(0,85,SCREEN_WIDTH,85);
+
+        g.setColor(255,128,0);
+        g.drawLine(0,21,SCREEN_WIDTH,21);
+        g.drawLine(0,86,SCREEN_WIDTH,86);
+
+        //title
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TITLE1, img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 60, 40, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TITLE2, img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 95, 60, Graphics.TOP|Graphics.LEFT);
+
+        g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
+        g.drawImage(img[IMAGE_PRESENTS], 24, SCREEN_HEIGHT-FOODER_HEIGHT+12, Graphics.TOP|Graphics.LEFT);
+
+        if( m_time!=0 )
+            g.drawImage(img[IMAGE_PRESS], 120-72, 128, Graphics.TOP|Graphics.LEFT);
+
+
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawModeSelect()
-	ŠT—v:	ƒ‚[ƒhƒZƒŒƒNƒg‰æ–Ê•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawModeSelect()
+    æ¦‚è¦:    ãƒ¢ãƒ¼ãƒ‰ã‚»ãƒ¬ã‚¯ãƒˆç”»é¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawModeSelect(){
-	try{
-		//”wŒi
-		g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
-		//’n–Ê
-		g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+    try{
+        //èƒŒæ™¯
+        g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
+        //åœ°é¢
+        g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
 
-		//ƒŠƒ“ƒS
-		for(int i=0; i<APPLE_SIZE; i++){
-			if( m_appleState[i]!=NONE ){
-				gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
-			}
-		}
+        //ãƒªãƒ³ã‚´
+        for(int i=0; i<APPLE_SIZE; i++){
+            if( m_appleState[i]!=NONE ){
+                gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
+            }
+        }
 
-		g.setColor(255,255,255);
-		g.drawLine(0,20,SCREEN_WIDTH,20);
-		g.drawLine(0,85,SCREEN_WIDTH,85);
+        g.setColor(255,255,255);
+        g.drawLine(0,20,SCREEN_WIDTH,20);
+        g.drawLine(0,85,SCREEN_WIDTH,85);
 
-		g.setColor(255,128,0);
-		g.drawLine(0,21,SCREEN_WIDTH,21);
-		g.drawLine(0,86,SCREEN_WIDTH,86);
+        g.setColor(255,128,0);
+        g.drawLine(0,21,SCREEN_WIDTH,21);
+        g.drawLine(0,86,SCREEN_WIDTH,86);
 
-		//title
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TITLE1, img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 60, 40, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TITLE2, img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 95, 60, Graphics.TOP|Graphics.LEFT);
+        //title
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TITLE1, img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 60, 40, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TITLE2, img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 95, 60, Graphics.TOP|Graphics.LEFT);
 
-		//GAME
-		if ( m_cursorTime<CURSOR_TIME ){
-			g.setColor(224+m_cursorTime*16,224+m_cursorTime*16,224+m_cursorTime*16);
-			g.fillRect(40,100+29-m_cursorTime*8,160,1+m_cursorTime*16);
-			g.setColor(192+m_cursorTime*16,192+m_cursorTime*16,192+m_cursorTime*16);
-			g.drawRect(40,100+29-m_cursorTime*8,160,1+m_cursorTime*16);
-		}else{
-			g.drawImage(img[IMAGE_GAME], 40, 100, Graphics.TOP|Graphics.LEFT);
-			gUtil.drawRegion(g,img[IMAGE_STAGE], 32*m_stage, 0,32, 32, GraphicsUtil.TRANS_NONE, 160, 120, Graphics.TOP|Graphics.LEFT);
-		}
+        //GAME
+        if ( m_cursorTime<CURSOR_TIME ){
+            g.setColor(224+m_cursorTime*16,224+m_cursorTime*16,224+m_cursorTime*16);
+            g.fillRect(40,100+29-m_cursorTime*8,160,1+m_cursorTime*16);
+            g.setColor(192+m_cursorTime*16,192+m_cursorTime*16,192+m_cursorTime*16);
+            g.drawRect(40,100+29-m_cursorTime*8,160,1+m_cursorTime*16);
+        }else{
+            g.drawImage(img[IMAGE_GAME], 40, 100, Graphics.TOP|Graphics.LEFT);
+            gUtil.drawRegion(g,img[IMAGE_STAGE], 32*m_stage, 0,32, 32, GraphicsUtil.TRANS_NONE, 160, 120, Graphics.TOP|Graphics.LEFT);
+        }
 
-		//Cursor
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_LEFT,  0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 20-m_time,  125+m_cursor*45, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_RIGHT, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 208+m_time, 125+m_cursor*45, Graphics.TOP|Graphics.LEFT);
+        //Cursor
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_LEFT,  0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 20-m_time,  125+m_cursor*45, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_RIGHT, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 208+m_time, 125+m_cursor*45, Graphics.TOP|Graphics.LEFT);
 
-		//option
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*(m_option+L_RECORD), img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 170, Graphics.TOP|Graphics.LEFT);
+        //option
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*(m_option+L_RECORD), img[IMAGE_LANG].getWidth(), NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 170, Graphics.TOP|Graphics.LEFT);
 
-		//ƒtƒbƒ_
-		g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
-		if( m_cursor==0 ){
-			drawSt="wƒQ[ƒ€‚ğŠJn‚µ‚Ü‚·x";
-		}else{
-			drawSt=MODE_HELP[m_option];
-		}
-		g.setColor(255,255,255);
-		g.drawString(drawSt,120-f.stringWidth(drawSt)/2,230,Graphics.BASELINE|Graphics.LEFT);
+        //ãƒ•ãƒƒãƒ€
+        g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
+        if( m_cursor==0 ){
+            drawSt="ã€ã‚²ãƒ¼ãƒ ã‚’é–‹å§‹ã—ã¾ã™ã€";
+        }else{
+            drawSt=MODE_HELP[m_option];
+        }
+        g.setColor(255,255,255);
+        g.drawString(drawSt,120-f.stringWidth(drawSt)/2,230,Graphics.BASELINE|Graphics.LEFT);
 
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawRecord()
-	ŠT—v:	ƒŒƒR[ƒh‰æ–Ê•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawRecord()
+    æ¦‚è¦:    ãƒ¬ã‚³ãƒ¼ãƒ‰ç”»é¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawRecord(){
-	try{
-		//”wŒi‰æ‘œ
-		g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
+    try{
+        //èƒŒæ™¯ç”»åƒ
+        g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
 /*
-		//”wŒi
-		g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
-		//’n–Ê
-		g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+        //èƒŒæ™¯
+        g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
+        //åœ°é¢
+        g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
 */
-		//ƒŠƒ“ƒS
-		for(int i=0; i<APPLE_SIZE; i++){
-			if( m_appleState[i]!=NONE ){
-				gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
-			}
-		}
+        //ãƒªãƒ³ã‚´
+        for(int i=0; i<APPLE_SIZE; i++){
+            if( m_appleState[i]!=NONE ){
+                gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
+            }
+        }
 
-		//•¶š•\¦
-		//gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_STAGE, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 40, 20, Graphics.TOP|Graphics.LEFT);
+        //æ–‡å­—è¡¨ç¤º
+        //gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_STAGE, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 40, 20, Graphics.TOP|Graphics.LEFT);
 
-		//RECORD
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_RECORD, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
+        //RECORD
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_RECORD, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
 
-		//score,combo
-		gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SCORE, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE,  96, 46, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_COMBO, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 176, 46, Graphics.TOP|Graphics.LEFT);
+        //score,combo
+        gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SCORE, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE,  96, 46, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_COMBO, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 176, 46, Graphics.TOP|Graphics.LEFT);
 
 
-		//gUtil.drawRegion(g,img[IMAGE_STAGE], 32*m_cursor, 0,32, 32, GraphicsUtil.TRANS_NONE, 160, 20, Graphics.TOP|Graphics.LEFT);
+        //gUtil.drawRegion(g,img[IMAGE_STAGE], 32*m_cursor, 0,32, 32, GraphicsUtil.TRANS_NONE, 160, 20, Graphics.TOP|Graphics.LEFT);
 
-		//•¶š•\¦
-		for(int i=0;i<HISCORE_SIZE;i++){
-			gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(i+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 20, 60+24*i, Graphics.TOP|Graphics.LEFT);
-			gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 40, 60+24*i, Graphics.TOP|Graphics.LEFT);
-			drawScore(m_hiScore[m_cursor][i],160,60+24*i,8);
-			drawScore(m_hiCombo[m_cursor][i],200,60+24*i,3);
-			//drawCal(m_calendar[m_cursor][i], 200,62+24*i);
-		}
+        //æ–‡å­—è¡¨ç¤º
+        for(int i=0;i<HISCORE_SIZE;i++){
+            gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(i+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 20, 60+24*i, Graphics.TOP|Graphics.LEFT);
+            gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 40, 60+24*i, Graphics.TOP|Graphics.LEFT);
+            drawScore(m_hiScore[m_cursor][i],160,60+24*i,8);
+            drawScore(m_hiCombo[m_cursor][i],200,60+24*i,3);
+            //drawCal(m_calendar[m_cursor][i], 200,62+24*i);
+        }
 /*
-		Sb.delete(0,Sb.length());
-		drawSt = Sb.append("playTime: ").append(m_playTime).toString();
-		g.drawString(drawSt,60,200,Graphics.BASELINE|Graphics.LEFT);
+        Sb.delete(0,Sb.length());
+        drawSt = Sb.append("playTime: ").append(m_playTime).toString();
+        g.drawString(drawSt,60,200,Graphics.BASELINE|Graphics.LEFT);
 */
-		g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(m_cursor+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 170, 220, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 190, 220, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*STAGE_SIZE, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 210, 220, Graphics.TOP|Graphics.LEFT);
+        g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(m_cursor+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 170, 220, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 190, 220, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*STAGE_SIZE, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 210, 220, Graphics.TOP|Graphics.LEFT);
 
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawHelp()
-	ŠT—v:	ƒwƒ‹ƒv‰æ–Ê•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawHelp()
+    æ¦‚è¦:    ãƒ˜ãƒ«ãƒ—ç”»é¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawHelp(){
-	try{
-		//”wŒi
-		g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
-		//’n–Ê
-		g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+    try{
+        //èƒŒæ™¯
+        g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
+        //åœ°é¢
+        g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
 
-		//ƒŠƒ“ƒS
-		for(int i=0; i<APPLE_SIZE; i++){
-			if( m_appleState[i]!=NONE ){
-				gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
-			}
-		}
+        //ãƒªãƒ³ã‚´
+        for(int i=0; i<APPLE_SIZE; i++){
+            if( m_appleState[i]!=NONE ){
+                gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
+            }
+        }
 
-		//HELP
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_HELP, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
+        //HELP
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_HELP, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
 
-		g.setColor(64,32,0);//’ƒF
-		g.fillRect(10,40,220,160);
+        g.setColor(64,32,0);//èŒ¶è‰²
+        g.fillRect(10,40,220,160);
 
-		g.setColor(128,64,0);
-		g.drawRect(10,40,220,160);
+        g.setColor(128,64,0);
+        g.drawRect(10,40,220,160);
 
-		g.setColor(255,255,255);
-		for(int i=0;i<HELP_TEXT[m_cursor].length; i++ ){
-			g.setColor(128,64,0);//’ƒF
-			g.drawString(HELP_TEXT[m_cursor][i],20,(68+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
-			g.setColor(255,255,255);
-			g.drawString(HELP_TEXT[m_cursor][i],20,68+20*i,Graphics.BASELINE|Graphics.LEFT);
-		}
+        g.setColor(255,255,255);
+        for(int i=0;i<HELP_TEXT[m_cursor].length; i++ ){
+            g.setColor(128,64,0);//èŒ¶è‰²
+            g.drawString(HELP_TEXT[m_cursor][i],20,(68+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
+            g.setColor(255,255,255);
+            g.drawString(HELP_TEXT[m_cursor][i],20,68+20*i,Graphics.BASELINE|Graphics.LEFT);
+        }
 
-		g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(m_cursor+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 170, 220, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 190, 220, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*HELP_TEXT.length, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 210, 220, Graphics.TOP|Graphics.LEFT);
+        g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(m_cursor+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 170, 220, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 190, 220, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*HELP_TEXT.length, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 210, 220, Graphics.TOP|Graphics.LEFT);
 
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawBonus()
-	ŠT—v:	ƒwƒ‹ƒv‰æ–Ê•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawBonus()
+    æ¦‚è¦:    ãƒ˜ãƒ«ãƒ—ç”»é¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawBonus(){
-	try{
-		//”wŒi
-		g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
-		//’n–Ê
-		g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+    try{
+        //èƒŒæ™¯
+        g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
+        //åœ°é¢
+        g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
 
-		//ƒŠƒ“ƒS
-		for(int i=0; i<APPLE_SIZE; i++){
-			if( m_appleState[i]!=NONE ){
-				gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE,
-					 m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
-			}
-		}
+        //ãƒªãƒ³ã‚´
+        for(int i=0; i<APPLE_SIZE; i++){
+            if( m_appleState[i]!=NONE ){
+                gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE,
+                     m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
+            }
+        }
 
-		//ITEM LIST
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_ITEM, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
+        //ITEM LIST
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_ITEM, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
 
-		//ƒAƒCƒeƒ€
-		for(int j=0; j<3; j++){
-			for(int i=0; i<4; i++){
-				if( m_cursor==(j*4+i) ){
-					g.setColor(255-m_time*16,255-m_time*16,255-m_time*16);//ƒIƒŒƒ“ƒW
-					g.drawArc((40+48*i)-3-m_time, (40+36*j)-3-m_time, 29+m_time*2,29+m_time*2, 0,360);
-				}else{
-					g.setColor(255,255,255);//”’
-					g.fillArc(40+48*i, 40+36*j, 24,24, 0,360);
-				}
+        //ã‚¢ã‚¤ãƒ†ãƒ 
+        for(int j=0; j<3; j++){
+            for(int i=0; i<4; i++){
+                if( m_cursor==(j*4+i) ){
+                    g.setColor(255-m_time*16,255-m_time*16,255-m_time*16);//ã‚ªãƒ¬ãƒ³ã‚¸
+                    g.drawArc((40+48*i)-3-m_time, (40+36*j)-3-m_time, 29+m_time*2,29+m_time*2, 0,360);
+                }else{
+                    g.setColor(255,255,255);//ç™½
+                    g.fillArc(40+48*i, 40+36*j, 24,24, 0,360);
+                }
 
-				if( m_bonusGet[j*4+i]!=0 ){
-					if( m_cursor==(j*4+i) ){
-						//Šg‘å
-						gUtil.drawRegion(g,img[IMAGE_BONUS2], (j*4+i)*32, 0, 32, 32, GraphicsUtil.TRANS_NONE,
-							(44+48*i)-8, (44+36*j)-8, Graphics.TOP|Graphics.LEFT);
-					}else{
-						gUtil.drawRegion(g,img[IMAGE_BONUS], (j*4+i)*16, 0, 16, 16, GraphicsUtil.TRANS_NONE,
-							44+48*i, 44+36*j, Graphics.TOP|Graphics.LEFT);
-					}
-					//New
-					if( m_bonusNew[(j*4+i)]==1 ){
-						if( (m_time%4)<2 )
-							gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*3, 45, 9, GraphicsUtil.TRANS_NONE, 48+48*i, 60+36*j+(m_time%4), Graphics.TOP|Graphics.LEFT);
-						else
-							gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*3, 45, 9, GraphicsUtil.TRANS_NONE, 48+48*i, 60+2+36*j-(m_time%4), Graphics.TOP|Graphics.LEFT);
-					}
-				}
-			}
-		}
+                if( m_bonusGet[j*4+i]!=0 ){
+                    if( m_cursor==(j*4+i) ){
+                        //æ‹¡å¤§
+                        gUtil.drawRegion(g,img[IMAGE_BONUS2], (j*4+i)*32, 0, 32, 32, GraphicsUtil.TRANS_NONE,
+                            (44+48*i)-8, (44+36*j)-8, Graphics.TOP|Graphics.LEFT);
+                    }else{
+                        gUtil.drawRegion(g,img[IMAGE_BONUS], (j*4+i)*16, 0, 16, 16, GraphicsUtil.TRANS_NONE,
+                            44+48*i, 44+36*j, Graphics.TOP|Graphics.LEFT);
+                    }
+                    //New
+                    if( m_bonusNew[(j*4+i)]==1 ){
+                        if( (m_time%4)<2 )
+                            gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*3, 45, 9, GraphicsUtil.TRANS_NONE, 48+48*i, 60+36*j+(m_time%4), Graphics.TOP|Graphics.LEFT);
+                        else
+                            gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*3, 45, 9, GraphicsUtil.TRANS_NONE, 48+48*i, 60+2+36*j-(m_time%4), Graphics.TOP|Graphics.LEFT);
+                    }
+                }
+            }
+        }
 
-		//ƒEƒBƒ“ƒhƒE
-		g.setColor(64,32,0);//’ƒF
-		g.fillRect(10,150,220,50);
+        //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
+        g.setColor(64,32,0);//èŒ¶è‰²
+        g.fillRect(10,150,220,50);
 
-		g.setColor(128,64,0);
-		g.drawRect(10,150,220,50);
+        g.setColor(128,64,0);
+        g.drawRect(10,150,220,50);
 
-		g.setColor(255,255,255);
-		for(int i=0;i<ITEM_TEXT[m_cursor].length; i++ ){
-			if( m_bonusGet[m_cursor]!=0 ){
-				g.setColor(128,64,0);//’ƒF
-				g.drawString(ITEM_TEXT[m_cursor][i],20+1,(170+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
-				g.setColor(255,255,255);
-				g.drawString(ITEM_TEXT[m_cursor][i],20,170+20*i,Graphics.BASELINE|Graphics.LEFT);
-			}else{
-				g.setColor(128,64,0);//’ƒF
-				g.drawString(ITEM_NO[i],20+1,(170+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
-				g.setColor(255,255,255);
-				g.drawString(ITEM_NO[i],20,170+20*i,Graphics.BASELINE|Graphics.LEFT);
+        g.setColor(255,255,255);
+        for(int i=0;i<ITEM_TEXT[m_cursor].length; i++ ){
+            if( m_bonusGet[m_cursor]!=0 ){
+                g.setColor(128,64,0);//èŒ¶è‰²
+                g.drawString(ITEM_TEXT[m_cursor][i],20+1,(170+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
+                g.setColor(255,255,255);
+                g.drawString(ITEM_TEXT[m_cursor][i],20,170+20*i,Graphics.BASELINE|Graphics.LEFT);
+            }else{
+                g.setColor(128,64,0);//èŒ¶è‰²
+                g.drawString(ITEM_NO[i],20+1,(170+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
+                g.setColor(255,255,255);
+                g.drawString(ITEM_NO[i],20,170+20*i,Graphics.BASELINE|Graphics.LEFT);
 
-			}
-		}
+            }
+        }
 
-		g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
-		drawScore((m_cursor+1),150, 220,2);
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 170, 220, Graphics.TOP|Graphics.LEFT);
-		drawScore(BONUS_SIZE,210,220,2);
+        g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
+        drawScore((m_cursor+1),150, 220,2);
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 170, 220, Graphics.TOP|Graphics.LEFT);
+        drawScore(BONUS_SIZE,210,220,2);
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawEnding()
-	ŠT—v:	ƒ^ƒCƒgƒ‹‰æ–Ê•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawEnding()
+    æ¦‚è¦:    ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawEnding(){
-	try{
-		//”wŒi
-		g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
-		//’n–Ê
-		//g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
-		
-		//gUtil.drawRegion(g,img[IMAGE_GROUND3], m_teropX, 0, 240-m_teropX, 19, GraphicsUtil.TRANS_NONE, 0-m_teropX, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
-		//gUtil.drawRegion(g,img[IMAGE_GROUND3], m_teropX, 0, 240-m_teropX, 19, GraphicsUtil.TRANS_NONE, 240-m_teropX, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
-		g.drawImage(img[IMAGE_GROUND3], 0-2*m_teropX, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
-		g.drawImage(img[IMAGE_GROUND3], 240-2*m_teropX, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
-		
-		//ƒŠƒ“ƒS
-		for(int i=0; i<APPLE_SIZE; i++){
-			if( m_appleState[i]!=NONE && m_appleState[i]!=SPECIAL ){
-				gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
-			}
-		}
+    try{
+        //èƒŒæ™¯
+        g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
+        //åœ°é¢
+        //g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+        
+        //gUtil.drawRegion(g,img[IMAGE_GROUND3], m_teropX, 0, 240-m_teropX, 19, GraphicsUtil.TRANS_NONE, 0-m_teropX, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+        //gUtil.drawRegion(g,img[IMAGE_GROUND3], m_teropX, 0, 240-m_teropX, 19, GraphicsUtil.TRANS_NONE, 240-m_teropX, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+        g.drawImage(img[IMAGE_GROUND3], 0-2*m_teropX, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+        g.drawImage(img[IMAGE_GROUND3], 240-2*m_teropX, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+        
+        //ãƒªãƒ³ã‚´
+        for(int i=0; i<APPLE_SIZE; i++){
+            if( m_appleState[i]!=NONE && m_appleState[i]!=SPECIAL ){
+                gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
+            }
+        }
 
-		for(int i=0;i<END_TEXT.length; i++ ){
-			g.setColor(128,64,0);//’ƒF
-			g.drawString(END_TEXT[i],120-f.stringWidth(END_TEXT[i])/2,(32+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
-			g.setColor(255,255,255);
-			g.drawString(END_TEXT[i],120-f.stringWidth(END_TEXT[i])/2,32+20*i,Graphics.BASELINE|Graphics.LEFT);
-		}
+        for(int i=0;i<END_TEXT.length; i++ ){
+            g.setColor(128,64,0);//èŒ¶è‰²
+            g.drawString(END_TEXT[i],120-f.stringWidth(END_TEXT[i])/2,(32+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
+            g.setColor(255,255,255);
+            g.drawString(END_TEXT[i],120-f.stringWidth(END_TEXT[i])/2,32+20*i,Graphics.BASELINE|Graphics.LEFT);
+        }
 
-		//‚Ê‚±
-		if( (m_time%4)<2 ){
-			g.drawImage(img[IMAGE_NEKO], -240+4*m_teropX, 140+(m_time%4), Graphics.TOP|Graphics.LEFT);
-		}else{
-			g.drawImage(img[IMAGE_NEKO], -240+4*m_teropX, 144-(m_time%4), Graphics.TOP|Graphics.LEFT);
-		}
+        //ã¬ã“
+        if( (m_time%4)<2 ){
+            g.drawImage(img[IMAGE_NEKO], -240+4*m_teropX, 140+(m_time%4), Graphics.TOP|Graphics.LEFT);
+        }else{
+            g.drawImage(img[IMAGE_NEKO], -240+4*m_teropX, 144-(m_time%4), Graphics.TOP|Graphics.LEFT);
+        }
 
-		//ƒLƒƒƒ‰ƒNƒ^
-		getImgIndex();
-		//for(int i=-1;i<10;i++)
-		//	gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, i*24+2*m_teropX, m_myY-24, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, -24+6*m_teropX, m_myY-24, Graphics.TOP|Graphics.LEFT);
+        //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿
+        getImgIndex();
+        //for(int i=-1;i<10;i++)
+        //    gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, i*24+2*m_teropX, m_myY-24, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, -24+6*m_teropX, m_myY-24, Graphics.TOP|Graphics.LEFT);
 
-		g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
-		drawSt="wìÒ‚©‚ç‚Ìè†x";
-		g.setColor(255,255,255);
-		g.drawString(drawSt,120-f.stringWidth(drawSt)/2,230,Graphics.BASELINE|Graphics.LEFT);
+        g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
+        drawSt="ã€ä½œè€…ã‹ã‚‰ã®æ‰‹ç´™ã€";
+        g.setColor(255,255,255);
+        g.drawString(drawSt,120-f.stringWidth(drawSt)/2,230,Graphics.BASELINE|Graphics.LEFT);
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawGameStart()
-	ŠT—v:	ƒQ[ƒ€ƒXƒ^[ƒg‰æ–Ê•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawGameStart()
+    æ¦‚è¦:    ã‚²ãƒ¼ãƒ ã‚¹ã‚¿ãƒ¼ãƒˆç”»é¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawGameStart(){
-	try{
-		if( m_time<10 ){
-			m_speed-=4;
-		}else{
-			m_speed+=5;
-		}
-		m_teropX-=m_speed;
+    try{
+        if( m_time<10 ){
+            m_speed-=4;
+        }else{
+            m_speed+=5;
+        }
+        m_teropX-=m_speed;
 
-		//”wŒi‰æ‘œ
-		g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
+        //èƒŒæ™¯ç”»åƒ
+        g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
 
-		//ƒLƒƒƒ‰ƒNƒ^
-		getImgIndex();
-		if( !m_isLeft ){
-			gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
-		}else{
-			gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_MIRROR, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
-		}
+        //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿
+        getImgIndex();
+        if( !m_isLeft ){
+            gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
+        }else{
+            gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_MIRROR, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
+        }
 /*
-		g.setColor(255,255,255);
-		g.drawString("GAME_START",60,120,Graphics.BASELINE|Graphics.LEFT);
+        g.setColor(255,255,255);
+        g.drawString("GAME_START",60,120,Graphics.BASELINE|Graphics.LEFT);
 */
-		//TIME_UP
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_START, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, m_teropX, 80, Graphics.TOP|Graphics.LEFT);
+        //TIME_UP
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_START, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, m_teropX, 80, Graphics.TOP|Graphics.LEFT);
 
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawPlaying()
-	ŠT—v:	ƒQ[ƒ€’†•`‰æˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawPlaying()
+    æ¦‚è¦:    ã‚²ãƒ¼ãƒ ä¸­æç”»å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawPlaying(){
-	int i=0;
+    int i=0;
 
-	try{
-		//”wŒi‰æ‘œ
-		g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
+    try{
+        //èƒŒæ™¯ç”»åƒ
+        g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
 
 
-		//”g–ä
-		for(i=0;i<3;i++){
-			if( m_effTime[i]>0 ){
-				gUtil.drawRegion(g,img[IMAGE_SHINE], 32*(m_effTime[i]-1), 0, 32, 32, GraphicsUtil.TRANS_NONE, m_effX[i]-8, m_effY[i]-24, Graphics.TOP|Graphics.LEFT);
-			}
-		}
+        //æ³¢ç´‹
+        for(i=0;i<3;i++){
+            if( m_effTime[i]>0 ){
+                gUtil.drawRegion(g,img[IMAGE_SHINE], 32*(m_effTime[i]-1), 0, 32, 32, GraphicsUtil.TRANS_NONE, m_effX[i]-8, m_effY[i]-24, Graphics.TOP|Graphics.LEFT);
+            }
+        }
 
-		//ƒŠƒ“ƒS
-		for(i=0; i<APPLE_SIZE; i++){
-			if( m_appleState[i]==SPECIAL )
-				//BONUS1
-				gUtil.drawRegion(g,img[IMAGE_BONUS], 16*m_bonusIndex, 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
-			else if( m_appleState[i]!=NONE )
-				gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
-		}
+        //ãƒªãƒ³ã‚´
+        for(i=0; i<APPLE_SIZE; i++){
+            if( m_appleState[i]==SPECIAL )
+                //BONUS1
+                gUtil.drawRegion(g,img[IMAGE_BONUS], 16*m_bonusIndex, 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
+            else if( m_appleState[i]!=NONE )
+                gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
+        }
 
-		//ƒXƒƒbƒg
-		if( m_slotTime>0 ){
-			drawSlot();
-		}
+        //ã‚¹ãƒ­ãƒƒãƒˆ
+        if( m_slotTime>0 ){
+            drawSlot();
+        }
 
-		//ƒRƒ“ƒ{
-		if( m_combo>0 ){
-			//HOP,STEP,JUMP
-			if( m_combo==1 )
-				gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*0, 45, 9, GraphicsUtil.TRANS_NONE, m_myX-8, m_myY-35, Graphics.TOP|Graphics.LEFT);
-			else if( m_combo==2 )
-				gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*1, 45, 9, GraphicsUtil.TRANS_NONE, m_myX-8, m_myY-35, Graphics.TOP|Graphics.LEFT);
-			else
-				gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*2, 45, 9, GraphicsUtil.TRANS_NONE, m_myX-8, m_myY-35, Graphics.TOP|Graphics.LEFT);
+        //ã‚³ãƒ³ãƒœ
+        if( m_combo>0 ){
+            //HOP,STEP,JUMP
+            if( m_combo==1 )
+                gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*0, 45, 9, GraphicsUtil.TRANS_NONE, m_myX-8, m_myY-35, Graphics.TOP|Graphics.LEFT);
+            else if( m_combo==2 )
+                gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*1, 45, 9, GraphicsUtil.TRANS_NONE, m_myX-8, m_myY-35, Graphics.TOP|Graphics.LEFT);
+            else
+                gUtil.drawRegion(g,img[IMAGE_JUMP], 0, 9*2, 45, 9, GraphicsUtil.TRANS_NONE, m_myX-8, m_myY-35, Graphics.TOP|Graphics.LEFT);
 
-			//ƒRƒ“ƒ{
-			if( m_comboTime==0 )
-				drawScore(m_combo,228-NUM_WIDTH,16,2);
-			else
-				drawScoreB(m_combo,228-NUM_WIDTH*2,16,2);//‘å
-			gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_COMBO, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 228-44, 4, Graphics.TOP|Graphics.LEFT);
-		}
+            //ã‚³ãƒ³ãƒœ
+            if( m_comboTime==0 )
+                drawScore(m_combo,228-NUM_WIDTH,16,2);
+            else
+                drawScoreB(m_combo,228-NUM_WIDTH*2,16,2);//å¤§
+            gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_COMBO, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 228-44, 4, Graphics.TOP|Graphics.LEFT);
+        }
 
 //ver1.1.0
-		if( m_myY<0 ){
-			g.setColor(255,255-m_time*16,255);
-			g.drawString("£",m_myX+4,16,Graphics.BASELINE|Graphics.LEFT);
-		}else{
-		//ƒLƒƒƒ‰ƒNƒ^
-		getImgIndex();
-		if( !m_isLeft ){
-			gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
-		}else{
-			gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_MIRROR, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
-		}
+        if( m_myY<0 ){
+            g.setColor(255,255-m_time*16,255);
+            g.drawString("â–²",m_myX+4,16,Graphics.BASELINE|Graphics.LEFT);
+        }else{
+        //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿
+        getImgIndex();
+        if( !m_isLeft ){
+            gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_NONE, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
+        }else{
+            gUtil.drawRegion(g,img[IMAGE_MYCHARA], MYCHARA_WIDTH*m_imgIndex, 0, MYCHARA_WIDTH, MYCHARA_HEIGHT, GraphicsUtil.TRANS_MIRROR, m_myX, m_myY-24, Graphics.TOP|Graphics.LEFT);
+        }
 
-		}
+        }
 //end of ver1.1.0
 
-		//debug
-		//g.drawString(""+runtime.freeMemory()+"/"+runtime.totalMemory(),0,0,Graphics.TOP|Graphics.LEFT);
-		//g.drawString("index:"+m_bonusIndex,0,0,Graphics.TOP|Graphics.LEFT);
+        //debug
+        //g.drawString(""+runtime.freeMemory()+"/"+runtime.totalMemory(),0,0,Graphics.TOP|Graphics.LEFT);
+        //g.drawString("index:"+m_bonusIndex,0,0,Graphics.TOP|Graphics.LEFT);
 
-		//PAUSE
-		if( m_isPause ){
-			drawMenu();
-		}
+        //PAUSE
+        if( m_isPause ){
+            drawMenu();
+        }
 
-	}catch(Exception e){
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawFooder()
-	ŠT—v:	ƒQ[ƒ€’†•`‰æˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawFooder()
+    æ¦‚è¦:    ã‚²ãƒ¼ãƒ ä¸­æç”»å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawFooder(){
 
-	//”wŒi
-	g.drawImage(imgFd, 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
+    //èƒŒæ™¯
+    g.drawImage(imgFd, 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
 
-	//ƒXƒRƒA
-	drawScore(m_score,221,214,8);
+    //ã‚¹ã‚³ã‚¢
+    drawScore(m_score,221,214,8);
 
-	//ŠÔƒo[
-	g.setColor(255,255,255);
-	g.fillRect(121,233,m_lv,3);
+    //æ™‚é–“ãƒãƒ¼
+    g.setColor(255,255,255);
+    g.fillRect(121,233,m_lv,3);
 
-	//ƒXƒƒbƒg˜g
-	g.setColor(255,128+(m_lv%4)*24,0+(m_lv%4)*48);
-	g.drawRect(8+20*((m_combo)%3), 220, 17, 17);
+    //ã‚¹ãƒ­ãƒƒãƒˆæ 
+    g.setColor(255,128+(m_lv%4)*24,0+(m_lv%4)*48);
+    g.drawRect(8+20*((m_combo)%3), 220, 17, 17);
 
-	//ƒXƒƒbƒg
-	for(int i=0;i<3;i++){
-		if( m_slot[i]!=NONE )
-			gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_slot[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, 9+20*i, 221, Graphics.TOP|Graphics.LEFT);
-	}
+    //ã‚¹ãƒ­ãƒƒãƒˆ
+    for(int i=0;i<3;i++){
+        if( m_slot[i]!=NONE )
+            gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_slot[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, 9+20*i, 221, Graphics.TOP|Graphics.LEFT);
+    }
 
-	//•`‰æI—¹
-	m_isDrawFooder=false;
+    //æç”»çµ‚äº†
+    m_isDrawFooder=false;
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawSlot()
-	ŠT—v:	¶ã‚ÌƒXƒƒbƒg•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawSlot()
+    æ¦‚è¦:    å·¦ä¸Šã®ã‚¹ãƒ­ãƒƒãƒˆæç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void drawSlot(){
 
-	int slotTime=SLOT_TIME-m_slotTime;
+    int slotTime=SLOT_TIME-m_slotTime;
 
-	if( slotTime<5 )
-		gUtil.drawRegion(g,img[IMAGE_SLOT], 0, 28*m_slotState,64, 28, GraphicsUtil.TRANS_NONE, 0-80+16*slotTime, 0, Graphics.TOP|Graphics.LEFT);
-	else if( slotTime>15 )
-		gUtil.drawRegion(g,img[IMAGE_SLOT], 0, 28*m_slotState,64, 28, GraphicsUtil.TRANS_NONE, 0-16*(slotTime-15), 0, Graphics.TOP|Graphics.LEFT);
-	else
-		gUtil.drawRegion(g,img[IMAGE_SLOT], 0, 28*m_slotState,64, 28, GraphicsUtil.TRANS_NONE, 0, 0, Graphics.TOP|Graphics.LEFT);
+    if( slotTime<5 )
+        gUtil.drawRegion(g,img[IMAGE_SLOT], 0, 28*m_slotState,64, 28, GraphicsUtil.TRANS_NONE, 0-80+16*slotTime, 0, Graphics.TOP|Graphics.LEFT);
+    else if( slotTime>15 )
+        gUtil.drawRegion(g,img[IMAGE_SLOT], 0, 28*m_slotState,64, 28, GraphicsUtil.TRANS_NONE, 0-16*(slotTime-15), 0, Graphics.TOP|Graphics.LEFT);
+    else
+        gUtil.drawRegion(g,img[IMAGE_SLOT], 0, 28*m_slotState,64, 28, GraphicsUtil.TRANS_NONE, 0, 0, Graphics.TOP|Graphics.LEFT);
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawScore()
-	ŠT—v:	ƒXƒRƒA•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawScore()
+    æ¦‚è¦:    ã‚¹ã‚³ã‚¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void drawScore(int score,int x,int y,int size){
-	int tmp=score;
-	int num=0;
-	int i=0;
+    int tmp=score;
+    int num=0;
+    int i=0;
 
-	//“¾“_
-	for(i=0;i<size;i++){
-		num=tmp%10;
-		gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*num, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, x-(NUM_WIDTH+2)*i, y, Graphics.TOP|Graphics.LEFT);
-		tmp/=10;
-		if(tmp==0){
-			break;
-		}
-	}
+    //å¾—ç‚¹
+    for(i=0;i<size;i++){
+        num=tmp%10;
+        gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*num, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, x-(NUM_WIDTH+2)*i, y, Graphics.TOP|Graphics.LEFT);
+        tmp/=10;
+        if(tmp==0){
+            break;
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawScoreB()
-	ŠT—v:	‘å‚«‚¢ƒXƒRƒA•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawScoreB()
+    æ¦‚è¦:    å¤§ãã„ã‚¹ã‚³ã‚¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void drawScoreB(int score,int x,int y,int size){
-	int tmp=score;
-	int num=0;
-	int i=0;
+    int tmp=score;
+    int num=0;
+    int i=0;
 
-	//“¾“_
-	for(i=0;i<size;i++){
-		num=tmp%10;
-		gUtil.drawRegion(g,img[IMAGE_NUMB], NUM_WIDTH*2*num, 0, NUM_WIDTH*2, NUM_HEIGHT*2, GraphicsUtil.TRANS_NONE, x-(NUM_WIDTH*2+4)*i, y, Graphics.TOP|Graphics.LEFT);
-		tmp/=10;
-		if(tmp==0){
-			break;
-		}
-	}
+    //å¾—ç‚¹
+    for(i=0;i<size;i++){
+        num=tmp%10;
+        gUtil.drawRegion(g,img[IMAGE_NUMB], NUM_WIDTH*2*num, 0, NUM_WIDTH*2, NUM_HEIGHT*2, GraphicsUtil.TRANS_NONE, x-(NUM_WIDTH*2+4)*i, y, Graphics.TOP|Graphics.LEFT);
+        tmp/=10;
+        if(tmp==0){
+            break;
+        }
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawCal()
-	ŠT—v:	Œ“ú•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawCal()
+    æ¦‚è¦:    æœˆæ—¥æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 
 private void drawCal(int score,int x,int y){
-	int tmp=score;
-	int num=0;
-	int i=0;
+    int tmp=score;
+    int num=0;
+    int i=0;
 
-	//“¾“_
-	for(i=0;i<(2+1+2);i++){
-		//ƒXƒ‰ƒbƒVƒ…
-		if(i==2 || i==5 ){
-			gUtil.drawRegion(g,img[IMAGE_CAL], CAL_WIDTH*N_SLASH, 0, CAL_WIDTH, CAL_HEIGHT, GraphicsUtil.TRANS_NONE, x-(CAL_WIDTH+1)*i, y, Graphics.TOP|Graphics.LEFT);
-			continue;
-		}
-		num=tmp%10;
-		gUtil.drawRegion(g,img[IMAGE_CAL], CAL_WIDTH*num, 0, CAL_WIDTH, CAL_HEIGHT, GraphicsUtil.TRANS_NONE, x-(CAL_WIDTH+1)*i, y, Graphics.TOP|Graphics.LEFT);
-		tmp/=10;
-	}
+    //å¾—ç‚¹
+    for(i=0;i<(2+1+2);i++){
+        //ã‚¹ãƒ©ãƒƒã‚·ãƒ¥
+        if(i==2 || i==5 ){
+            gUtil.drawRegion(g,img[IMAGE_CAL], CAL_WIDTH*N_SLASH, 0, CAL_WIDTH, CAL_HEIGHT, GraphicsUtil.TRANS_NONE, x-(CAL_WIDTH+1)*i, y, Graphics.TOP|Graphics.LEFT);
+            continue;
+        }
+        num=tmp%10;
+        gUtil.drawRegion(g,img[IMAGE_CAL], CAL_WIDTH*num, 0, CAL_WIDTH, CAL_HEIGHT, GraphicsUtil.TRANS_NONE, x-(CAL_WIDTH+1)*i, y, Graphics.TOP|Graphics.LEFT);
+        tmp/=10;
+    }
 }
 */
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawMenu()
-	ŠT—v:	ƒƒjƒ…[•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawMenu()
+    æ¦‚è¦:    ãƒ¡ãƒ‹ãƒ¥ãƒ¼æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void drawMenu(){
 
-	//HELP
-	gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_PAUSE, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 80, 80, Graphics.TOP|Graphics.LEFT);
+    //HELP
+    gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_PAUSE, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 80, 80, Graphics.TOP|Graphics.LEFT);
 
-	//ƒEƒBƒ“ƒhƒE
-	g.setColor(64,32,0);//’ƒF
-	g.fillRect(10,100,220,50);
+    //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
+    g.setColor(64,32,0);//èŒ¶è‰²
+    g.fillRect(10,100,220,50);
 
-	g.setColor(128,64,0);
-	g.drawRect(10,100,220,50);
+    g.setColor(128,64,0);
+    g.drawRect(10,100,220,50);
 
-	g.setColor(255,255,255);
-	for(int i=0;i<MENU_TEXT.length; i++ ){
-		g.setColor(128,64,0);//’ƒF
-		g.drawString(MENU_TEXT[i],120-f.stringWidth(MENU_TEXT[i])/2+1,(120+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
-		if( m_cursor==i ){
-			g.setColor(255,255,255);
-			g.drawString(MENU_TEXT[i],120-f.stringWidth(MENU_TEXT[i])/2,120+20*i,Graphics.BASELINE|Graphics.LEFT);
-		}
-	}
+    g.setColor(255,255,255);
+    for(int i=0;i<MENU_TEXT.length; i++ ){
+        g.setColor(128,64,0);//èŒ¶è‰²
+        g.drawString(MENU_TEXT[i],120-f.stringWidth(MENU_TEXT[i])/2+1,(120+20*i)+1,Graphics.BASELINE|Graphics.LEFT);
+        if( m_cursor==i ){
+            g.setColor(255,255,255);
+            g.drawString(MENU_TEXT[i],120-f.stringWidth(MENU_TEXT[i])/2,120+20*i,Graphics.BASELINE|Graphics.LEFT);
+        }
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawGameEnd()
-	ŠT—v:	ƒQ[ƒ€I—¹•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawGameEnd()
+    æ¦‚è¦:    ã‚²ãƒ¼ãƒ çµ‚äº†æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void drawGameEnd(){
-	if( m_time<10 ){
-		m_speed-=4;
-	}else{
-		m_speed+=5;
-	}
-	m_teropX-=m_speed;
-	//g.drawImage(img[IMAGE_TIMEUP], m_teropX, 80, Graphics.TOP|Graphics.LEFT);
-	//TIME_UP
-	gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TIME_UP, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, m_teropX, 80, Graphics.TOP|Graphics.LEFT);
+    if( m_time<10 ){
+        m_speed-=4;
+    }else{
+        m_speed+=5;
+    }
+    m_teropX-=m_speed;
+    //g.drawImage(img[IMAGE_TIMEUP], m_teropX, 80, Graphics.TOP|Graphics.LEFT);
+    //TIME_UP
+    gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_TIME_UP, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, m_teropX, 80, Graphics.TOP|Graphics.LEFT);
 
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	drawGameResult()
-	ŠT—v:	ƒQ[ƒ€Œ‹‰Ê‰æ–Ê•`‰æ
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    drawGameResult()
+    æ¦‚è¦:    ã‚²ãƒ¼ãƒ çµæœç”»é¢æç”»
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void drawGameResult(){
-	try{
-		//”wŒi‰æ‘œ
-		g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
+    try{
+        //èƒŒæ™¯ç”»åƒ
+        g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
 
-		//RECORD
-		gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_RECORD, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
-		//gUtil.drawRegion(g,img[IMAGE_STAGE], 32*m_stage, 0,32, 32, GraphicsUtil.TRANS_NONE, 160, 20, Graphics.TOP|Graphics.LEFT);
+        //RECORD
+        gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_RECORD, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
+        //gUtil.drawRegion(g,img[IMAGE_STAGE], 32*m_stage, 0,32, 32, GraphicsUtil.TRANS_NONE, 160, 20, Graphics.TOP|Graphics.LEFT);
 
-		//score,combo
-		gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SCORE, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE,  96, 46, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_COMBO, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 176, 46, Graphics.TOP|Graphics.LEFT);
+        //score,combo
+        gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SCORE, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE,  96, 46, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_COMBO, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 176, 46, Graphics.TOP|Graphics.LEFT);
 
-		//•¶š•\¦
-		for(int i=0;i<HISCORE_SIZE;i++){
-			if( m_hiScoreNum==i && m_time==0 ){
-			}else{
-				gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(i+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 20, 60+24*i, Graphics.TOP|Graphics.LEFT);
-				gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 40, 60+24*i, Graphics.TOP|Graphics.LEFT);
-				drawScore(m_hiScore[m_stage][i],160,60+24*i,8);
-				drawScore(m_hiCombo[m_stage][i],200,60+24*i,2);
-				//drawCal(m_calendar[m_stage][i], 220,62+24*i);
-			}
-		}
-	}catch(Exception e){
+        //æ–‡å­—è¡¨ç¤º
+        for(int i=0;i<HISCORE_SIZE;i++){
+            if( m_hiScoreNum==i && m_time==0 ){
+            }else{
+                gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(i+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 20, 60+24*i, Graphics.TOP|Graphics.LEFT);
+                gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 40, 60+24*i, Graphics.TOP|Graphics.LEFT);
+                drawScore(m_hiScore[m_stage][i],160,60+24*i,8);
+                drawScore(m_hiCombo[m_stage][i],200,60+24*i,2);
+                //drawCal(m_calendar[m_stage][i], 220,62+24*i);
+            }
+        }
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyTitle()
-	ŠT—v:	ƒ^ƒCƒgƒ‹ƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyTitle()
+    æ¦‚è¦:    ã‚¿ã‚¤ãƒˆãƒ«ã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 public void keyTitle(){
-	switch( m_event ){
-		case KEY_5:
-		case KEY_SELECT:
+    switch( m_event ){
+        case KEY_5:
+        case KEY_SELECT:
 //playEnter();
-			m_nextState=MODE_SELECT;
-			break;
-	}
+            m_nextState=MODE_SELECT;
+            break;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyModeSelect()
-	ŠT—v:	ƒ^ƒCƒgƒ‹ƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyModeSelect()
+    æ¦‚è¦:    ã‚¿ã‚¤ãƒˆãƒ«ã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 public void keyModeSelect(){
-	switch( m_event ){
-		case KEY_UP:
-		case KEY_2:
-		case KEY_DOWN:
-		case KEY_8:
-			if(m_cursor==0){
-				m_cursor=1;
-			}else{
-				m_cursor=0;
-			}
-			playCursor();
-			break;
+    switch( m_event ){
+        case KEY_UP:
+        case KEY_2:
+        case KEY_DOWN:
+        case KEY_8:
+            if(m_cursor==0){
+                m_cursor=1;
+            }else{
+                m_cursor=0;
+            }
+            playCursor();
+            break;
 
-		case KEY_LEFT:
-		case KEY_4:
-			if( m_cursor==0 ){
-				m_stage--;
-				if( m_stage<0 ){
-					m_stage=STAGE_SIZE-1;
-				}
-				m_cursorTime=0;
-			}else{
-				m_option--;
-				if( m_option<0 ){
-					m_option=MODE_SIZE-1;
-				}
-			}
-			playCursor();
-			break;
+        case KEY_LEFT:
+        case KEY_4:
+            if( m_cursor==0 ){
+                m_stage--;
+                if( m_stage<0 ){
+                    m_stage=STAGE_SIZE-1;
+                }
+                m_cursorTime=0;
+            }else{
+                m_option--;
+                if( m_option<0 ){
+                    m_option=MODE_SIZE-1;
+                }
+            }
+            playCursor();
+            break;
 
-		case KEY_RIGHT:
-		case KEY_6:
-			if( m_cursor==0 ){
-				m_stage++;
-				if( m_stage>STAGE_SIZE-1 ){
-					m_stage=0;
-				}
-				m_cursorTime=0;
-			}else{
-				m_option++;
-				if( m_option>MODE_SIZE-1 ){
-					m_option=0;
-				}
-			}
-			playCursor();
-			break;
+        case KEY_RIGHT:
+        case KEY_6:
+            if( m_cursor==0 ){
+                m_stage++;
+                if( m_stage>STAGE_SIZE-1 ){
+                    m_stage=0;
+                }
+                m_cursorTime=0;
+            }else{
+                m_option++;
+                if( m_option>MODE_SIZE-1 ){
+                    m_option=0;
+                }
+            }
+            playCursor();
+            break;
 
-		case KEY_5:
-		case KEY_SELECT:
-			if( m_cursor==0 ){
-				m_nextState=GAME_START;
-			}else{
-				switch( m_option ){
-					case 0:
-						m_nextState=RECORD;
-						break;
-					case 1:
-						m_nextState=BONUS;
-						break;
-					case 2:
-						m_nextState=HELP;
-						break;
-				}
-				//playCursor();
-			}
-			break;
-	}
+        case KEY_5:
+        case KEY_SELECT:
+            if( m_cursor==0 ){
+                m_nextState=GAME_START;
+            }else{
+                switch( m_option ){
+                    case 0:
+                        m_nextState=RECORD;
+                        break;
+                    case 1:
+                        m_nextState=BONUS;
+                        break;
+                    case 2:
+                        m_nextState=HELP;
+                        break;
+                }
+                //playCursor();
+            }
+            break;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyRecord()
-	ŠT—v:	ƒŒƒR[ƒhƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyRecord()
+    æ¦‚è¦:    ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void keyRecord(){
-	switch( m_event ){
-		case KEY_UP:
-		case KEY_2:
-		case KEY_LEFT:
-		case KEY_4:
-			m_cursor--;
-			if( m_cursor<0 ){
-				m_cursor=STAGE_SIZE-1;
-			}
-			setStageImage(m_cursor);
-			playCursor();
-			break;
+    switch( m_event ){
+        case KEY_UP:
+        case KEY_2:
+        case KEY_LEFT:
+        case KEY_4:
+            m_cursor--;
+            if( m_cursor<0 ){
+                m_cursor=STAGE_SIZE-1;
+            }
+            setStageImage(m_cursor);
+            playCursor();
+            break;
 
-		case KEY_DOWN:
-		case KEY_8:
-		case KEY_RIGHT:
-		case KEY_6:
-			m_cursor++;
-			if( m_cursor>STAGE_SIZE-1 ){
-				m_cursor=0;
-			}
-			setStageImage(m_cursor);
-			playCursor();
-			break;
+        case KEY_DOWN:
+        case KEY_8:
+        case KEY_RIGHT:
+        case KEY_6:
+            m_cursor++;
+            if( m_cursor>STAGE_SIZE-1 ){
+                m_cursor=0;
+            }
+            setStageImage(m_cursor);
+            playCursor();
+            break;
 
-		case KEY_5:
-		case KEY_SELECT:
-			m_nextState=MODE_SELECT;
-			//playCursor();
-			break;
-	}
+        case KEY_5:
+        case KEY_SELECT:
+            m_nextState=MODE_SELECT;
+            //playCursor();
+            break;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyBonus()
-	ŠT—v:	ƒ{[ƒiƒXƒAƒCƒeƒ€ƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyBonus()
+    æ¦‚è¦:    ãƒœãƒ¼ãƒŠã‚¹ã‚¢ã‚¤ãƒ†ãƒ ã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void keyBonus(){
-	switch( m_event ){
-		case KEY_UP:
-		case KEY_2:
-		case KEY_LEFT:
-		case KEY_4:
-			m_bonusNew[m_cursor]=0;
-			m_cursor--;
-			if( m_cursor<0 ){
-				m_cursor=BONUS_SIZE-1;
-			}
+    switch( m_event ){
+        case KEY_UP:
+        case KEY_2:
+        case KEY_LEFT:
+        case KEY_4:
+            m_bonusNew[m_cursor]=0;
+            m_cursor--;
+            if( m_cursor<0 ){
+                m_cursor=BONUS_SIZE-1;
+            }
 playCursor();
-			break;
+            break;
 
-		case KEY_DOWN:
-		case KEY_8:
-		case KEY_RIGHT:
-		case KEY_6:
-			m_bonusNew[m_cursor]=0;
-			m_cursor++;
-			if( m_cursor>BONUS_SIZE-1 ){
-				m_cursor=0;
-			}
+        case KEY_DOWN:
+        case KEY_8:
+        case KEY_RIGHT:
+        case KEY_6:
+            m_bonusNew[m_cursor]=0;
+            m_cursor++;
+            if( m_cursor>BONUS_SIZE-1 ){
+                m_cursor=0;
+            }
 playCursor();
-			break;
+            break;
 
-		case KEY_5:
-		case KEY_SELECT:
-			if( m_cursor==BONUS_SIZE-1 && m_bonusGet[BONUS_SIZE-1]==1 ){
-				m_nextState=ENDING;
-			}else{
-				m_nextState=MODE_SELECT;
-			}
+        case KEY_5:
+        case KEY_SELECT:
+            if( m_cursor==BONUS_SIZE-1 && m_bonusGet[BONUS_SIZE-1]==1 ){
+                m_nextState=ENDING;
+            }else{
+                m_nextState=MODE_SELECT;
+            }
 //playCursor();
-			break;
-	}
+            break;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyHelp()
-	ŠT—v:	ƒwƒ‹ƒvƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyHelp()
+    æ¦‚è¦:    ãƒ˜ãƒ«ãƒ—ã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void keyHelp(){
-	switch( m_event ){
-		case KEY_UP:
-		case KEY_2:
-		case KEY_LEFT:
-		case KEY_4:
-			m_cursor--;
-			if( m_cursor<0 ){
-				m_cursor=HELP_TEXT.length-1;
-			}
+    switch( m_event ){
+        case KEY_UP:
+        case KEY_2:
+        case KEY_LEFT:
+        case KEY_4:
+            m_cursor--;
+            if( m_cursor<0 ){
+                m_cursor=HELP_TEXT.length-1;
+            }
 playCursor();
-			break;
+            break;
 
-		case KEY_DOWN:
-		case KEY_8:
-		case KEY_RIGHT:
-		case KEY_6:
-			m_cursor++;
-			if( m_cursor>HELP_TEXT.length-1 ){
-				m_cursor=0;
-			}
+        case KEY_DOWN:
+        case KEY_8:
+        case KEY_RIGHT:
+        case KEY_6:
+            m_cursor++;
+            if( m_cursor>HELP_TEXT.length-1 ){
+                m_cursor=0;
+            }
 playCursor();
-			break;
+            break;
 
-		case KEY_5:
-		case KEY_SELECT:
-			m_nextState=MODE_SELECT;
+        case KEY_5:
+        case KEY_SELECT:
+            m_nextState=MODE_SELECT;
 //playCursor();
-			break;
-	}
+            break;
+    }
 }
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyEnding()
-	ŠT—v:	ƒGƒ“ƒfƒBƒ“ƒOƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyEnding()
+    æ¦‚è¦:    ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void keyEnding(){
-	switch( m_event ){
-		case KEY_5:
-		case KEY_SELECT:
-			m_nextState=BONUS;
+    switch( m_event ){
+        case KEY_5:
+        case KEY_SELECT:
+            m_nextState=BONUS;
 //playCursor();
-			break;
-	}
+            break;
+    }
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyGameResult()
-	ŠT—v:	ƒQ[ƒ€Œ‹‰ÊƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyGameResult()
+    æ¦‚è¦:    ã‚²ãƒ¼ãƒ çµæœã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void keyGameResult(){
-	switch( m_event ){
-		case KEY_5:
-		case KEY_SELECT:
-			m_nextState=TITLE;
+    switch( m_event ){
+        case KEY_5:
+        case KEY_SELECT:
+            m_nextState=TITLE;
 //playCursor();
-			break;
-	}
+            break;
+    }
 }
 
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyPlaying()
-	ŠT—v:	ƒQ[ƒ€’†ƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyPlaying()
+    æ¦‚è¦:    ã‚²ãƒ¼ãƒ ä¸­ã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 public void keyPlaying(){
 
-	//¶ƒL[
-	if ( (key&KEY_LEFT)!=0 || (key&KEY_4)!=0) {
-		if( m_myState!=JUMP ){
-			m_myState=WALK;
-		}
-		m_isLeft=true;
-		m_speed=WALK_SPEED;
-	}
-	// ‰EƒL[
-	else if ( (key&KEY_RIGHT)!=0 || (key&KEY_6)!=0) {
-		if( m_myState!=JUMP ){
-			m_myState=WALK;
-		}
-		m_isLeft=false;
-		m_speed=WALK_SPEED;
-	}
-	//¶E‰E‚ğ‰Ÿ‚µ‚Ä‚¢‚È‚¢
-	else{
-		if( m_myState!=JUMP ){
-			m_myState=STOP;
-		}
-		m_speed/=2;
-	}
+    //å·¦ã‚­ãƒ¼
+    if ( (key&KEY_LEFT)!=0 || (key&KEY_4)!=0) {
+        if( m_myState!=JUMP ){
+            m_myState=WALK;
+        }
+        m_isLeft=true;
+        m_speed=WALK_SPEED;
+    }
+    // å³ã‚­ãƒ¼
+    else if ( (key&KEY_RIGHT)!=0 || (key&KEY_6)!=0) {
+        if( m_myState!=JUMP ){
+            m_myState=WALK;
+        }
+        m_isLeft=false;
+        m_speed=WALK_SPEED;
+    }
+    //å·¦ãƒ»å³ã‚’æŠ¼ã—ã¦ã„ãªã„
+    else{
+        if( m_myState!=JUMP ){
+            m_myState=STOP;
+        }
+        m_speed/=2;
+    }
 
-	// ‰ºƒL[
-	if( (key&KEY_DOWN)!=0 || (key&KEY_8)!=0){
-		if( m_myState!=JUMP && m_ground!=GROUND_BOTTOM ){
-			m_myState=JUMP;
-			if( m_ground==GROUND_MIDDLE ){
-				m_ground=GROUND_BOTTOM;
-			}
-			else if( m_ground==GROUND_TOP ){
-				m_ground=GROUND_MIDDLE;
-			}
-		}
-	}
-	//ƒWƒƒƒ“ƒvƒL[
-	if( (key&KEY_5)!=0 || (key&KEY_SELECT)!=0 ){
-		if( m_myState!=JUMP ){
-			m_myState=JUMP;
-			m_walkCount=0;
-			m_addY=-JUMP_HEIGHT;
-			m_myY--;
-		}
-	}
+    // ä¸‹ã‚­ãƒ¼
+    if( (key&KEY_DOWN)!=0 || (key&KEY_8)!=0){
+        if( m_myState!=JUMP && m_ground!=GROUND_BOTTOM ){
+            m_myState=JUMP;
+            if( m_ground==GROUND_MIDDLE ){
+                m_ground=GROUND_BOTTOM;
+            }
+            else if( m_ground==GROUND_TOP ){
+                m_ground=GROUND_MIDDLE;
+            }
+        }
+    }
+    //ã‚¸ãƒ£ãƒ³ãƒ—ã‚­ãƒ¼
+    if( (key&KEY_5)!=0 || (key&KEY_SELECT)!=0 ){
+        if( m_myState!=JUMP ){
+            m_myState=JUMP;
+            m_walkCount=0;
+            m_addY=-JUMP_HEIGHT;
+            m_myY--;
+        }
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	onMenu(),offMenu()
-	ŠT—v:	ƒƒjƒ…[Ø‚è‘Ö‚¦
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    onMenu(),offMenu()
+    æ¦‚è¦:    ãƒ¡ãƒ‹ãƒ¥ãƒ¼åˆ‡ã‚Šæ›¿ãˆ
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void onMenu(){
-	m_isPause=true;
-	m_cursor=0;
-	removeCommand(pauseCmd);
-	addCommand(resumeCmd);
+    m_isPause=true;
+    m_cursor=0;
+    removeCommand(pauseCmd);
+    addCommand(resumeCmd);
 }
 private void offMenu(){
-	m_isPause=false;
-	removeCommand(resumeCmd);
-	addCommand(pauseCmd);
+    m_isPause=false;
+    removeCommand(resumeCmd);
+    addCommand(pauseCmd);
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	keyMenu()
-	ŠT—v:	ƒƒjƒ…[‰æ–ÊƒL[ˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    keyMenu()
+    æ¦‚è¦:    ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã‚­ãƒ¼å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 public void keyMenu(){
-	switch( m_event ){
+    switch( m_event ){
 
-		case KEY_2:
-		case KEY_UP:
-		case KEY_8:
-		case KEY_DOWN:
-			if( m_cursor==0 )
-				m_cursor=1;
-			else
-				m_cursor=0;
-			break;
+        case KEY_2:
+        case KEY_UP:
+        case KEY_8:
+        case KEY_DOWN:
+            if( m_cursor==0 )
+                m_cursor=1;
+            else
+                m_cursor=0;
+            break;
 
-		case KEY_5:
-		case KEY_SELECT:
-			switch( m_cursor ){
-				//ÄŠJ
-				case 0:
-					break;
-				//ƒ^ƒCƒgƒ‹
-				case 1:
-					m_nextState=TITLE;
-					break;
-			}
-			m_isPause=false;
-			removeCommand(resumeCmd);
-			addCommand(pauseCmd);
-			break;
-	}
+        case KEY_5:
+        case KEY_SELECT:
+            switch( m_cursor ){
+                //å†é–‹
+                case 0:
+                    break;
+                //ã‚¿ã‚¤ãƒˆãƒ«
+                case 1:
+                    m_nextState=TITLE;
+                    break;
+            }
+            m_isPause=false;
+            removeCommand(resumeCmd);
+            addCommand(pauseCmd);
+            break;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	getImgIndex()
-	ŠT—v:	ƒLƒƒƒ‰ƒNƒ^‚ÌƒCƒ[ƒW”Ô†æ“¾
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    getImgIndex()
+    æ¦‚è¦:    ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ç•ªå·å–å¾—
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void getImgIndex(){
 
-	switch( m_myState ){
-		case STOP:
-			m_imgIndex=IMAGE_STOP;
-			break;
+    switch( m_myState ){
+        case STOP:
+            m_imgIndex=IMAGE_STOP;
+            break;
 
-		case WALK:
-			switch(m_walkCount%3){
-				case 0:
-					m_imgIndex=IMAGE_STOP;
-					break;
-				case 1:
-					m_imgIndex=IMAGE_WALK1;
-					break;
-				case 2:
-					m_imgIndex=IMAGE_WALK2;
-					break;
-			}
-			break;
+        case WALK:
+            switch(m_walkCount%3){
+                case 0:
+                    m_imgIndex=IMAGE_STOP;
+                    break;
+                case 1:
+                    m_imgIndex=IMAGE_WALK1;
+                    break;
+                case 2:
+                    m_imgIndex=IMAGE_WALK2;
+                    break;
+            }
+            break;
 
-		case JUMP:
-			m_imgIndex=IMAGE_WALK1;
-			break;
-	}
+        case JUMP:
+            m_imgIndex=IMAGE_WALK1;
+            break;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	myAction()
-	ŠT—v:	ƒLƒƒƒ‰ƒNƒ^‚Ìˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    myAction()
+    æ¦‚è¦:    ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ã®å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void myAction(){
 
-	//‚Æ‚Ü‚Á‚Ä‚¢‚ê‚ÎŒ¸‘¬
-	if( m_myState==STOP ){
-		m_walkCount=0;
-	}else{
-		m_walkCount++;
-	}
+    //ã¨ã¾ã£ã¦ã„ã‚Œã°æ¸›é€Ÿ
+    if( m_myState==STOP ){
+        m_walkCount=0;
+    }else{
+        m_walkCount++;
+    }
 
-	checkGround();
+    checkGround();
 
-	//ƒLƒƒƒ‰ƒNƒ^‚ÌˆÚ“®
-	if(!m_isLeft){//‰E
-		m_myX+=m_speed;
-		//’[
-		if(m_myX>SCREEN_WIDTH-MYCHARA_WIDTH){
-			m_myX=SCREEN_WIDTH-MYCHARA_WIDTH;
-		}
+    //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ã®ç§»å‹•
+    if(!m_isLeft){//å³
+        m_myX+=m_speed;
+        //ç«¯
+        if(m_myX>SCREEN_WIDTH-MYCHARA_WIDTH){
+            m_myX=SCREEN_WIDTH-MYCHARA_WIDTH;
+        }
 
-	}else{//¶
-		m_myX-=m_speed;
-		if(m_myX<0){
-			m_myX=0;
-		}
-	}
+    }else{//å·¦
+        m_myX-=m_speed;
+        if(m_myX<0){
+            m_myX=0;
+        }
+    }
 
-	if(m_myY<m_ground){
-		//’n–Êæ“¾
-		getGround();
-		m_addY+=4;
-		m_myY+=m_addY;
-		if(m_myY>=m_ground){
-			m_addY=0;
-			m_myY=m_ground;
+    if(m_myY<m_ground){
+        //åœ°é¢å–å¾—
+        getGround();
+        m_addY+=4;
+        m_myY+=m_addY;
+        if(m_myY>=m_ground){
+            m_addY=0;
+            m_myY=m_ground;
 
-			if( m_combo>m_comboMax ){
-				m_comboMax=m_combo;
-			}
-			m_combo=0;
+            if( m_combo>m_comboMax ){
+                m_comboMax=m_combo;
+            }
+            m_combo=0;
 
-			//ƒXƒƒbƒg‰Šú‰»
-			for(int i=0;i<m_slot.length;i++){
-				m_slot[i]=NONE;
-			}
+            //ã‚¹ãƒ­ãƒƒãƒˆåˆæœŸåŒ–
+            for(int i=0;i<m_slot.length;i++){
+                m_slot[i]=NONE;
+            }
 
-			m_myState=STOP;
-			m_speed=0;
-			m_isDrawFooder=true;
-		}
-	}
+            m_myState=STOP;
+            m_speed=0;
+            m_isDrawFooder=true;
+        }
+    }
 
-	//ƒtƒ‹[ƒc‚ğ“¥‚ñ‚¾‚Æ‚«
-	if( m_myState==JUMP ){
-		for(int i=0;i<APPLE_SIZE; i++){
-			if( m_myX+MYCHARA_WIDTH>m_appleX[i] && m_myX<m_appleX[i]+16 &&
-				m_myY>m_appleY[i]-16 && m_myY<m_appleY[i]+16 && m_appleState[i]!=NONE )
-			{
-				//ƒWƒƒƒ“ƒv
-				m_addY=-JUMP_HEIGHT;
-				//ƒRƒ“ƒ{’Ç‰Á
-				m_combo++;
-				m_comboTime=COMBO_TIME;
-				if( m_combo>MAX_COMBO ){
-					m_combo=MAX_COMBO;
-				}
-				//ƒXƒRƒA’Ç‰Á
-				m_score+=10*m_combo;
-				if( m_score>MAX_SCORE ){
-					m_score=MAX_SCORE;
-				}
+    //ãƒ•ãƒ«ãƒ¼ãƒ„ã‚’è¸ã‚“ã ã¨ã
+    if( m_myState==JUMP ){
+        for(int i=0;i<APPLE_SIZE; i++){
+            if( m_myX+MYCHARA_WIDTH>m_appleX[i] && m_myX<m_appleX[i]+16 &&
+                m_myY>m_appleY[i]-16 && m_myY<m_appleY[i]+16 && m_appleState[i]!=NONE )
+            {
+                //ã‚¸ãƒ£ãƒ³ãƒ—
+                m_addY=-JUMP_HEIGHT;
+                //ã‚³ãƒ³ãƒœè¿½åŠ 
+                m_combo++;
+                m_comboTime=COMBO_TIME;
+                if( m_combo>MAX_COMBO ){
+                    m_combo=MAX_COMBO;
+                }
+                //ã‚¹ã‚³ã‚¢è¿½åŠ 
+                m_score+=10*m_combo;
+                if( m_score>MAX_SCORE ){
+                    m_score=MAX_SCORE;
+                }
 
-				//ƒXƒyƒVƒƒƒ‹ƒAƒCƒeƒ€
-				if(m_appleState[i]==SPECIAL){
-					m_slotTime=SLOT_TIME;
-					m_slotState=GET_ITEM;
-					m_score+=10000;
-					if( m_score>MAX_SCORE ) m_score=MAX_SCORE;
-					m_appleState[i]=NONE;
-					m_isBonusGet=true;
-					m_isDrawFooder=true;
-					//ver1.2.0
-					playBonus();
-					continue;
-				}else{
-					//ver1.2.0
-					playEnter();
-				}
+                //ã‚¹ãƒšã‚·ãƒ£ãƒ«ã‚¢ã‚¤ãƒ†ãƒ 
+                if(m_appleState[i]==SPECIAL){
+                    m_slotTime=SLOT_TIME;
+                    m_slotState=GET_ITEM;
+                    m_score+=10000;
+                    if( m_score>MAX_SCORE ) m_score=MAX_SCORE;
+                    m_appleState[i]=NONE;
+                    m_isBonusGet=true;
+                    m_isDrawFooder=true;
+                    //ver1.2.0
+                    playBonus();
+                    continue;
+                }else{
+                    //ver1.2.0
+                    playEnter();
+                }
 
-				//ƒXƒƒbƒg‚ÉŠi”[‚µ‚Ä
-				m_slot[(m_combo-1)%3]=m_appleState[i];
-// ”g–ä ver1.1.0
-				m_effX[(m_combo-1)%3]=m_appleX[i];
-				m_effY[(m_combo-1)%3]=m_appleY[i];
-				m_effTime[(m_combo-1)%3]=1;
+                //ã‚¹ãƒ­ãƒƒãƒˆã«æ ¼ç´ã—ã¦
+                m_slot[(m_combo-1)%3]=m_appleState[i];
+// æ³¢ç´‹ ver1.1.0
+                m_effX[(m_combo-1)%3]=m_appleX[i];
+                m_effY[(m_combo-1)%3]=m_appleY[i];
+                m_effTime[(m_combo-1)%3]=1;
 
-				checkSlot();
-				m_appleState[i]=NONE;
+                checkSlot();
+                m_appleState[i]=NONE;
 
-				m_isDrawFooder=true;
-				break;
-			}
-		}
-	}
+                m_isDrawFooder=true;
+                break;
+            }
+        }
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	moveApple()
-	ŠT—v:	ƒLƒƒƒ‰ƒNƒ^‚Ìˆ—
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    moveApple()
+    æ¦‚è¦:    ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ã®å‡¦ç†
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void moveApple(){
-	int i=0;
+    int i=0;
 
-	for(i=0; i<APPLE_SIZE; i++){
-		if( m_appleState[i]!=NONE ){
-			//ƒLƒƒƒ‰ƒNƒ^‚ÌˆÚ“®
-			if( !m_appleIsLeft[i] ){//‰E
-				m_appleX[i]+=m_appleSpeedX[i];
-				//’[
-				if( m_appleX[i]>SCREEN_WIDTH+MYCHARA_WIDTH ){
-					m_appleState[i]=NONE;
-				}
+    for(i=0; i<APPLE_SIZE; i++){
+        if( m_appleState[i]!=NONE ){
+            //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ã®ç§»å‹•
+            if( !m_appleIsLeft[i] ){//å³
+                m_appleX[i]+=m_appleSpeedX[i];
+                //ç«¯
+                if( m_appleX[i]>SCREEN_WIDTH+MYCHARA_WIDTH ){
+                    m_appleState[i]=NONE;
+                }
 
-			}else{//¶
-				m_appleX[i]-=m_appleSpeedX[i];
-				//’[
-				if( m_appleX[i]<0-MYCHARA_WIDTH ){
-					m_appleState[i]=NONE;
-				}
-			}
+            }else{//å·¦
+                m_appleX[i]-=m_appleSpeedX[i];
+                //ç«¯
+                if( m_appleX[i]<0-MYCHARA_WIDTH ){
+                    m_appleState[i]=NONE;
+                }
+            }
 
-			//—‰º
-			m_appleSpeedY[i]+=4;
-			m_appleY[i]+=m_appleSpeedY[i];
+            //è½ä¸‹
+            m_appleSpeedY[i]+=4;
+            m_appleY[i]+=m_appleSpeedY[i];
 
-			//Õ“Ë
-			if( m_appleY[i]>GROUND_BOTTOM ){
-				m_appleSpeedY[i]=-28-(m_appleState[i]*4);
-				m_appleY[i]=GROUND_BOTTOM;
-			}
-		}
-	}//end of for(i=0; i<APPLE_SIZE; i++)
+            //è¡çª
+            if( m_appleY[i]>GROUND_BOTTOM ){
+                m_appleSpeedY[i]=-28-(m_appleState[i]*4);
+                m_appleY[i]=GROUND_BOTTOM;
+            }
+        }
+    }//end of for(i=0; i<APPLE_SIZE; i++)
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	appearApple()
-	ŠT—v:	‚è‚ñ‚²‚ÌoŒ»
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    appearApple()
+    æ¦‚è¦:    ã‚Šã‚“ã”ã®å‡ºç¾
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void appearApple(){
-	int i=0;
+    int i=0;
 
-	for(i=0; i<APPLE_SIZE; i++){
-		if(m_appleState[i]==NONE){
-			if( !m_isAppearBonus && m_lv<BONUS_APPEAR ){
-				m_appleState[i]=SPECIAL;
-				m_isAppearBonus=true;
-			}else{
-				m_appleState[i]=(Math.abs(r.nextInt())%3);
-			}
+    for(i=0; i<APPLE_SIZE; i++){
+        if(m_appleState[i]==NONE){
+            if( !m_isAppearBonus && m_lv<BONUS_APPEAR ){
+                m_appleState[i]=SPECIAL;
+                m_isAppearBonus=true;
+            }else{
+                m_appleState[i]=(Math.abs(r.nextInt())%3);
+            }
 
-			m_appleX[i]=Math.abs(r.nextInt())%SCREEN_WIDTH;
-			m_appleY[i]=0;
-			m_appleSpeedX[i]=(Math.abs(r.nextInt())%3)*2+2;
-			m_appleSpeedY[i]=4;
-			if( m_appleX[i]>(SCREEN_WIDTH/2) ){
-				m_appleIsLeft[i]=true;
-			}else{
-				m_appleIsLeft[i]=false;
-			}
-			break;
-		}
-	}
+            m_appleX[i]=Math.abs(r.nextInt())%SCREEN_WIDTH;
+            m_appleY[i]=0;
+            m_appleSpeedX[i]=(Math.abs(r.nextInt())%3)*2+2;
+            m_appleSpeedY[i]=4;
+            if( m_appleX[i]>(SCREEN_WIDTH/2) ){
+                m_appleIsLeft[i]=true;
+            }else{
+                m_appleIsLeft[i]=false;
+            }
+            break;
+        }
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	getGround()
-	ŠT—v:	’n–Êæ“¾
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    getGround()
+    æ¦‚è¦:    åœ°é¢å–å¾—
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void getGround(){
 
-	if( m_myY<GROUND_TOP ){
-		if(	( GROUND_TOP1X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_TOP1X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) ||
-			( GROUND_TOP2X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_TOP2X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ))
-		{
-			m_ground=GROUND_TOP;
-		}
-	}
-	else if( m_myY<GROUND_MIDDLE ){
-		if(	( GROUND_MIDDLE1X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_MIDDLE1X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) ||
-			( GROUND_MIDDLE2X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_MIDDLE2X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ))
-		{
-		
-			m_ground=GROUND_MIDDLE;
-		}
-	}
-	else{
-		m_ground=GROUND_BOTTOM;
-	}
+    if( m_myY<GROUND_TOP ){
+        if(    ( GROUND_TOP1X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_TOP1X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) ||
+            ( GROUND_TOP2X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_TOP2X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ))
+        {
+            m_ground=GROUND_TOP;
+        }
+    }
+    else if( m_myY<GROUND_MIDDLE ){
+        if(    ( GROUND_MIDDLE1X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_MIDDLE1X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) ||
+            ( GROUND_MIDDLE2X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_MIDDLE2X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ))
+        {
+        
+            m_ground=GROUND_MIDDLE;
+        }
+    }
+    else{
+        m_ground=GROUND_BOTTOM;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	walkCheckGround()
-	ŠT—v:	’n–Êæ“¾
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    walkCheckGround()
+    æ¦‚è¦:    åœ°é¢å–å¾—
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void checkGround(){
 
-	if( m_ground==GROUND_TOP ){
-		if(	( GROUND_TOP1X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_TOP1X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) ||
-			( GROUND_TOP2X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_TOP2X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) )
-		{
-		}else{
-			m_myState=JUMP;
-			m_ground=GROUND_MIDDLE;
-		}
-	}
-	else if( m_ground==GROUND_MIDDLE ){
-		if(	( GROUND_MIDDLE1X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_MIDDLE1X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) ||
-			( GROUND_MIDDLE2X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_MIDDLE2X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ))
-		{
-		}else{
-			m_myState=JUMP;
-			m_ground=GROUND_BOTTOM;
-		}
-	}
+    if( m_ground==GROUND_TOP ){
+        if(    ( GROUND_TOP1X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_TOP1X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) ||
+            ( GROUND_TOP2X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_TOP2X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) )
+        {
+        }else{
+            m_myState=JUMP;
+            m_ground=GROUND_MIDDLE;
+        }
+    }
+    else if( m_ground==GROUND_MIDDLE ){
+        if(    ( GROUND_MIDDLE1X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_MIDDLE1X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ) ||
+            ( GROUND_MIDDLE2X[m_stage]-(MYCHARA_WIDTH/2)<m_myX && m_myX<GROUND_MIDDLE2X[m_stage]+GROUND_WIDTH-(MYCHARA_WIDTH/2) ))
+        {
+        }else{
+            m_myState=JUMP;
+            m_ground=GROUND_BOTTOM;
+        }
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	initTitle()
-	ŠT—v:	ƒ^ƒCƒgƒ‹‰Šú‰»
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    initTitle()
+    æ¦‚è¦:    ã‚¿ã‚¤ãƒˆãƒ«åˆæœŸåŒ–
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void initTitle(){
-	m_myState=WALK;
-	m_isLeft=false;
-	m_myX=60;
-	m_myY=GROUND_BOTTOM;
-	m_speed=WALK_SPEED;
+    m_myState=WALK;
+    m_isLeft=false;
+    m_myX=60;
+    m_myY=GROUND_BOTTOM;
+    m_speed=WALK_SPEED;
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	initGame()
-	ŠT—v:	ƒQ[ƒ€‰Šú‰»
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    initGame()
+    æ¦‚è¦:    ã‚²ãƒ¼ãƒ åˆæœŸåŒ–
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void initGame(){
 
-	//ƒQ[ƒ€
-	m_time			=0;
-	m_lv			=TIME_LIMIT;
-	m_score			=0;
-	m_combo			=0;
-	m_comboMax		=0;
-	m_comboTime		=0;
+    //ã‚²ãƒ¼ãƒ 
+    m_time            =0;
+    m_lv            =TIME_LIMIT;
+    m_score            =0;
+    m_combo            =0;
+    m_comboMax        =0;
+    m_comboTime        =0;
 
-	//ƒLƒƒƒ‰ƒNƒ^
-	m_myX			=120;
-	m_myY			=GROUND_BOTTOM;
-	m_isLeft		=false;
-	m_myState		=STOP;
-	m_addY			=0;
-	m_walkCount		=0;
-	m_imgIndex		=IMAGE_STOP;
-	m_speed			=0;
-	m_ground		=GROUND_BOTTOM;
+    //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿
+    m_myX            =120;
+    m_myY            =GROUND_BOTTOM;
+    m_isLeft        =false;
+    m_myState        =STOP;
+    m_addY            =0;
+    m_walkCount        =0;
+    m_imgIndex        =IMAGE_STOP;
+    m_speed            =0;
+    m_ground        =GROUND_BOTTOM;
 
-	//ƒXƒƒbƒg
-	for(int i=0;i<m_slot.length;i++){
-		m_slot[i]=NONE;
-	}
-	m_slotTime=0;
-	m_slotState=NONE;
-	m_isAppearBonus=false;
-	m_isBonusGet=false;
+    //ã‚¹ãƒ­ãƒƒãƒˆ
+    for(int i=0;i<m_slot.length;i++){
+        m_slot[i]=NONE;
+    }
+    m_slotTime=0;
+    m_slotState=NONE;
+    m_isAppearBonus=false;
+    m_isBonusGet=false;
 
-	//ƒtƒ‹[ƒc
-	for(int i=0;i<APPLE_SIZE;i++){
-		m_appleState[i]	=NONE;
-		m_appleX[i]		=0;
-		m_appleY[i]		=0;
-		m_appleSpeedX[i]=4;
-		m_appleSpeedY[i]=4;
-		m_appleIsLeft[i]=false;
-	}
+    //ãƒ•ãƒ«ãƒ¼ãƒ„
+    for(int i=0;i<APPLE_SIZE;i++){
+        m_appleState[i]    =NONE;
+        m_appleX[i]        =0;
+        m_appleY[i]        =0;
+        m_appleSpeedX[i]=4;
+        m_appleSpeedY[i]=4;
+        m_appleIsLeft[i]=false;
+    }
 
-	//ver1.1.0 ”g–ä
-	for(int i=0;i<3;i++){
-		m_effX[i]		=0;
-		m_effY[i]		=0;
-		m_effTime[i]	=0;
-	}
+    //ver1.1.0 æ³¢ç´‹
+    for(int i=0;i<3;i++){
+        m_effX[i]        =0;
+        m_effY[i]        =0;
+        m_effTime[i]    =0;
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	moveTitle()
-	ŠT—v:	ƒ^ƒCƒgƒ‹‚Å‚Ì‚Ğ‚æ‚±
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    moveTitle()
+    æ¦‚è¦:    ã‚¿ã‚¤ãƒˆãƒ«ã§ã®ã²ã‚ˆã“
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void moveTitle(){
 
-	if( m_myX<40-MYCHARA_WIDTH ){
-		m_isLeft=false;
-	}
-	else if( m_myX>200 ){
-		m_isLeft=true;
-	}
+    if( m_myX<40-MYCHARA_WIDTH ){
+        m_isLeft=false;
+    }
+    else if( m_myX>200 ){
+        m_isLeft=true;
+    }
 
-	if( (Math.abs(r.nextInt())%100)<10 ){
-		if(!m_isLeft){
-			m_isLeft=true;
-		}else{
-			m_isLeft=false;
-		}
-	}
+    if( (Math.abs(r.nextInt())%100)<10 ){
+        if(!m_isLeft){
+            m_isLeft=true;
+        }else{
+            m_isLeft=false;
+        }
+    }
 }
 
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	checkSlot()
-	ŠT—v:	ƒXƒƒbƒg
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    checkSlot()
+    æ¦‚è¦:    ã‚¹ãƒ­ãƒƒãƒˆ
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void checkSlot(){
 
-	//ƒXƒƒbƒg‚ª‹ó‚È‚çI—¹
-	if( m_slot[0]==NONE || m_slot[1]==NONE || m_slot[2]==NONE ){
-		return;
-	}
+    //ã‚¹ãƒ­ãƒƒãƒˆãŒç©ºãªã‚‰çµ‚äº†
+    if( m_slot[0]==NONE || m_slot[1]==NONE || m_slot[2]==NONE ){
+        return;
+    }
 
-	//same bonus
-	if( m_slot[0]==m_slot[1] && m_slot[0]==m_slot[2] ){
-		m_score+=BONUS_SCORE+m_slot[0]*500;
-		if( m_score>MAX_SCORE ){
-			m_score=MAX_SCORE;
-		}
-		m_slotTime=SLOT_TIME;
-		m_slotState=SLOT_BONUS;
-		playBonus();
-	}
+    //same bonus
+    if( m_slot[0]==m_slot[1] && m_slot[0]==m_slot[2] ){
+        m_score+=BONUS_SCORE+m_slot[0]*500;
+        if( m_score>MAX_SCORE ){
+            m_score=MAX_SCORE;
+        }
+        m_slotTime=SLOT_TIME;
+        m_slotState=SLOT_BONUS;
+        playBonus();
+    }
 
-	//same bonus
-	else if( m_slot[0]!=m_slot[1] && m_slot[1]!=m_slot[2] && m_slot[2]!=m_slot[0]){
-		m_lv+=BONUS_TIME;
-		if( m_lv>TIME_LIMIT ){
-			m_lv=TIME_LIMIT;
-		}
-		m_slotTime=SLOT_TIME;
-		m_slotState=TIME_BONUS;
-		playBonus();
-	}
+    //same bonus
+    else if( m_slot[0]!=m_slot[1] && m_slot[1]!=m_slot[2] && m_slot[2]!=m_slot[0]){
+        m_lv+=BONUS_TIME;
+        if( m_lv>TIME_LIMIT ){
+            m_lv=TIME_LIMIT;
+        }
+        m_slotTime=SLOT_TIME;
+        m_slotState=TIME_BONUS;
+        playBonus();
+    }
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	sortHiscore()
-	ŠT—v:	ƒnƒCƒXƒRƒA•À‚Ñ‘Ö‚¦
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    sortHiscore()
+    æ¦‚è¦:    ãƒã‚¤ã‚¹ã‚³ã‚¢ä¸¦ã³æ›¿ãˆ
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private void sortHiscore(){
-	int i=0;
-	int j=HISCORE_SIZE-2;
+    int i=0;
+    int j=HISCORE_SIZE-2;
 /*
-	Calendar cal=Calendar.getInstance();
-	int year=cal.get(Calendar.YEAR);
-	int month=cal.get(Calendar.MONTH)+1;
-	int day=cal.get(Calendar.DAY_OF_MONTH);
+    Calendar cal=Calendar.getInstance();
+    int year=cal.get(Calendar.YEAR);
+    int month=cal.get(Calendar.MONTH)+1;
+    int day=cal.get(Calendar.DAY_OF_MONTH);
 
-	//YYYY”NMMŒDD“ú
-	int now=year*10000+month*100+day;
+    //YYYYå¹´MMæœˆDDæ—¥
+    int now=year*10000+month*100+day;
 */
-	m_hiScoreNum=-1;
+    m_hiScoreNum=-1;
 
-	for(i=0;i<HISCORE_SIZE;i++){
-		if( m_score>=m_hiScore[m_stage][i] ){
-			while( j>=0 && j>=i){
-				m_hiScore[m_stage][j+1]=m_hiScore[m_stage][j];
-				m_hiCombo[m_stage][j+1]=m_hiCombo[m_stage][j];
-				j--;
-			}
-			m_hiScore[m_stage][i]=m_score;
-			//m_calendar[m_stage][i]=now;
-			m_hiCombo[m_stage][i]=m_comboMax;
-			m_hiScoreNum=i;
-			break;
-		}
-	}
+    for(i=0;i<HISCORE_SIZE;i++){
+        if( m_score>=m_hiScore[m_stage][i] ){
+            while( j>=0 && j>=i){
+                m_hiScore[m_stage][j+1]=m_hiScore[m_stage][j];
+                m_hiCombo[m_stage][j+1]=m_hiCombo[m_stage][j];
+                j--;
+            }
+            m_hiScore[m_stage][i]=m_score;
+            //m_calendar[m_stage][i]=now;
+            m_hiCombo[m_stage][i]=m_comboMax;
+            m_hiScoreNum=i;
+            break;
+        }
+    }
 }
-
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	setStageImage()
-	ŠT—v:	ƒŒƒR[ƒhƒXƒgƒA‚©‚ç“Ç‚İo‚·ŠÖ”
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	stage:ƒXƒe[ƒW
+    åå‰:    setStageImage()
+    æ¦‚è¦:    ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã‹ã‚‰èª­ã¿å‡ºã™é–¢æ•°
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    stage:ã‚¹ãƒ†ãƒ¼ã‚¸
 */
 private void setStageImage(int stage) {
-	Graphics g3=imgBg.getGraphics();
+    Graphics g3=imgBg.getGraphics();
 
-	try{
-		g3.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
-		g3.drawImage(img[IMAGE_GROUND1], GROUND_TOP1X[stage], GROUND_TOP, Graphics.TOP|Graphics.LEFT);
-		g3.drawImage(img[IMAGE_GROUND1], GROUND_TOP2X[stage], GROUND_TOP, Graphics.TOP|Graphics.LEFT);
-		g3.drawImage(img[IMAGE_GROUND2], GROUND_MIDDLE1X[stage], GROUND_MIDDLE, Graphics.TOP|Graphics.LEFT);
-		g3.drawImage(img[IMAGE_GROUND2], GROUND_MIDDLE2X[stage], GROUND_MIDDLE, Graphics.TOP|Graphics.LEFT);
-		g3.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
-	}catch(Exception e){
+    try{
+        g3.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
+        g3.drawImage(img[IMAGE_GROUND1], GROUND_TOP1X[stage], GROUND_TOP, Graphics.TOP|Graphics.LEFT);
+        g3.drawImage(img[IMAGE_GROUND1], GROUND_TOP2X[stage], GROUND_TOP, Graphics.TOP|Graphics.LEFT);
+        g3.drawImage(img[IMAGE_GROUND2], GROUND_MIDDLE1X[stage], GROUND_MIDDLE, Graphics.TOP|Graphics.LEFT);
+        g3.drawImage(img[IMAGE_GROUND2], GROUND_MIDDLE2X[stage], GROUND_MIDDLE, Graphics.TOP|Graphics.LEFT);
+        g3.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
-
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	setFooderImage()
-	ŠT—v:	ƒtƒbƒ_‚ğƒZƒbƒg‚·‚éŠÖ”
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    setFooderImage()
+    æ¦‚è¦:    ãƒ•ãƒƒãƒ€ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void setFooderImage() {
-	Graphics g3=imgFd.getGraphics();
+    Graphics g3=imgFd.getGraphics();
 
-	try{
-		g3.drawImage(img[IMAGE_FOODER], 0, 0, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g3,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SLOT, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 8, 211-PLAYING_HEIGHT, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g3,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SCORE, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 72, 211-PLAYING_HEIGHT, Graphics.TOP|Graphics.LEFT);
-		gUtil.drawRegion(g3,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_TIME, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 72, 231-PLAYING_HEIGHT, Graphics.TOP|Graphics.LEFT);
+    try{
+        g3.drawImage(img[IMAGE_FOODER], 0, 0, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g3,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SLOT, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 8, 211-PLAYING_HEIGHT, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g3,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SCORE, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 72, 211-PLAYING_HEIGHT, Graphics.TOP|Graphics.LEFT);
+        gUtil.drawRegion(g3,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_TIME, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 72, 231-PLAYING_HEIGHT, Graphics.TOP|Graphics.LEFT);
 
-		//ŠÔƒo[
-		g3.setColor(  0,128,  0);
-		g3.fillRect(119,231-PLAYING_HEIGHT,TIME_LIMIT+3,6);
-		g3.setColor(255,255,255);
-		g3.drawRect(119,231-PLAYING_HEIGHT,TIME_LIMIT+3,6);
+        //æ™‚é–“ãƒãƒ¼
+        g3.setColor(  0,128,  0);
+        g3.fillRect(119,231-PLAYING_HEIGHT,TIME_LIMIT+3,6);
+        g3.setColor(255,255,255);
+        g3.drawRect(119,231-PLAYING_HEIGHT,TIME_LIMIT+3,6);
 
-		//SLOT
-		for(int i=0;i<3;i++){
-			//ƒXƒƒbƒg˜g
-			g3.setColor(255,255,255);
-			g3.fillRect(8+20*i, 220-PLAYING_HEIGHT, 17, 17);
-			g3.setColor(192,255,192);
-			g3.drawRect(8+20*i, 220-PLAYING_HEIGHT, 17, 17);
-		}
-	}catch(Exception e){
+        //SLOT
+        for(int i=0;i<3;i++){
+            //ã‚¹ãƒ­ãƒƒãƒˆæ 
+            g3.setColor(255,255,255);
+            g3.fillRect(8+20*i, 220-PLAYING_HEIGHT, 17, 17);
+            g3.setColor(192,255,192);
+            g3.drawRect(8+20*i, 220-PLAYING_HEIGHT, 17, 17);
+        }
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	getBonusIndex()
-	ŠT—v:	ƒŒƒR[ƒhƒXƒgƒA‚©‚ç“Ç‚İo‚·ŠÖ”
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    getBonusIndex()
+    æ¦‚è¦:    ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã‹ã‚‰èª­ã¿å‡ºã™é–¢æ•°
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void getBonusIndex() {
-	int bonusOn[]={0,1,0,0,0,0,0,0,0,0,0,0};
-	int indexSize=2;
-	Calendar cal=Calendar.getInstance();
-	int week=cal.get(Calendar.DAY_OF_WEEK);
-	int hour=cal.get(Calendar.HOUR);
-	int minute=cal.get(Calendar.MINUTE);
+    int bonusOn[]={0,1,0,0,0,0,0,0,0,0,0,0};
+    int indexSize=2;
+    Calendar cal=Calendar.getInstance();
+    int week=cal.get(Calendar.DAY_OF_WEEK);
+    int hour=cal.get(Calendar.HOUR);
+    int minute=cal.get(Calendar.MINUTE);
 
-	//3.ƒƒƒ“
-	if( (Math.abs(r.nextInt())%1)==0 ){
-		bonusOn[indexSize]=2;
-		indexSize++;
-	}
-	//4.‚³‚­‚ç‚ñ‚Ú
-	if( m_playTime>=25 ){
-		bonusOn[indexSize]=3;
-		indexSize++;
-	}
-	//5.ƒ‰ƒtƒ‰ƒ“ƒX
-	if(	( m_playTime>=100 ) ||
-		( week==Calendar.SUNDAY )	){
-		bonusOn[indexSize]=4;
-		indexSize++;
-	}
-	//6.ŠÃ‚¢‚İ‚©‚ñ
-	if(	( m_playTime>=300 ) ||
-		( hour==12 )	){
-		bonusOn[indexSize]=5;
-		indexSize++;
-	}
-	//7.¯‚Ì‚©‚¯‚ç
-	if(	( m_hiScore[m_stage][0]>=30000 )||
-		( hour==5 )	){
-		bonusOn[indexSize]=6;
-		indexSize++;
-	}
-	//8.ƒKƒ“ƒfƒ€
-	if(	( m_hiScore[m_stage][0]>=60000 ) ||
-		( m_playTime>=500 )	){
-		bonusOn[indexSize]=7;
-		indexSize++;
-	}
-	//9.ƒ‚[ƒ^[
-	if(	( m_hiScore[m_stage][0]>=90000 ) ||
-		( minute%10==0 )	){
-		bonusOn[indexSize]=8;
-		indexSize++;
-	}
-	//10.ƒQƒ€ƒ{ƒC
-	if(	( m_hiScore[0][0]>=30000 && m_hiScore[1][0]>=30000 && m_hiScore[2][0]>=30000) ||
-		( week==Calendar.WEDNESDAY )	){
-		bonusOn[indexSize]=9;
-		indexSize++;
-	}
-	//11.”ª¯‹…
-	if(	( m_hiScore[0][0]>=60000 && m_hiScore[1][0]>=60000 && m_hiScore[2][0]>=60000) ||
-		( week==Calendar.MONDAY && hour==9 )	){
-		bonusOn[indexSize]=10;
-		indexSize++;
-	}
+    //3.ãƒ¡ãƒ­ãƒ³
+    if( (Math.abs(r.nextInt())%1)==0 ){
+        bonusOn[indexSize]=2;
+        indexSize++;
+    }
+    //4.ã•ãã‚‰ã‚“ã¼
+    if( m_playTime>=25 ){
+        bonusOn[indexSize]=3;
+        indexSize++;
+    }
+    //5.ãƒ©ãƒ•ãƒ©ãƒ³ã‚¹
+    if(    ( m_playTime>=100 ) ||
+        ( week==Calendar.SUNDAY )    ){
+        bonusOn[indexSize]=4;
+        indexSize++;
+    }
+    //6.ç”˜ã„ã¿ã‹ã‚“
+    if(    ( m_playTime>=300 ) ||
+        ( hour==12 )    ){
+        bonusOn[indexSize]=5;
+        indexSize++;
+    }
+    //7.æ˜Ÿã®ã‹ã‘ã‚‰
+    if(    ( m_hiScore[m_stage][0]>=30000 )||
+        ( hour==5 )    ){
+        bonusOn[indexSize]=6;
+        indexSize++;
+    }
+    //8.ã‚¬ãƒ³ãƒ‡ãƒ 
+    if(    ( m_hiScore[m_stage][0]>=60000 ) ||
+        ( m_playTime>=500 )    ){
+        bonusOn[indexSize]=7;
+        indexSize++;
+    }
+    //9.ãƒ¢ãƒ¼ã‚¿ãƒ¼
+    if(    ( m_hiScore[m_stage][0]>=90000 ) ||
+        ( minute%10==0 )    ){
+        bonusOn[indexSize]=8;
+        indexSize++;
+    }
+    //10.ã‚²ãƒ ãƒœã‚¤
+    if(    ( m_hiScore[0][0]>=30000 && m_hiScore[1][0]>=30000 && m_hiScore[2][0]>=30000) ||
+        ( week==Calendar.WEDNESDAY )    ){
+        bonusOn[indexSize]=9;
+        indexSize++;
+    }
+    //11.å…«æ˜Ÿçƒ
+    if(    ( m_hiScore[0][0]>=60000 && m_hiScore[1][0]>=60000 && m_hiScore[2][0]>=60000) ||
+        ( week==Calendar.MONDAY && hour==9 )    ){
+        bonusOn[indexSize]=10;
+        indexSize++;
+    }
 
-	//12.è†
-	if( indexSize>=10 ){
-		bonusOn[indexSize]=11;
-		indexSize++;
-	}
-	m_bonusIndex=bonusOn[(Math.abs(r.nextInt())%indexSize)];
+    //12.æ‰‹ç´™
+    if( indexSize>=10 ){
+        bonusOn[indexSize]=11;
+        indexSize++;
+    }
+    m_bonusIndex=bonusOn[(Math.abs(r.nextInt())%indexSize)];
 
 /** debug
-		for(int i=0;i<BONUS_SIZE;i++){
-			m_bonusGet[i]=1;
-			m_bonusNew[i]=1;
-		}
+        for(int i=0;i<BONUS_SIZE;i++){
+            m_bonusGet[i]=1;
+            m_bonusNew[i]=1;
+        }
 */
 }
 
-
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	loadRecordStore()
-	ŠT—v:	ƒŒƒR[ƒhƒXƒgƒA‚©‚ç“Ç‚İo‚·ŠÖ”
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    loadRecordStore()
+    æ¦‚è¦:    ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã‹ã‚‰èª­ã¿å‡ºã™é–¢æ•°
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:    -
+    å¼•æ•°:    -
 */
 private synchronized void loadRecordStore() {
-	RecordStore rs=null;
-	byte[] w=null;
+    RecordStore rs=null;
+    byte[] w=null;
 
-	int p=0;
+    int p=0;
 
-	int i,j;
+    int i,j;
 
-	//“Ç‚İ‚İ
-	try{
-		//ƒŒƒR[ƒhƒXƒgƒA‚ğŠJ‚­
-		rs=RecordStore.openRecordStore(RS_GAMEDATA,false);
+    //èª­ã¿è¾¼ã¿
+    try{
+        //ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã‚’é–‹ã
+        rs=RecordStore.openRecordStore(RS_GAMEDATA,false);
 
-		w=rs.getRecord(1);
+        w=rs.getRecord(1);
 
-//--	“Ç•ÏŠ·		--------------------------------------//
+//--    èª­è¾¼å¤‰æ›        --------------------------------------//
 
-		m_playTime=((w[p+0]&0xFF)<<24)+((w[p+1]&0xFF)<<16)+((w[p+2]&0xFF)<<8)+((w[p+3]&0xFF)<<0);
-		p+=4;
+        m_playTime=((w[p+0]&0xFF)<<24)+((w[p+1]&0xFF)<<16)+((w[p+2]&0xFF)<<8)+((w[p+3]&0xFF)<<0);
+        p+=4;
 
-		for(j=0;j<STAGE_SIZE;j++){
-			for(i=0;i<HISCORE_SIZE;i++){
-				m_hiScore[j][i]=((w[p+0]&0xFF)<<24)+((w[p+1]&0xFF)<<16)+((w[p+2]&0xFF)<<8)+((w[p+3]&0xFF)<<0);
-				p+=4;
+        for(j=0;j<STAGE_SIZE;j++){
+            for(i=0;i<HISCORE_SIZE;i++){
+                m_hiScore[j][i]=((w[p+0]&0xFF)<<24)+((w[p+1]&0xFF)<<16)+((w[p+2]&0xFF)<<8)+((w[p+3]&0xFF)<<0);
+                p+=4;
 
-				m_hiCombo[j][i]=((w[p+0]&0xFF)<<24)+((w[p+1]&0xFF)<<16)+((w[p+2]&0xFF)<<8)+((w[p+3]&0xFF)<<0);
-				p+=4;
-			}
-		}
+                m_hiCombo[j][i]=((w[p+0]&0xFF)<<24)+((w[p+1]&0xFF)<<16)+((w[p+2]&0xFF)<<8)+((w[p+3]&0xFF)<<0);
+                p+=4;
+            }
+        }
 
-		for(i=0;i<BONUS_SIZE;i++){
-			m_bonusGet[i]=(w[p]&0xFF);
-			p++;
-			m_bonusNew[i]=(w[p]&0xFF);
-			p++;
-		}
+        for(i=0;i<BONUS_SIZE;i++){
+            m_bonusGet[i]=(w[p]&0xFF);
+            p++;
+            m_bonusNew[i]=(w[p]&0xFF);
+            p++;
+        }
 
-		//ver1.5.0
-		m_isMute=(w[p]&0xFF);
-		p++;
-		m_isShare=(w[p]&0xFF);
-		p++;
+        //ver1.5.0
+        m_isMute=(w[p]&0xFF);
+        p++;
+        m_isShare=(w[p]&0xFF);
+        p++;
 
-//--	•ÏŠ·I—¹		--------------------------------------//
+//--    å¤‰æ›çµ‚äº†        --------------------------------------//
 
-		//ƒŒƒR[ƒhƒXƒgƒA‚ğ•Â‚¶‚é
-		rs.closeRecordStore();
+        //ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã‚’é–‰ã˜ã‚‹
+        rs.closeRecordStore();
 
-	//—áŠOˆ—
-	}catch(Exception e){
-System.out.println(e.toString());
-		try{
-			if( rs!=null ) rs.closeRecordStore();
-		}catch(Exception e2){}
-	}
+    //ä¾‹å¤–å‡¦ç†
+    }catch(Exception e){
+        System.out.println(e.toString());
+        try{
+            if( rs!=null ) rs.closeRecordStore();
+        }catch(Exception e2){}
+    }
 }
-
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	saveRecordStore()
-	ŠT—v:	ƒŒƒR[ƒhƒXƒgƒA‚É‘‚«‚ŞŠÖ”
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    saveRecordStore()
+    æ¦‚è¦:    ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã«æ›¸ãè¾¼ã‚€é–¢æ•°
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private synchronized void saveRecordStore() {
-	RecordStore rs=null;
-	byte[] w=new byte[RS_SIZE];
-	int p=0;
-	int i,j,k;
+    RecordStore rs=null;
+    byte[] w=new byte[RS_SIZE];
+    int p=0;
+    int i,j,k;
 
-	try{
-		//ƒŒƒR[ƒhƒXƒgƒA‚ğŠJ‚­
-		rs=RecordStore.openRecordStore(RS_GAMEDATA,true);
+    try{
+        //ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã‚’é–‹ã
+        rs=RecordStore.openRecordStore(RS_GAMEDATA,true);
 
-//--	‘•ÏŠ·		--------------------------------------//
+//--    æ›¸è¾¼å¤‰æ›        --------------------------------------//
 
-		//‘ŠJn
-		for(k=0;k<4;k++){
-			w[p+k]=(byte)((m_playTime>>(24-8*k))&0xFF);
-		}
-		p+=4;
-		for(j=0;j<STAGE_SIZE;j++){
-			for(i=0;i<HISCORE_SIZE;i++){
-				for(k=0;k<4;k++){
-					w[p+k]=(byte)((m_hiScore[j][i]>>(24-8*k))&0xFF);
-				}
-				p+=4;
+        //æ›¸è¾¼é–‹å§‹
+        for(k=0;k<4;k++){
+            w[p+k]=(byte)((m_playTime>>(24-8*k))&0xFF);
+        }
+        p+=4;
+        for(j=0;j<STAGE_SIZE;j++){
+            for(i=0;i<HISCORE_SIZE;i++){
+                for(k=0;k<4;k++){
+                    w[p+k]=(byte)((m_hiScore[j][i]>>(24-8*k))&0xFF);
+                }
+                p+=4;
 
-				for(k=0;k<4;k++){
-					w[p+k]=(byte)((m_hiCombo[j][i]>>(24-8*k))&0xFF);
-				}
-				p+=4;
-			}
-		}
-		for(i=0;i<BONUS_SIZE;i++){
-				w[p]=(byte)(m_bonusGet[i]&0xFF);
-				p++;
-				w[p]=(byte)(m_bonusNew[i]&0xFF);
-				p++;
-		}
+                for(k=0;k<4;k++){
+                    w[p+k]=(byte)((m_hiCombo[j][i]>>(24-8*k))&0xFF);
+                }
+                p+=4;
+            }
+        }
+        for(i=0;i<BONUS_SIZE;i++){
+                w[p]=(byte)(m_bonusGet[i]&0xFF);
+                p++;
+                w[p]=(byte)(m_bonusNew[i]&0xFF);
+                p++;
+        }
 
-		//ver1.5.0
-		w[p]=(byte)(m_isMute&0xFF);
-		p++;
-		w[p]=(byte)(m_isShare&0xFF);
-		p++;
+        //ver1.5.0
+        w[p]=(byte)(m_isMute&0xFF);
+        p++;
+        w[p]=(byte)(m_isShare&0xFF);
+        p++;
 
 
-//--	•ÏŠ·I—¹		--------------------------------------//
-		//ƒŒƒR[ƒhƒXƒgƒA‚É‘‚«‚İ
-		if( rs.getNumRecords()==0 ){
-			rs.addRecord(w,0,p);
-		}else{
-			rs.setRecord(1,w,0,p);
-		}
+//--    å¤‰æ›çµ‚äº†        --------------------------------------//
+        //ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã«æ›¸ãè¾¼ã¿
+        if( rs.getNumRecords()==0 ){
+            rs.addRecord(w,0,p);
+        }else{
+            rs.setRecord(1,w,0,p);
+        }
 
-		//ƒŒƒR[ƒhƒXƒgƒA‚ğ•Â‚¶‚é
-		rs.closeRecordStore();
+        //ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚¹ãƒˆã‚¢ã‚’é–‰ã˜ã‚‹
+        rs.closeRecordStore();
 
-	//—áŠOˆ—
-	}catch(Exception e){
+    //ä¾‹å¤–å‡¦ç†
+    }catch(Exception e){
 System.out.println(e.toString());
-		try{
-			if( rs!=null ) rs.closeRecordStore();
-		}catch(Exception e2){}
-	}
+        try{
+            if( rs!=null ) rs.closeRecordStore();
+        }catch(Exception e2){}
+    }
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	initSound()
-	ŠT—v:	‰¹‚Ì€”õ‚ğ‚·‚éŠÖ”
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    initSound()
+    æ¦‚è¦:    éŸ³ã®æº–å‚™ã‚’ã™ã‚‹é–¢æ•°
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void initSound(){
-	try{
-		Phrase cursor	=new Phrase("resource:bonus1.spf");
-		Phrase jump		=new Phrase("resource:jump.spf");
-		Phrase bg1		=new Phrase("resource:bg1.spf");
-		Phrase bg2		=new Phrase("resource:bg2.spf");
+    try{
+        Phrase cursor    =new Phrase("resource:bonus1.spf");
+        Phrase jump        =new Phrase("resource:jump.spf");
+        Phrase bg1        =new Phrase("resource:bg1.spf");
+        Phrase bg2        =new Phrase("resource:bg2.spf");
 
-		tr1.setPhrase(bg1);
-		tr2.setPhrase(bg2);
-		tr3.setPhrase(jump);
-		tr4.setPhrase(cursor);
-		tr2.setSubjectTo(tr1);
-	}catch(Exception e){
+        tr1.setPhrase(bg1);
+        tr2.setPhrase(bg2);
+        tr3.setPhrase(jump);
+        tr4.setPhrase(cursor);
+        tr2.setSubjectTo(tr1);
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 private void setTitleSound(){
-	try{
-		tr3.stop();
-		tr4.stop();
-		tr3.removePhrase();
-		tr4.removePhrase();
+    try{
+        tr3.stop();
+        tr4.stop();
+        tr3.removePhrase();
+        tr4.removePhrase();
 
-		Phrase enter	=new Phrase("resource:bonus1.spf");
-		Phrase cursor	=new Phrase("resource:cursor.spf");
+        Phrase enter    =new Phrase("resource:bonus1.spf");
+        Phrase cursor    =new Phrase("resource:cursor.spf");
 
-		tr3.setPhrase(enter);
-		tr4.setPhrase(cursor);
-	}catch(Exception e){
+        tr3.setPhrase(enter);
+        tr4.setPhrase(cursor);
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 private void setStageSound(){
-	try{
-		tr3.stop();
-		tr4.stop();
-		tr3.removePhrase();
-		tr4.removePhrase();
+    try{
+        tr3.stop();
+        tr4.stop();
+        tr3.removePhrase();
+        tr4.removePhrase();
 
-		Phrase jump	=new Phrase("resource:jump.spf");
-		Phrase cursor	=new Phrase("resource:cursor.spf");
+        Phrase jump    =new Phrase("resource:jump.spf");
+        Phrase cursor    =new Phrase("resource:cursor.spf");
 
-		tr3.setPhrase(jump);
-		tr4.setPhrase(cursor);
-	}catch(Exception e){
+        tr3.setPhrase(jump);
+        tr4.setPhrase(cursor);
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 private void playEnter() {
-	if( m_isMute==1 ){
-		return;
-	}
-	try{
-		tr3.stop();
-		tr3.play();
-	}catch(Exception e){
+    if( m_isMute==1 ){
+        return;
+    }
+    try{
+        tr3.stop();
+        tr3.play();
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 private void playCursor() {
-	if( m_isMute==1 ){
-		return;
-	}
-	try{
-		tr4.stop();
-		tr4.play();
-	}catch(Exception e){
+    if( m_isMute==1 ){
+        return;
+    }
+    try{
+        tr4.stop();
+        tr4.play();
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 private void playBgm() {
-	if( m_isMute==1 ){
-		return;
-	}
-	try{
-		tr1.play(0);
-	}catch(Exception e){
+    if( m_isMute==1 ){
+        return;
+    }
+    try{
+        tr1.play(0);
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 private void stopBgm() {
-	try{
-		tr1.stop();
-	}catch(Exception e){
+    try{
+        tr1.stop();
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 private void playBonus() {
-	if( m_isMute==1 ){
-		return;
-	}
-	try{
-		tr4.stop();
-		tr4.removePhrase();
-		Phrase bonus=new Phrase("resource:bonus"+m_slotState+".spf");
-		tr4.setPhrase(bonus);
-		tr4.play();
-	}catch(Exception e){
+    if( m_isMute==1 ){
+        return;
+    }
+    try{
+        tr4.stop();
+        tr4.removePhrase();
+        Phrase bonus=new Phrase("resource:bonus"+m_slotState+".spf");
+        tr4.setPhrase(bonus);
+        tr4.play();
+    }catch(Exception e){
 System.out.println(e.toString());
-	}
+    }
 }
 
 ////////////////////////////////////////////////////////////////
 /**
-	–¼‘O:	switchMute()
-	ŠT—v:	ƒ~ƒ…[ƒg‚ğON‚·‚éŠÖ”
-	‹@”\:	-
-	–ß‚è’l:	-
-	ˆø”:	-
+    åå‰:    switchMute()
+    æ¦‚è¦:    ãƒŸãƒ¥ãƒ¼ãƒˆã‚’ONã™ã‚‹é–¢æ•°
+    æ©Ÿèƒ½:    -
+    æˆ»ã‚Šå€¤:  -
+    å¼•æ•°:    -
 */
 private void switchMute(){
-	//off‚©‚çon
-	if( m_isMute==0 ){
-		removeCommand(onSoundCmd);
-		addCommand(offSoundCmd);
-		m_isMute=1;
-		stopBgm();
-	//off‚©‚çon
-	}else{
-		removeCommand(offSoundCmd);
-		addCommand(onSoundCmd);
-		m_isMute=0;
-		//BGMÄ¶
-		switch( m_modeState ){
-			case GAME_START:
-			case GAME_END:
-			case GAME_PLAYING:
-				playBgm();
-				break;
-		}
-	}
+    //offã‹ã‚‰on
+    if( m_isMute==0 ){
+        removeCommand(onSoundCmd);
+        addCommand(offSoundCmd);
+        m_isMute=1;
+        stopBgm();
+    //offã‹ã‚‰on
+    }else{
+        removeCommand(offSoundCmd);
+        addCommand(onSoundCmd);
+        m_isMute=0;
+        //BGMå†ç”Ÿ
+        switch( m_modeState ){
+            case GAME_START:
+            case GAME_END:
+            case GAME_PLAYING:
+                playBgm();
+                break;
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////
