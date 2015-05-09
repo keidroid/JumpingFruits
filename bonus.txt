@@ -1,0 +1,79 @@
+1.バナナ		:ランダム
+2.パイナップル	:ランダム
+3.メロン		:ランダム(ただし確率低い)
+4.さくらんぼ	:プレイタイム25
+5.ラフランス	:プレイタイム100
+6.甘いみかん	:プレイタイム300
+7.星のかけら	:得点30000
+8.ガンデム		:得点60000
+9.モーター		:得点90000
+10.ゲムボイ		:全ての面得点30000
+11.八星球		:全ての面得点60000
+12.手紙			:全てを取得
+
+////////////////////////////////////////////////////////////////
+/**
+	名前:	getBonusIndex()
+	概要:	レコードストアから読み出す関数
+	機能:	-
+	戻り値:	-
+	引数:	-
+*/
+private void getBonusIndex() {
+	int bonusOn[]={0,1,0,0,0,0,0,0,0,0,0,0};
+	int indexSize=2;
+
+	//3.メロン
+	if( (Math.abs(r.nextInt())%1)==0 ){
+		bonusOn[indexSize]=2;
+		indexSize++;
+	}
+	//4.さくらんぼ
+	if( m_playTime>=25 ){
+		bonusOn[indexSize]=3;
+		indexSize++;
+	}
+	//5.ラフランス
+	if( m_playTime>=100 ){
+		bonusOn[indexSize]=4;
+		indexSize++;
+	}
+	//6.甘いみかん
+	if( m_playTime>=300 ){
+		bonusOn[indexSize]=5;
+		indexSize++;
+	}
+	//7.星のかけら
+	if( m_hiScore[m_stage][0]>=30000 ){
+		bonusOn[indexSize]=6;
+		indexSize++;
+	}
+	//8.ガンデム
+	if( m_hiScore[m_stage][0]>=60000 ){
+		bonusOn[indexSize]=7;
+		indexSize++;
+	}
+	//9.モーター
+	if( m_hiScore[m_stage][0]>=90000 ){
+		bonusOn[indexSize]=8;
+		indexSize++;
+	}
+	//10.ゲムボイ
+	if( m_hiScore[0][0]>=30000 && m_hiScore[1][0]>=30000 && m_hiScore[2][0]>=30000){
+		bonusOn[indexSize]=9;
+		indexSize++;
+	}
+	//11.八星球
+	if( m_hiScore[0][0]>=60000 && m_hiScore[1][0]>=60000 && m_hiScore[2][0]>=60000){
+		bonusOn[indexSize]=10;
+		indexSize++;
+	}
+	//12.手紙
+	if( indexSize>=10 ){
+		bonusOn[indexSize]=11;
+		indexSize++;
+	}
+	m_bonusIndex=bonusOn[(Math.abs(r.nextInt())%indexSize)];
+
+}
+

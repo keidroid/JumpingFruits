@@ -1,0 +1,4 @@
+-libraryjars C:\JSCL122_SDK101\lib\midpapi10.jar;C:\JSCL122_SDK101\lib\cldcapi10.jar;C:\JSCL122_SDK101\lib\jscl.jar
+-injars C:\JSCL122_SDK101\apps\JumpingFruits\bin\JumpingFruits.jar
+-outjar C:\DOCUME~1\KEIHAS~1\LOCALS~1\Temp\JumpingFruits.jar
+-keep public class * extends javax.microedition.midlet.MIDlet 

@@ -1,0 +1,12 @@
+MIDlet-1: JumpingFruits, icon.png, JumpingFruits
+MIDlet-Application-Range: 0,0
+MIDlet-Data-Size: 256
+MIDlet-Description: 果物をキャッチするアクションゲーム。
+MIDlet-Info-URL: http://www3.pf-x.net/~bluesystem/v/
+MIDlet-Install-Notify: 
+MIDlet-Name: Jumping Fruits
+MIDlet-OCL: JSCL-1.2.0
+MIDlet-Vendor: bluesystem■
+MIDlet-Version: 1.5.0
+MicroEdition-Configuration: CLDC-1.0
+MicroEdition-Profile: MIDP-1.0
