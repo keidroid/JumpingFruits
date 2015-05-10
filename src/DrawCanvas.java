@@ -31,16 +31,16 @@ final static int        KEY_NO           =0x00000000,
                         KEY_DOWN         =0x00008000,
                         KEY_SELECT       =0x00010000,
 
-                        SCREEN_WIDTH     =240,            //スクリーンの幅
-                        SCREEN_HEIGHT    =240,            //スクリーンの高さ
-                        FOODER_HEIGHT    =32,             //フッダの高さ
+                        SCREEN_WIDTH     =240, //スクリーンの幅
+                        SCREEN_HEIGHT    =240, //スクリーンの高さ
+                        FOODER_HEIGHT    =32,  //フッダの高さ
                         PLAYING_HEIGHT   =208,
-                        NUM_WIDTH        =14,            //数字の幅
-                        NUM_HEIGHT       =11,            //数字の高さ
-                        CAL_WIDTH        =8,             //数字の幅
-                        CAL_HEIGHT       =10,            //数字の高さ
-                        F_WIDTH          =9,             //数字の幅
-                        F_HEIGHT         =7,             //数字の高さ
+                        NUM_WIDTH        =14,  //数字の幅
+                        NUM_HEIGHT       =11,  //数字の高さ
+                        CAL_WIDTH        =8,   //数字の幅
+                        CAL_HEIGHT       =10,  //数字の高さ
+                        F_WIDTH          =9,   //数字の幅
+                        F_HEIGHT         =7,   //数字の高さ
 
                         NOW_LOADING      =0,
                         TITLE            =1,
@@ -54,265 +54,267 @@ final static int        KEY_NO           =0x00000000,
                         BONUS            =10,
                         ENDING           =11,
 
-                        SLEEP_TIME       =70,            //スリープタイム
+                        SLEEP_TIME       =70, //スリープタイム
                         MAX_SCORE        =9999999,
                         MAX_COMBO        =99,
 
-                        COMBO_TIME        =4,
-                        TIME_LIMIT        =112,//20,
-                        CURSOR_TIME       =2,
+                        COMBO_TIME       =4,
+                        TIME_LIMIT       =112,//20,
+                        CURSOR_TIME      =2,
 
-                        HISCORE_SIZE      =5,
-                        BONUS_SIZE        =12,
-                        STAGE_SIZE        =3,
-                        RS_SIZE           =256,            //レコードストア
-                        MODE_SIZE         =3,
+                        HISCORE_SIZE     =5,
+                        BONUS_SIZE       =12,
+                        STAGE_SIZE       =3,
+                        RS_SIZE          =256, //レコードストア
+                        MODE_SIZE        =3,
 
-                        STOP              =0,
-                        WALK              =1,
-                        JUMP              =2,
-                        WALK_SPEED        =8,
-                        JUMP_HEIGHT       =22,
-                        MYCHARA_WIDTH     =24,
-                        MYCHARA_HEIGHT    =24,
+                        STOP             =0,
+                        WALK             =1,
+                        JUMP             =2,
+                        WALK_SPEED       =8,
+                        JUMP_HEIGHT      =22,
+                        MYCHARA_WIDTH    =24,
+                        MYCHARA_HEIGHT   =24,
 
-                        GROUND_TOP        =93,
+                        GROUND_TOP       =93,
                         GROUND_MIDDLE    =141,
                         GROUND_BOTTOM    =189,
-                        GROUND_WIDTH    =96,
+                        GROUND_WIDTH     =96,
                         GROUND_HEIGHT    =48,
 
-                        APPLE_SIZE        =6,                //出てくるフルーツの大きさ
-                        NONE            =-1,
+                        APPLE_SIZE       =6, //出てくるフルーツの大きさ
+                        NONE             =-1,
                         APPLE            =0,
-                        ORANGE            =1,
+                        ORANGE           =1,
                         LEMON            =2,
-                        SPECIAL            =3,
+                        SPECIAL          =3,
 
-                        BONUS_SCORE        =2000,
-                        BONUS_TIME        =8,
-                        BONUS_APPEAR    =16,
+                        BONUS_SCORE      =2000,
+                        BONUS_TIME       =8,
+                        BONUS_APPEAR     =16,
 
                         SLOT_TIME        =20,
-                        SLOT_BONUS        =0,
-                        TIME_BONUS        =1,
-                        GET_ITEM        =2,
+                        SLOT_BONUS       =0,
+                        TIME_BONUS       =1,
+                        GET_ITEM         =2,
 
-                        IMAGE_MYCHARA    =0,            //ImageIndex
-                        IMAGE_BG        =1,
+                        IMAGE_MYCHARA    =0, //ImageIndex
+                        IMAGE_BG         =1,
                         IMAGE_GROUND3    =2,
                         IMAGE_GROUND2    =3,
                         IMAGE_GROUND1    =4,
-                        IMAGE_FOODER    =5,
-                        IMAGE_APPLE        =6,
-                        IMAGE_BONUS        =7,
-                        IMAGE_LANG        =8,
+                        IMAGE_FOODER     =5,
+                        IMAGE_APPLE      =6,
+                        IMAGE_BONUS      =7,
+                        IMAGE_LANG       =8,
                         IMAGE_NUM        =9,
                         IMAGE_LANG_FD    =10,
-                        IMAGE_JUMP        =11,
-                        IMAGE_SHINE        =12,
-                        IMAGE_PRESENTS    =13,
-                        IMAGE_STAGE        =14,
-                        IMAGE_GAME        =15,
-                        IMAGE_SLOT        =16,
-                        IMAGE_BONUS2    =17,
-                        IMAGE_PRESS        =18,
-                        IMAGE_NUMB        =19,
-                        IMAGE_NEKO        =20,
-                        IMAGE_SIZE        =21,            //Imageサイズ
+                        IMAGE_JUMP       =11,
+                        IMAGE_SHINE      =12,
+                        IMAGE_PRESENTS   =13,
+                        IMAGE_STAGE      =14,
+                        IMAGE_GAME       =15,
+                        IMAGE_SLOT       =16,
+                        IMAGE_BONUS2     =17,
+                        IMAGE_PRESS      =18,
+                        IMAGE_NUMB       =19,
+                        IMAGE_NEKO       =20,
+                        IMAGE_SIZE       =21, //Imageサイズ
 
-                        IMAGE_STOP        =0,
-                        IMAGE_WALK1        =2,
-                        IMAGE_WALK2        =1,
+                        IMAGE_STOP       =0,
+                        IMAGE_WALK1      =2,
+                        IMAGE_WALK2      =1,
 
-                        L_TITLE1        =0,                //文字
-                        L_TITLE2        =1,
-                        L_START            =2,
-                        L_PAUSE            =3,
+                        L_TITLE1         =0, //文字
+                        L_TITLE2         =1,
+                        L_START          =2,
+                        L_PAUSE          =3,
                         L_TIME_UP        =4,
-                        L_RECORD        =5,
-                        L_ITEM            =6,
-                        L_HELP            =7,
-                        L_STAGE            =8,
-                        N_SLASH            =10,
-                        N_PLUS            =11,
-                        N_LEFT            =12,
-                        N_RIGHT            =13,
-                        F_SCORE            =0,
-                        F_TIME            =1,
-                        F_COMBO            =2,
-                        F_SLOT            =3,
+                        L_RECORD         =5,
+                        L_ITEM           =6,
+                        L_HELP           =7,
+                        L_STAGE          =8,
+                        N_SLASH          =10,
+                        N_PLUS           =11,
+                        N_LEFT           =12,
+                        N_RIGHT          =13,
+                        F_SCORE          =0,
+                        F_TIME           =1,
+                        F_COMBO          =2,
+                        F_SLOT           =3,
 
-                        FINAL_END        =-1;            //宣言終了
+                        FINAL_END        =-1; //宣言終了
 
-final static String        RS_GAMEDATA        ="A";
+final static String     RS_GAMEDATA      ="A";
 
-final static int[]        GROUND_TOP1X    ={ 241,  12, 208},
-                        GROUND_TOP2X    ={ 241, 241, -64},
-                        GROUND_MIDDLE1X    ={ 241,  48, -32},
-                        GROUND_MIDDLE2X    ={ 241, 241, 176};
+final static int[]      GROUND_TOP1X     ={ 241,  12, 208},
+                        GROUND_TOP2X     ={ 241, 241, -64},
+                        GROUND_MIDDLE1X  ={ 241,  48, -32},
+                        GROUND_MIDDLE2X  ={ 241, 241, 176};
 
-final static String[]    MODE_HELP        =    {
-                                                    "『ハイスコアを表示します』","『取得したアイテムを表示します』","『ヘルプを表示します』"
-                                            };
+final static String[]   MODE_HELP={
+                            "『ハイスコアを表示します』",
+                            "『取得したアイテムを表示します』",
+                            "『ヘルプを表示します』"
+                        };
 
-final static String[]    MENU_TEXT        =    {
-                                                    "ゲーム再開","タイトルに戻る"
-                                            };
+final static String[]   MENU_TEXT={
+                            "ゲーム再開",
+                            "タイトルに戻る"
+                        };
 
-final static String[][]    HELP_TEXT        =    {    {
-                                                    "◆はじめに",
-                                                    "Jumping Fruitsはひよこを操作して",
-                                                    "フルーツをキャッチするゲームです。",
-                                                    "",
-                                                    "フルーツをキャッチするとスコアが",
-                                                    "加算されます。制限時間が０になると",
-                                                    "ゲームオーバー。全３ステージです。"
-                                                },{
-                                                    "◆操作方法",
-                                                    "←→: 移動",
-                                                    "決定: ジャンプ",
-                                                    " ↓ : 降りる",
-                                                    "",
-                                                    "方向キーは２,４,６,８キー,",
-                                                    "決定キーは５キーで代用できます。"
-                                                },{
-                                                    "◆連続ジャンプ",
-                                                    "フルーツをキャッチするとさらに",
-                                                    "ひよこがジャンプします",
-                                                    "連続ジャンプの回数によって加算され",
-                                                    "る得点が増えるので、連続ジャンプで",
-                                                    "高得点を狙ってください！",
-                                                    ""
-                                                },{
-                                                    "◆ボーナス１『SLOT BONUS』",
-                                                    "取得したフルーツは左下のスロットに",
-                                                    "格納されます。",
-                                                    "左下のスロットが３つそろうと",
-                                                    "『SLOT BONUS』となり、さらに高得点",
-                                                    "が加算されます。",
-                                                    ""
-                                                },{
-                                                    "◆ボーナス２『TIME BONUS』",
-                                                    "左下のスロットが３つ違う場合は、",
-                                                    "『TIME BONUS』となります。",
-                                                    "制限時間が少し延びるのでスロットを",
-                                                    "上手に活用してください。",
-                                                    "",
-                                                    ""
-                                                },{
-                                                    "◆ボーナス３『GET ITEM』",
-                                                    "ある条件を満たすと変なものが落ちて",
-                                                    "きます。見事にキャッチすると一万点",
-                                                    "加算されます。",
-                                                    "取得したアイテムはITEM LISTから",
-                                                    "閲覧できます。",
-                                                    "目指せ全アイテムコンプリート！"
-                                                },{
-                                                    "◆さいごに",
-                                                    "『Jumping Fruits』をDLして頂いて",
-                                                    "ありがとうございました。",
-                                                    "ご意見・要望はWebサイトへどうぞ。",
-                                                    "",
-                                                    "Copyright by bluesystem■",
-                                                    "          All right reserved 2006."
-                                                }};
-final static String[][]    ITEM_TEXT        =    {    {
-                                                    "甘そうなバナナ。フィリピン産。",
-                                                    "昔は貴重品だったそうだ。"
-                                                },{
-                                                    "舌がしびれるパイナップル。",
-                                                    "南国出身で風格があります。さすが。"
-                                                },{
-                                                    "高級品の代表、メロン。",
-                                                    "たまにハムがのっているがそれは嫌。"
-                                                },{
-                                                    "さくらんぼ。中身がいっぱい詰まった",
-                                                    "甘く甘いやつです。もう一回！"
-                                                },{
-                                                    "ラ・フランス。たまにガムで食べる",
-                                                    "程度なんでよく知りませんが…。"
-                                                },{
-                                                    "すごく甘いみかん。ふつうのみかん",
-                                                    "と微妙に色が違います。"
-                                                },{
-                                                    "『星のかけら』というスナック菓子。",
-                                                    "ひよこ界の今年一番のヒット商品。"
-                                                },{
-                                                    "『ガンデム』のプラモのつのだ…。",
-                                                    "この形はきっと武者ガンデムだ…。"
-                                                },{
-                                                    "『○イパーダッシュモーター』だ！",
-                                                    "コースアウトに気をつけよう。"
-                                                },{
-                                                    "ちまたで人気の『ゲームボウィ』。",
-                                                    "あなたは60秒で何点とれ…(以下略)"
-                                                },{
-                                                    "伝説の『八星球』だ…。",
-                                                    "何個集めても願いは叶いそうにない。"
-                                                },{
-                                                    "『作者からの手紙』",
-                                                    "決定キーを押して下さい(*^-')ノ"    
-                                                }};
-final static String[]    ITEM_NO            =    {        "そのアイテムはまだ",
-                                                    "              手に入れていません。"};
-final static String[]    END_TEXT        =    {
-                                                    "◆Thank You For Playing!!◆",
-                                                    "全アイテムコンプリート",
-                                                    "本当におめでとうございます!!",
-                                                    "一応このゲームはここで終わりです。",
-                                                    "お疲れ様です。あんたはすごい！",
-                                                    "次回作にご期待ください(*'-')ノ"
-                                            };
+final static String[][] HELP_TEXT={{
+                            "◆はじめに",
+                            "Jumping Fruitsはひよこを操作して",
+                            "フルーツをキャッチするゲームです。",
+                            "",
+                            "フルーツをキャッチするとスコアが",
+                            "加算されます。制限時間が０になると",
+                            "ゲームオーバー。全３ステージです。"
+                        },{
+                            "◆操作方法",
+                            "←→: 移動",
+                            "決定: ジャンプ",
+                            " ↓ : 降りる",
+                            "",
+                            "方向キーは２,４,６,８キー,",
+                            "決定キーは５キーで代用できます。"
+                        },{
+                            "◆連続ジャンプ",
+                            "フルーツをキャッチするとさらに",
+                            "ひよこがジャンプします",
+                            "連続ジャンプの回数によって加算され",
+                            "る得点が増えるので、連続ジャンプで",
+                            "高得点を狙ってください！",
+                            ""
+                        },{
+                            "◆ボーナス１『SLOT BONUS』",
+                            "取得したフルーツは左下のスロットに",
+                            "格納されます。",
+                            "左下のスロットが３つそろうと",
+                            "『SLOT BONUS』となり、さらに高得点",
+                            "が加算されます。",
+                            ""
+                        },{
+                            "◆ボーナス２『TIME BONUS』",
+                            "左下のスロットが３つ違う場合は、",
+                            "『TIME BONUS』となります。",
+                            "制限時間が少し延びるのでスロットを",
+                            "上手に活用してください。",
+                            "",
+                            ""
+                        },{
+                            "◆ボーナス３『GET ITEM』",
+                            "ある条件を満たすと変なものが落ちて",
+                            "きます。見事にキャッチすると一万点",
+                            "加算されます。",
+                            "取得したアイテムはITEM LISTから",
+                            "閲覧できます。",
+                            "目指せ全アイテムコンプリート！"
+                        },{
+                            "◆さいごに",
+                            "『Jumping Fruits』をDLして頂いて",
+                            "ありがとうございました。",
+                            "ご意見・要望はWebサイトへどうぞ。",
+                            "",
+                            "Copyright by bluesystem■",
+                            "          All right reserved 2006."
+                        }};
+final static String[][]    ITEM_TEXT={{
+                            "甘そうなバナナ。フィリピン産。",
+                            "昔は貴重品だったそうだ。"
+                        },{
+                            "舌がしびれるパイナップル。",
+                            "南国出身で風格があります。さすが。"
+                        },{
+                            "高級品の代表、メロン。",
+                            "たまにハムがのっているがそれは嫌。"
+                        },{
+                            "さくらんぼ。中身がいっぱい詰まった",
+                            "甘く甘いやつです。もう一回！"
+                        },{
+                            "ラ・フランス。たまにガムで食べる",
+                            "程度なんでよく知りませんが…。"
+                        },{
+                            "すごく甘いみかん。ふつうのみかん",
+                            "と微妙に色が違います。"
+                        },{
+                            "『星のかけら』というスナック菓子。",
+                            "ひよこ界の今年一番のヒット商品。"
+                        },{
+                            "『ガンデム』のプラモのつのだ…。",
+                            "この形はきっと武者ガンデムだ…。"
+                        },{
+                            "『○イパーダッシュモーター』だ！",
+                            "コースアウトに気をつけよう。"
+                        },{
+                            "ちまたで人気の『ゲームボウィ』。",
+                            "あなたは60秒で何点とれ…(以下略)"
+                        },{
+                            "伝説の『八星球』だ…。",
+                            "何個集めても願いは叶いそうにない。"
+                        },{
+                            "『作者からの手紙』",
+                            "決定キーを押して下さい"
+                        }};
+final static String[]    ITEM_NO={
+                            "そのアイテムはまだ",
+                            "              手に入れていません。"
+                        };
+final static String[]    END_TEXT={
+                            "◆Thank You For Playing!!◆",
+                            "全アイテムコンプリート",
+                            "本当におめでとうございます!!",
+                            "一応このゲームはここで終わりです。",
+                            "お疲れ様です。あんたはすごい！",
+                            "次回作にご期待ください(*'-')ノ"
+                        };
 
 /** メインオブジェクト */
 private JumpingFruits    jumpingFruits;
 
 /** イメージ */
-private Image[]            img                =new Image[IMAGE_SIZE];
+private Image[]          img = new Image[IMAGE_SIZE];
 
 private Image            logoImg;
 
 /** ダブルバッファリング */
-private Image             mainImg;            //オフイメージ
-private Graphics        g;                    //オフグラフィクス
+private Image             mainImg; //オフイメージ
+private Graphics          g;       //オフグラフィクス
 
 /** 背景画像 */
-private Image             imgBg=Image.createImage(SCREEN_WIDTH,SCREEN_HEIGHT-FOODER_HEIGHT);                //背景画像
+private Image             imgBg=Image.createImage(SCREEN_WIDTH,SCREEN_HEIGHT-FOODER_HEIGHT); //背景画像
 private Image             imgFd=Image.createImage(SCREEN_WIDTH,FOODER_HEIGHT);    
 
 /**グラフィックユーティリティ*/
-private GraphicsUtil    gUtil;
+private GraphicsUtil      gUtil;
 
 /** デバイスコントロール */
-private DeviceControl    devCtl = DeviceControl.getDefaultDeviceControl();
+private DeviceControl     devCtl = DeviceControl.getDefaultDeviceControl();
 
 /** ストリングバッファ */
-private StringBuffer    Sb                =new StringBuffer();
+private StringBuffer      Sb                =new StringBuffer();
 private String            drawSt            =null;
 
 /** キーイベント */
-private int             m_event            =KEY_NO;
+private int               m_event           =KEY_NO;
 /** キー状態 */
-private int             key                =KEY_NO;
+private int               key               =KEY_NO;
 
 /** フォントを保持する変数 */
-private Font            f                =Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-private int             stHeight        =f.getHeight();
+private Font              f                =Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+private int               stHeight         =f.getHeight();
 
 /** 乱数 */
-private    Random            r                =new Random();
+private Random            r                =new Random();
 
 /** コマンド変数 */
-//private Command         noneCmd            =new Command("",        Command.SCREEN,1);
-private Command         exitCmd            =new Command("終了",    Command.SCREEN,2);
-private Command         pauseCmd        =new Command("中断",    Command.SCREEN,3);
-private Command         resumeCmd        =new Command("再開",    Command.SCREEN,4);
-private Command         backCmd            =new Command("戻る",    Command.SCREEN,5);
-
-//ver1.2.0
-private Command         onSoundCmd        =new Command("♪○",    Command.SCREEN,1);
-private Command         offSoundCmd        =new Command("♪×",    Command.SCREEN,1);
+private Command         exitCmd     = new Command("終了", Command.SCREEN,2);
+private Command         pauseCmd    = new Command("中断", Command.SCREEN,3);
+private Command         resumeCmd   = new Command("再開", Command.SCREEN,4);
+private Command         backCmd     = new Command("戻る", Command.SCREEN,5);
+private Command         onSoundCmd  = new Command("♪○",  Command.SCREEN,1);
+private Command         offSoundCmd = new Command("♪×",  Command.SCREEN,1);
 
 /** システム変数 */
 private long            m_sleepTime        =0;    //スリープタイム
@@ -380,10 +382,7 @@ private boolean[]        m_appleIsLeft    ={false,false,false,false,false,false}
 //ver1.1.0
 private int                m_effX[]        ={0,0,0};
 private int                m_effY[]        ={0,0,0};
-private int                m_effTime[]        ={0,0,0};
-
-//debug
-//private Runtime            runtime=Runtime.getRuntime();
+private int                m_effTime[]     ={0,0,0};
 
 //ver1.2.0 sound
 /** フレーズプレイヤー */
@@ -407,7 +406,6 @@ private int                m_isShare        =0;
     引数:    -
 */
 DrawCanvas(JumpingFruits jumpingFruits) {
-
     //メインオブジェクト作成
     this.jumpingFruits = jumpingFruits;
 
@@ -449,7 +447,7 @@ public void resumeExe() {
     戻り値:    -
     引数:    -
 */
-public void run(){
+public void run() {
 
     int i=0;
 
@@ -477,7 +475,7 @@ public void run(){
         try{
             img[i] = Image.createImage("/"+i+".png");
         }catch(Exception e){
-System.out.println(e.toString());
+            System.out.println(e.toString());
         }
         m_load=i*100/IMAGE_SIZE;
         if( System.currentTimeMillis()-m_sleepTime>=SLEEP_TIME ){
@@ -495,7 +493,7 @@ System.out.println(e.toString());
         tr3 = phrasePlayer.getTrack(2);
         tr4 = phrasePlayer.getTrack(3);
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
     //サウンド
     initSound();
@@ -508,7 +506,7 @@ System.out.println(e.toString());
     try{
         Thread.sleep(100);
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
     loadRecordStore();
 
@@ -884,7 +882,7 @@ System.out.println(e.toString());
     戻り値:    -
     引数:    Graphics g    グラフィックオブジェクト
 */
-public synchronized void paint(Graphics g2){
+public synchronized void paint(Graphics g2) {
 
     int i=0;
 
@@ -900,7 +898,7 @@ public synchronized void paint(Graphics g2){
         g2.drawImage(mainImg, m_hcenter-120, m_vcenter-120, Graphics.LEFT|Graphics.TOP);
 
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -914,18 +912,18 @@ System.out.println(e.toString());
     引数:    -
 */
 public synchronized void commandAction(Command c, Displayable s) {
-    if( c == exitCmd ){//Exitコマンド
+    if (c == exitCmd) {//Exitコマンド
         //終了処理
         jumpingFruits.doExit();
     }
-    else if( c==pauseCmd ){//Pauseコマンド
+    else if (c==pauseCmd) {//Pauseコマンド
         onMenu();
     }
-    else if( c==resumeCmd ){//Resumeコマンド
+    else if (c==resumeCmd) {//Resumeコマンド
         offMenu();
     }
-    else if( c==backCmd ){
-        switch( m_modeState ){
+    else if (c==backCmd) {
+        switch (m_modeState) {
             case MODE_SELECT:
                 m_nextState=TITLE;
                 break;
@@ -938,13 +936,12 @@ public synchronized void commandAction(Command c, Displayable s) {
                 m_nextState=BONUS;
                 break;
         }
-//playCursor();
     }
     //ver1.2.0
-    else if( c==onSoundCmd ){//♪○コマンド
+    else if (c==onSoundCmd) {//♪○コマンド
         switchMute();
     }
-    else if( c==offSoundCmd ){//♪×コマンド
+    else if (c==offSoundCmd) {//♪×コマンド
         switchMute();
     }
 }
@@ -1008,7 +1005,7 @@ public synchronized void keyPressed(int keyCode) {
     戻り値:    -
     引数:    -
 */
-private void drawNowloading(){
+private void drawNowloading() {
     try{
         //背景:白
         g.setColor(255,255,255);
@@ -1030,7 +1027,7 @@ private void drawNowloading(){
         g.drawString(drawSt,220-f.stringWidth(drawSt),210,Graphics.BASELINE|Graphics.LEFT);
 
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1043,7 +1040,7 @@ System.out.println(e.toString());
     戻り値:    -
     引数:    -
 */
-private void drawTitle(){
+private void drawTitle() {
     try{
         //背景
         g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
@@ -1086,7 +1083,7 @@ private void drawTitle(){
 
 
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1099,7 +1096,7 @@ System.out.println(e.toString());
     戻り値:    -
     引数:    -
 */
-private void drawModeSelect(){
+private void drawModeSelect() {
     try{
         //背景
         g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
@@ -1155,7 +1152,7 @@ private void drawModeSelect(){
 
 
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1168,25 +1165,17 @@ System.out.println(e.toString());
     戻り値:    -
     引数:    -
 */
-private void drawRecord(){
+private void drawRecord() {
     try{
         //背景画像
         g.drawImage(imgBg, 0, 0, Graphics.TOP|Graphics.LEFT);
-/*
-        //背景
-        g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
-        //地面
-        g.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
-*/
+
         //リンゴ
         for(int i=0; i<APPLE_SIZE; i++){
             if( m_appleState[i]!=NONE ){
                 gUtil.drawRegion(g,img[IMAGE_APPLE], 16*m_appleState[i], 0, 16, 16, GraphicsUtil.TRANS_NONE, m_appleX[i], m_appleY[i]-16, Graphics.TOP|Graphics.LEFT);
             }
         }
-
-        //文字表示
-        //gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_STAGE, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 40, 20, Graphics.TOP|Graphics.LEFT);
 
         //RECORD
         gUtil.drawRegion(g,img[IMAGE_LANG], 0, NUM_HEIGHT*L_RECORD, 116, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 62, 20, Graphics.TOP|Graphics.LEFT);
@@ -1195,30 +1184,21 @@ private void drawRecord(){
         gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_SCORE, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE,  96, 46, Graphics.TOP|Graphics.LEFT);
         gUtil.drawRegion(g,img[IMAGE_LANG_FD], 0, F_HEIGHT*F_COMBO, 44, F_HEIGHT, GraphicsUtil.TRANS_NONE, 176, 46, Graphics.TOP|Graphics.LEFT);
 
-
-        //gUtil.drawRegion(g,img[IMAGE_STAGE], 32*m_cursor, 0,32, 32, GraphicsUtil.TRANS_NONE, 160, 20, Graphics.TOP|Graphics.LEFT);
-
         //文字表示
         for(int i=0;i<HISCORE_SIZE;i++){
             gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(i+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 20, 60+24*i, Graphics.TOP|Graphics.LEFT);
             gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 40, 60+24*i, Graphics.TOP|Graphics.LEFT);
             drawScore(m_hiScore[m_cursor][i],160,60+24*i,8);
             drawScore(m_hiCombo[m_cursor][i],200,60+24*i,3);
-            //drawCal(m_calendar[m_cursor][i], 200,62+24*i);
         }
-/*
-        Sb.delete(0,Sb.length());
-        drawSt = Sb.append("playTime: ").append(m_playTime).toString();
-        g.drawString(drawSt,60,200,Graphics.BASELINE|Graphics.LEFT);
-*/
+        
         g.drawImage(img[IMAGE_FOODER], 0, SCREEN_HEIGHT-FOODER_HEIGHT, Graphics.TOP|Graphics.LEFT);
         gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*(m_cursor+1), 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 170, 220, Graphics.TOP|Graphics.LEFT);
         gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*N_SLASH, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 190, 220, Graphics.TOP|Graphics.LEFT);
         gUtil.drawRegion(g,img[IMAGE_NUM], NUM_WIDTH*STAGE_SIZE, 0, NUM_WIDTH, NUM_HEIGHT, GraphicsUtil.TRANS_NONE, 210, 220, Graphics.TOP|Graphics.LEFT);
 
-
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1231,7 +1211,7 @@ System.out.println(e.toString());
     戻り値:    -
     引数:    -
 */
-private void drawHelp(){
+private void drawHelp() {
     try{
         //背景
         g.drawImage(img[IMAGE_BG], 0, 0, Graphics.TOP|Graphics.LEFT);
@@ -1269,7 +1249,7 @@ private void drawHelp(){
 
 
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1360,7 +1340,7 @@ private void drawBonus(){
         drawScore(BONUS_SIZE,210,220,2);
 
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1418,7 +1398,7 @@ private void drawEnding(){
         g.drawString(drawSt,120-f.stringWidth(drawSt)/2,230,Graphics.BASELINE|Graphics.LEFT);
 
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1431,7 +1411,7 @@ System.out.println(e.toString());
     戻り値:    -
     引数:    -
 */
-private void drawGameStart(){
+private void drawGameStart() {
     try{
         if( m_time<10 ){
             m_speed-=4;
@@ -1546,7 +1526,7 @@ private void drawPlaying(){
         }
 
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1770,7 +1750,7 @@ private void drawGameResult(){
             }
         }
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -1787,7 +1767,6 @@ public void keyTitle(){
     switch( m_event ){
         case KEY_5:
         case KEY_SELECT:
-//playEnter();
             m_nextState=MODE_SELECT;
             break;
     }
@@ -1910,7 +1889,6 @@ private void keyRecord(){
         case KEY_5:
         case KEY_SELECT:
             m_nextState=MODE_SELECT;
-            //playCursor();
             break;
     }
 }
@@ -1935,7 +1913,7 @@ private void keyBonus(){
             if( m_cursor<0 ){
                 m_cursor=BONUS_SIZE-1;
             }
-playCursor();
+            playCursor();
             break;
 
         case KEY_DOWN:
@@ -1947,7 +1925,7 @@ playCursor();
             if( m_cursor>BONUS_SIZE-1 ){
                 m_cursor=0;
             }
-playCursor();
+            playCursor();
             break;
 
         case KEY_5:
@@ -1957,7 +1935,6 @@ playCursor();
             }else{
                 m_nextState=MODE_SELECT;
             }
-//playCursor();
             break;
     }
 }
@@ -1981,7 +1958,7 @@ private void keyHelp(){
             if( m_cursor<0 ){
                 m_cursor=HELP_TEXT.length-1;
             }
-playCursor();
+            playCursor();
             break;
 
         case KEY_DOWN:
@@ -1992,13 +1969,12 @@ playCursor();
             if( m_cursor>HELP_TEXT.length-1 ){
                 m_cursor=0;
             }
-playCursor();
+            playCursor();
             break;
 
         case KEY_5:
         case KEY_SELECT:
             m_nextState=MODE_SELECT;
-//playCursor();
             break;
     }
 }
@@ -2015,7 +1991,6 @@ private void keyEnding(){
         case KEY_5:
         case KEY_SELECT:
             m_nextState=BONUS;
-//playCursor();
             break;
     }
 }
@@ -2033,7 +2008,6 @@ private void keyGameResult(){
         case KEY_5:
         case KEY_SELECT:
             m_nextState=TITLE;
-//playCursor();
             break;
     }
 }
@@ -2127,9 +2101,8 @@ private void offMenu(){
     戻り値:    -
     引数:    -
 */
-public void keyMenu(){
-    switch( m_event ){
-
+public void keyMenu() {
+    switch (m_event) {
         case KEY_2:
         case KEY_UP:
         case KEY_8:
@@ -2142,7 +2115,7 @@ public void keyMenu(){
 
         case KEY_5:
         case KEY_SELECT:
-            switch( m_cursor ){
+            switch (m_cursor) {
                 //再開
                 case 0:
                     break;
@@ -2169,13 +2142,13 @@ public void keyMenu(){
 */
 private void getImgIndex(){
 
-    switch( m_myState ){
+    switch (m_myState) {
         case STOP:
             m_imgIndex=IMAGE_STOP;
             break;
 
         case WALK:
-            switch(m_walkCount%3){
+            switch (m_walkCount%3) {
                 case 0:
                     m_imgIndex=IMAGE_STOP;
                     break;
@@ -2203,51 +2176,50 @@ private void getImgIndex(){
     戻り値:    -
     引数:    -
 */
-private void myAction(){
+private void myAction() {
 
     //とまっていれば減速
-    if( m_myState==STOP ){
+    if (m_myState==STOP) {
         m_walkCount=0;
-    }else{
+    } else {
         m_walkCount++;
     }
 
     checkGround();
 
     //キャラクタの移動
-    if(!m_isLeft){//右
-        m_myX+=m_speed;
+    if (!m_isLeft) {//右
+        m_myX += m_speed;
         //端
-        if(m_myX>SCREEN_WIDTH-MYCHARA_WIDTH){
-            m_myX=SCREEN_WIDTH-MYCHARA_WIDTH;
+        if(m_myX > SCREEN_WIDTH-MYCHARA_WIDTH){
+            m_myX = SCREEN_WIDTH-MYCHARA_WIDTH;
         }
 
-    }else{//左
-        m_myX-=m_speed;
-        if(m_myX<0){
-            m_myX=0;
+    } else {//左
+        m_myX -= m_speed;
+        if(m_myX < 0){
+            m_myX = 0;
         }
     }
 
-    if(m_myY<m_ground){
+    if (m_myY < m_ground) {
         //地面取得
         getGround();
         m_addY+=4;
         m_myY+=m_addY;
-        if(m_myY>=m_ground){
+        if (m_myY >= m_ground) {
             m_addY=0;
             m_myY=m_ground;
 
-            if( m_combo>m_comboMax ){
-                m_comboMax=m_combo;
+            if (m_combo > m_comboMax) {
+                m_comboMax = m_combo;
             }
             m_combo=0;
 
             //スロット初期化
-            for(int i=0;i<m_slot.length;i++){
+            for(int i=0; i<m_slot.length; i++) {
                 m_slot[i]=NONE;
             }
-
             m_myState=STOP;
             m_speed=0;
             m_isDrawFooder=true;
@@ -2644,7 +2616,7 @@ private void setStageImage(int stage) {
         g3.drawImage(img[IMAGE_GROUND2], GROUND_MIDDLE2X[stage], GROUND_MIDDLE, Graphics.TOP|Graphics.LEFT);
         g3.drawImage(img[IMAGE_GROUND3], 0, GROUND_BOTTOM, Graphics.TOP|Graphics.LEFT);
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -2680,7 +2652,7 @@ private void setFooderImage() {
             g3.drawRect(8+20*i, 220-PLAYING_HEIGHT, 17, 17);
         }
     }catch(Exception e){
-System.out.println(e.toString());
+        System.out.println(e.toString());
     }
 }
 
@@ -2760,12 +2732,12 @@ private void getBonusIndex() {
     }
     m_bonusIndex=bonusOn[(Math.abs(r.nextInt())%indexSize)];
 
-/** debug
+    /** debug
         for(int i=0;i<BONUS_SIZE;i++){
             m_bonusGet[i]=1;
             m_bonusNew[i]=1;
         }
-*/
+    */
 }
 
 ////////////////////////////////////////////////////////////////
